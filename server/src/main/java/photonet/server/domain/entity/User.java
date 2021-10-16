@@ -25,7 +25,7 @@ public class User {
     private Photo profilePicture;
     @OneToMany(mappedBy = "author")
     private List<Post> posts;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "target")
     private List<Rate> rating;
 
 }

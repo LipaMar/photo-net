@@ -21,5 +21,4 @@ public class UserService {
         return users.map(userMapper::mapUserPhotoToBasicProfile);
     }
 
-
 }
