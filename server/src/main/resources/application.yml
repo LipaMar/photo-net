@@ -7,3 +7,8 @@ spring:
     username: sa
     password: ''
     url: jdbc:h2:mem:testdb
+  sql:
+    init:
+      data-locations: classpath:db/data.sql
+  jpa:
+    defer-datasource-initialization: true
