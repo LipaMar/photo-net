@@ -7,13 +7,13 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Table(name = "comment")
+@Table(name = "rate")
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
-public class Comment extends Opinion {
+public class Rate extends Opinion {
 
-    private String content;
+    private Integer rating;
 
 }
