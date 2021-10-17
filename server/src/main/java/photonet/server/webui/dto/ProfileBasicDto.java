@@ -3,7 +3,7 @@ package photonet.server.webui.dto;
 import lombok.Data;
 
 @Data
-public class ProfilesBasicDto {
+public class ProfileBasicDto {
 
     private String userName;
     private String profilePicture;
