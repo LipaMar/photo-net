@@ -8,5 +8,6 @@ public class ProfilesBasicDto {
     private String userName;
     private String profilePicture;
     private double rating;
+    private int rateCount;
 
 }

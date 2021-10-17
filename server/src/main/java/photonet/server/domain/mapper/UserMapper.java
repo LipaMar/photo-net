@@ -9,6 +9,8 @@ import photonet.server.webui.dto.ProfilesBasicDto;
 public interface UserMapper {
 
     @Mapping(source = "profilePicture.path", target = "profilePicture")
+    @Mapping(source = "rating", target = "rating")
+    @Mapping(source = "rating", target = "rateCount")
     ProfilesBasicDto mapUserPhotoToBasicProfile(User user);
 
 }

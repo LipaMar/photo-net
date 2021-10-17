@@ -15,4 +15,8 @@ public interface RateMapper {
                 .orElse(0);
     }
 
+    default int mapRatingsToCount(List<Rate> ratings){
+        return ratings.size();
+    }
+
 }
