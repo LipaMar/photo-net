@@ -1,0 +1,95 @@
+@import 'src/styles.scss';
+
+header {
+  background-color: $nav-blue;
+  //::after {
+  //  content: '';
+  //  display: table;
+  //  clear: both;
+  //}
+}
+
+#container {
+  width: 85%;
+  margin: 0 auto;
+  padding: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.logo {
+  float: left;
+  width: 290px;
+  height: 72px;
+  border: 5px dashed white;
+  padding: 10px;
+  //margin: 25px 0;
+
+}
+
+nav {
+  margin: 0;
+  padding: 0;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+    margin-left: 120px;
+    padding: 38px 0;
+    position: relative;
+
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-family: Roboto, sans-serif;
+    font-size: 25px;
+
+    &:after {
+      content: '';
+      height: 0;
+      display: block;
+      background-color: white;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+
+    &:hover {
+      color: $nav-blue-light;
+
+      &:after {
+        height: 15px;
+        transition: all ease-in-out 250ms;
+      }
+    }
+  }
+
+}
+
+.search-box {
+
+  input[type="text"] {
+    border-radius: 15px 0 0 15px;
+    border: none;
+    outline: none;
+    padding-left: 15px;
+    //width: 300px;
+  }
+
+  .btn {
+    border-radius: 0 15px 15px 0;
+    i {
+      color: gray;
+    }
+  }
+}
+
