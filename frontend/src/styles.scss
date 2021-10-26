@@ -4,3 +4,15 @@
 $nav-blue: #6699cc;
 $nav-blue-light: #99ccff;
 $footer-brown: #cc9966;
+
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, $nav-blue 0%, white 100%);
+}
