@@ -1,0 +1,12 @@
+@import "src/styles";
+:host {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(0deg, $nav-blue 0%, $white 120%) no-repeat fixed;
+
+  .content{
+    margin-bottom: auto;
+  }
+}
