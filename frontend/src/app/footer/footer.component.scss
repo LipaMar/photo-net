@@ -2,9 +2,10 @@
 
 footer {
   background-color: $footer-brown;
-  color: white;
-  font-family: Roboto, sans-serif;
+  color: $white;
+  font-family: $font-roboto;
   font-size: 20px;
+
 
   a {
     font-size: 2em;
