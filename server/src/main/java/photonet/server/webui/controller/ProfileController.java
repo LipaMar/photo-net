@@ -3,6 +3,7 @@ package photonet.server.webui.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +21,8 @@ public class ProfileController {
     private final UserService userService;
 
     @GetMapping
-    public Page<ProfileBasicDto> profiles(Pageable pageable) {
-        return userService.getBasicProfileList(pageable);
-    }
-
-    @GetMapping("/{userName}")
-    public ProfileDto profiles(@PathVariable String userName) {
-        return userService.getProfile(userName);
+    public ProfileDto profile() {
+        return userService.getProfile(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
 }

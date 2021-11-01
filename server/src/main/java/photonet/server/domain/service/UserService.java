@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import photonet.server.config.exception.ResourceNotFoundException;
 import photonet.server.domain.entity.User;
@@ -29,6 +30,12 @@ public class UserService {
     public ProfileDto getProfile(String userName) {
         return userRepository.findByUserName(userName)
                 .map(userMapper::mapUserToProfileDto)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
+
+    public UserDetails getDetails(String username){
+        return userRepository.findByUserName(username)
+                .map(userMapper::mapUserToUserDetails)
                 .orElseThrow(ResourceNotFoundException::new);
     }
 

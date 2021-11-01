@@ -24,6 +24,8 @@ public class User {
     private String bio;
     @Column(nullable = false)
     private Boolean active = true;
+    private String password;
+    private String role;
     @OneToMany(orphanRemoval = true)
     private List<Comment> comments;
     @OneToOne
