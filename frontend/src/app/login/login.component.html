@@ -1,7 +1,3 @@
-<form method="post">
-  <label>Login:</label>
-  <input type="text">
-  <app-input [type]='password' [label]='Hasło'></app-input>
-  <input type="submit" value="Zaloguj">
-</form>
+<app-form [formFields]="formFields" [method]="method"></app-form>
+
 <p>Nie posiadasz konta? <a href="/register">Zarejestruj się!</a></p>

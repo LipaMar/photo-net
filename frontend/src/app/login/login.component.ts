@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormField, InputTypes, MethodType} from "../elements/form/form.models";
 
 @Component({
   selector: 'app-login',
@@ -6,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  password= 'password';
 
-  constructor() { }
+  constructor() {
+  }
+
+  method = MethodType.POST;
+  formFields: FormField[] = [
+    {label: "Login", type: InputTypes.TEXT},
+    {label: "Hasło", type: InputTypes.PASSWORD},
+  ];
 
   ngOnInit(): void {
   }

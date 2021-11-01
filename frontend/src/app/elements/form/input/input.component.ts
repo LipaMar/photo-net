@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {InputTypes} from "../form.models";
 
 @Component({
   selector: 'app-input',
@@ -7,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class InputComponent implements OnInit {
 @Input() label = "";
-@Input() type = "text";
+@Input() type = InputTypes.TEXT;
 
   constructor() { }
 

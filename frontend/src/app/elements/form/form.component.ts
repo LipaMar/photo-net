@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormField, MethodType} from "./form.models";
 
 @Component({
   selector: 'app-form',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  @Input() formFields: FormField[] = [];
+  @Input() method: MethodType = MethodType.GET;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
