@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {environment} from "../../environments/environment";
 import {Credentials} from "./login.models";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class LoginService {
   constructor(private httpClient: HttpClient) {
   }
 
-  login(credentials: Credentials) {
+  login(credentials: Credentials): Observable<Boolean> {
     let token = btoa(credentials.username + ':' + credentials.password);
     const httpOptions = {
       headers: new HttpHeaders({
@@ -21,13 +22,13 @@ export class LoginService {
       })
     };
 
-    return this.httpClient.get<any>(`${environment.apiUrl}/login`,  httpOptions)
-      .pipe(map(logged => {
-        // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
-        // user.authdata = window.btoa(credentials.username + ':' + credentials.password);
-        // localStorage.setItem('user', JSON.stringify(user));
-        // this.userSubject.next(user);
-        console.log(logged);
-      }));
+    return this.httpClient.get<any>(`${environment.apiUrl}/login`,  httpOptions);
+      // .pipe(map(logged => {
+      //   // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+      //   // user.authdata = window.btoa(credentials.username + ':' + credentials.password);
+      //   // localStorage.setItem('user', JSON.stringify(user));
+      //   // this.userSubject.next(user);
+      //   console.log(logged);
+      // }));
   }
 }
