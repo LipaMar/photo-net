@@ -10,5 +10,6 @@ export enum MethodType {
 
 export interface FormField {
   label: string;
+  field: string;
   type: InputTypes;
 }

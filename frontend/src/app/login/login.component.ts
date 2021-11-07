@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormField, InputTypes, MethodType} from "../elements/form/form.models";
+import {FormField, InputTypes} from "../elements/form/form.models";
+import {LoginService} from "./login.service";
+import {Credentials} from "./login.models";
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -8,16 +11,33 @@ import {FormField, InputTypes, MethodType} from "../elements/form/form.models";
 })
 export class LoginComponent implements OnInit {
 
-  constructor() {
-  }
+  model = new Credentials('', '');
+  form = this.fb.group({
+    login: ["", [Validators.required]],
+    password: ["", [Validators.required]]
+  });
 
-  method = MethodType.POST;
   formFields: FormField[] = [
-    {label: "Login", type: InputTypes.TEXT},
-    {label: "Hasło", type: InputTypes.PASSWORD},
+    {label: "Login", type: InputTypes.TEXT, field: 'login'},
+    {label: "Hasło", type: InputTypes.PASSWORD, field: 'password'},
   ];
 
+  constructor(private service: LoginService, private fb: FormBuilder) {
+  }
+
   ngOnInit(): void {
+  }
+
+  newCredentials() {
+    this.model = new Credentials('', '');
+  }
+
+  submitLogin() {
+    console.log(this.model)
+    this.service.login(this.model).subscribe(data => {
+        console.log(data);
+      }
+    );
   }
 
 }
