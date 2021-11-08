@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {map} from 'rxjs/operators';
 import {environment} from "../../environments/environment";
 import {Credentials} from "./login.models";
 import {Observable} from "rxjs";
@@ -21,14 +20,6 @@ export class LoginService {
         'Authorization': "Basic " + token
       })
     };
-
-    return this.httpClient.get<any>(`${environment.apiUrl}/login`,  httpOptions);
-      // .pipe(map(logged => {
-      //   // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
-      //   // user.authdata = window.btoa(credentials.username + ':' + credentials.password);
-      //   // localStorage.setItem('user', JSON.stringify(user));
-      //   // this.userSubject.next(user);
-      //   console.log(logged);
-      // }));
-  }
+    return this.httpClient.get<any>(`${environment.apiUrl}/login`, httpOptions)
+  };
 }
