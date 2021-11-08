@@ -1,0 +1,23 @@
+{
+  "nav": {
+    "home": "strona główna",
+    "followed": "obserwowani",
+    "discover": "odkryj",
+    "profile": "profil"
+  },
+  "footer": {
+    "followUs": "Obserwuj nas na"
+  },
+  "page": {
+    "login": {
+      "header": "Logowanie",
+      "login": "Login",
+      "provideLogin": "Wprowadź login",
+      "password": "Hasło",
+      "providePass": "Wprowadź hasło",
+      "loginButton": "Zaloguj",
+      "noAcc": "Nie posiadasz konta?",
+      "register": "Zarejestruj się!"
+    }
+  }
+}

@@ -1,33 +1,33 @@
 <div class="container">
   <div>
-    <h1>Logowanie</h1>
+    <h1>{{'page.login.header' | translate}}</h1>
     <form #loginForm="ngForm" (ngSubmit)="submitLogin()">
       <div class="form-group">
-        <label for="name">Login</label>
+        <label for="name">{{'page.login.login' | translate}}</label>
         <input type="text" class="form-control" id="name"
                required
                [(ngModel)]="model.username" name="name"
                #name="ngModel">
         <div [hidden]="name.valid || name.pristine"
              class="alert alert-danger">
-          Wprowadź login
+          {{'page.login.provideLogin' | translate}}
         </div>
       </div>
 
       <div class="form-group">
-        <label for="password">Hasło</label>
+        <label for="password">{{'page.login.password' | translate}}</label>
         <input required type="password" class="form-control" id="password"
                [(ngModel)]="model.password" name="password" #password="ngModel">
         <div class="form-control" [hidden]="password.valid || password.pristine"
              class="alert alert-danger">
-          Wprowadź hasło
+          {{'page.login.providePass' | translate}}
         </div>
       </div>
 
-      <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Zaloguj</button>
+      <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">{{'page.login.loginButton' | translate}}</button>
 
     </form>
   </div>
 
-  <p>Nie posiadasz konta? <a href="/register">Zarejestruj się!</a></p>
+  <p>{{'page.login.noAcc' | translate}} <a href="/register">{{'page.login.register' | translate}}</a></p>
 </div>
