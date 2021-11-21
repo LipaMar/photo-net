@@ -7,8 +7,8 @@ public class ProfileBasicDto {
 
     private Boolean active;
     private String userName;
-    private String profilePicture;
-    private double rating;
-    private int rateCount;
+    private byte[] profilePicture;
+    private Double rating;
+    private Long rateCount;
 
 }

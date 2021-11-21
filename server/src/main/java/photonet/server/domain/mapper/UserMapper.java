@@ -7,20 +7,18 @@ import photonet.server.domain.entity.User;
 import photonet.server.webui.dto.ProfileBasicDto;
 import photonet.server.webui.dto.ProfileDto;
 
-@Mapper(uses = {RateMapper.class})
+@Mapper(uses = {RateMapper.class, PhotoMapper.class, PostMapper.class})
 public interface UserMapper {
 
-    @Mapping(source = "profilePicture.path", target = "profilePicture")
     @Mapping(source = "rating", target = "rating")
     @Mapping(source = "rating", target = "rateCount")
     ProfileBasicDto mapUserToBasicProfile(User user);
 
-    @Mapping(source = "profilePicture.path", target = "profilePicture")
     @Mapping(source = "rating", target = "rating")
     @Mapping(source = "rating", target = "rateCount")
     ProfileDto mapUserToProfileDto(User user);
 
-    default UserDetails mapUserToUserDetails(User user){
+    default UserDetails mapUserToUserDetails(User user) {
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUserName())
                 .password(user.getPassword())

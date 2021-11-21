@@ -1,6 +1,6 @@
-INSERT into PHOTO (path) values ('server/src/main/resources/db/test-photos/image.jfif');
-INSERT into PHOTO (path) values ('server/src/main/resources/db/test-photos/image1.jfif');
-INSERT into PHOTO (path) values ('server/src/main/resources/db/test-photos/image2.jfif');
+INSERT into PHOTO (path) values ('db/test-photos/image.jfif');
+INSERT into PHOTO (path) values ('db/test-photos/image1.jfif');
+INSERT into PHOTO (path) values ('db/test-photos/image2.jfif');
 
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('admin', '$2a$12$q0NXCRNQTetsXx1NSMuL1eOddYPlTlUMN.aMhXNv6EmCIrjNHCRwW', 'ADMIN', 'admin', 'admin', true, null);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('tgoldin0', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec', 'areek0@soup.io', true, null);
@@ -153,6 +153,8 @@ insert into USER (user_name, password, role, bio, email, active, profile_picture
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('kbark43', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in hac habitasse platea dictumst etiam faucibus cursus urna ut tellus nulla ut erat id mauris vulputate', 'pbolderstone43@ibm.com', false, null);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('aocridigan44', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'tortor id nulla ultrices aliquet maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat dui maecenas tristique est et tempus semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit amet diam in magna bibendum imperdiet nullam', 'ztolliday44@youtube.com', true, null);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('srudloff45', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent', 'dtowle45@smugmug.com', true, null);
+
+INSERT into POST (author_id, photo_id) values (2, 1);
 
 insert into rate (rating, author_id, target_id) values (4, 71, 79);
 insert into rate (rating, author_id, target_id) values (4, 35, 115);

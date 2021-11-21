@@ -14,6 +14,7 @@ import java.util.List;
 public class Post {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
     private Photo photo;
@@ -21,6 +22,8 @@ public class Post {
     private List<Comment> comments;
     @ManyToOne
     private User author;
+    @OneToMany(mappedBy = "post", orphanRemoval = true)
+    private List<AppLike> likes;
 
 }
 

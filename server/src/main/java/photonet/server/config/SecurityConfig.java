@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return userService::getDetails;
+        return userService::getSecurityDetails;
     }
 
     @Bean
