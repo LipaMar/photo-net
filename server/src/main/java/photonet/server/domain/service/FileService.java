@@ -62,5 +62,5 @@ public class FileService {
         var fileName = dateTime.format(DateTimeFormatter.ofPattern("yyMMdd_HHmm_")) + UUID.randomUUID() + ".jpg";
         return String.join(File.separator, DIR, fileName);
     }
-    
+
 }
