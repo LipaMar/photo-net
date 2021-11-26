@@ -6,7 +6,7 @@
         <label for="name">{{'page.login.login' | translate}}</label>
         <input type="text" class="form-control" id="name"
                required
-               [(ngModel)]="model.username" name="name"
+               [(ngModel)]="credentials.username" name="name"
                #name="ngModel">
         <div [hidden]="name.valid || name.pristine"
              class="alert alert-danger">
@@ -17,7 +17,7 @@
       <div class="form-group">
         <label for="password">{{'page.login.password' | translate}}</label>
         <input required type="password" class="form-control" id="password"
-               [(ngModel)]="model.password" name="password" #password="ngModel">
+               [(ngModel)]="credentials.password" name="password" #password="ngModel">
         <div class="form-control" [hidden]="password.valid || password.pristine"
              class="alert alert-danger">
           {{'page.login.providePass' | translate}}

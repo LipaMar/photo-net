@@ -2,10 +2,9 @@ package photonet.server.domain.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.springframework.security.core.userdetails.UserDetails;
 import photonet.server.domain.entity.User;
+import photonet.server.webui.dto.LoginDto;
 import photonet.server.webui.dto.ProfileBasicDto;
 import photonet.server.webui.dto.ProfileDto;
 import photonet.server.webui.dto.UserDto;
@@ -22,6 +21,8 @@ public interface UserMapper {
     ProfileDto mapUserToProfileDto(User user);
 
     User mapUserDtoToUser(UserDto dto);
+
+    LoginDto mapToLoginDto(User user);
 
     default UserDetails mapUserToUserDetails(User user) {
         return org.springframework.security.core.userdetails.User.builder()

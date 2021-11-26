@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  model = new Credentials('', '');
+  credentials = new Credentials('', '');
   form = this.fb.group({
     login: ["", [Validators.required]],
     password: ["", [Validators.required]]
@@ -28,11 +28,12 @@ export class LoginComponent implements OnInit {
   }
 
   submitLogin() {
-    this.service.login(this.model)
+    this.service.login(this.credentials)
       .subscribe(data => {
           console.log(data);
           if (data) {
             this.showSuccessMess();
+            localStorage.setItem("token", this.service.getToken(this.credentials));
             this.router.navigateByUrl("/home");
           }
         },
@@ -44,11 +45,11 @@ export class LoginComponent implements OnInit {
   }
 
   showSuccessMess() {
-    this.toastr.success("Pomyślnie zalogowano");
+    this.toastr.success('message.login.success');
   }
 
   showLoginFailureMess() {
-    this.toastr.error("Błędny login lub hasło");
+    this.toastr.error("message.login.failure");
   }
 
 }

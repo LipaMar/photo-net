@@ -3,6 +3,8 @@ package photonet.server.domain.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import photonet.server.domain.entity.User;
 import photonet.server.domain.mapper.UserMapper;
 import photonet.server.domain.repository.PhotoRepository;
 import photonet.server.domain.repository.UserRepository;
+import photonet.server.webui.dto.LoginDto;
 import photonet.server.webui.dto.ProfileBasicDto;
 import photonet.server.webui.dto.ProfileDto;
 import photonet.server.webui.dto.UserDto;
@@ -70,6 +73,15 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public LoginDto isLogged() {
+        var auth = getAuthentication();
+        return userRepository.findByUserName(loggedUserName())
+                .filter((x)->auth.isAuthenticated())
+                .filter((x)->!(auth instanceof AnonymousAuthenticationToken))
+                .map(userMapper::mapToLoginDto)
+                .orElse(null);
+    }
+
     private Photo buildPhoto(String filePath) {
         var photo = new Photo();
         photo.setPath(filePath);
@@ -77,6 +89,10 @@ public class UserService {
     }
 
     private String loggedUserName() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
+        return getAuthentication().getName();
+    }
+
+    private Authentication getAuthentication() {
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 }

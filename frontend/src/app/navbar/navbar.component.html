@@ -1,26 +1,29 @@
-<header xmlns="http://www.w3.org/1999/html">
-  <div id="container">
-    <a class="logo" href="/">
-      <img src="assets/images/logo.svg" alt="logo"/>
-    </a>
-    <nav>
-      <ul>
-        <li><a href="#">{{ 'nav.home' | translate}}</a></li>
+<div id="container" class="container-fluid">
+  <a class="logo" href="/">
+    <img src="assets/images/logo.svg" alt="logo"/>
+  </a>
+  <nav>
+    <ul>
+
+      <li><a href="#">{{ 'nav.home' | translate}}</a></li>
+      <ng-container *ngIf="isLogged else anonUserOptions">
         <li><a href="#">{{ 'nav.followed' | translate}}</a></li>
         <li><a href="#">{{ 'nav.discover' | translate}}</a></li>
         <li><a href="#">{{ 'nav.profile' | translate}}</a></li>
-        <li>
-
-        </li>
-      </ul>
-    </nav>
-    <div class="search-box">
-      <div class="input-group">
-        <input type="text">
-        <div class="input-group-append">
-          <span class="btn btn bg-white"><i class="fas fa-search"></i></span>
-        </div>
+        <li><a href="/" (click)="logout()">{{ 'nav.logout' | translate}}</a></li>
+      </ng-container>
+      <ng-template #anonUserOptions>
+        <li><a href="/login">{{ 'nav.login' | translate}}</a></li>
+        <li><a href="/register">{{ 'nav.register' | translate}}</a></li>
+      </ng-template>
+    </ul>
+  </nav>
+  <div class="search-box">
+    <div class="input-group">
+      <input type="text">
+      <div class="input-group-append">
+        <span class="btn btn bg-white"><i class="fas fa-search"></i></span>
       </div>
     </div>
   </div>
-</header>
+</div>

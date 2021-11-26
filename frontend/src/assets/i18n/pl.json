@@ -3,10 +3,19 @@
     "home": "strona główna",
     "followed": "obserwowani",
     "discover": "odkryj",
-    "profile": "profil"
+    "profile": "profil",
+    "login": "zaloguj się",
+    "logout": "wyloguj się",
+    "register": "zarejestruj się"
   },
   "footer": {
     "followUs": "Obserwuj nas na"
+  },
+  "message": {
+    "login": {
+     "success": "Pomyślnie zalogowano",
+     "failure": "Błędny login lub hasło"
+    }
   },
   "page": {
     "login": {
@@ -20,4 +29,5 @@
       "register": "Zarejestruj się!"
     }
   }
+
 }

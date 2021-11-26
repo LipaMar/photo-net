@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from "../../environments/environment";
-import {Credentials} from "./login.models";
+import {Credentials, LoggedDto} from "./login.models";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -9,17 +9,29 @@ import {Observable} from "rxjs";
 })
 export class LoginService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   login(credentials: Credentials): Observable<Boolean> {
-    let token = btoa(credentials.username + ':' + credentials.password);
+    let token = this.getToken(credentials);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': "Basic " + token
       })
     };
-    return this.httpClient.get<any>(`${environment.apiUrl}/login`, httpOptions)
+    return this.http.get<any>(`${environment.apiUrl}/login`, httpOptions)
   };
+
+  getToken(credentials: Credentials):string{
+    return btoa(credentials.username + ':' + credentials.password);
+  }
+
+  doGetIsLogged(): Observable<LoggedDto> {
+    return this.http.get<LoggedDto>(environment.apiUrl + '/login');
+  }
+
+  logout() {
+    localStorage.removeItem("token");
+  }
 }

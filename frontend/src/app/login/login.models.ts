@@ -3,3 +3,8 @@ export class Credentials {
               public password: string) {
   }
 }
+
+export interface LoggedDto {
+  userName: string;
+  active: boolean;
+}
