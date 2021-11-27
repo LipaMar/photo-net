@@ -2,12 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {Credentials, LoggedDto} from "./login.models";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+
+  onLogin$ = new Subject<any>();
 
   constructor(private http: HttpClient) {
   }

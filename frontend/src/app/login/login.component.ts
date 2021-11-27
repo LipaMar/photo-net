@@ -11,7 +11,6 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   credentials = new Credentials('', '');
   form = this.fb.group({
     login: ["", [Validators.required]],
@@ -21,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(private service: LoginService,
               private fb: FormBuilder,
               private toastr: ToastrService,
-              private router: Router) {
+              private router: Router,
+              private loginService: LoginService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
           if (data) {
             this.showSuccessMess();
             localStorage.setItem("token", this.service.getToken(this.credentials));
+            this.loginService.onLogin$.next(true);
             this.router.navigateByUrl("/home");
           }
         },
