@@ -14,15 +14,10 @@ export class LoginService {
   constructor(private http: HttpClient) {
   }
 
-  login(credentials: Credentials): Observable<Boolean> {
+  login(credentials: Credentials): Observable<any> {
     let token = this.getToken(credentials);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': "Basic " + token
-      })
-    };
-    return this.http.get<any>(`${environment.apiUrl}/login`, httpOptions)
+    localStorage.setItem("token", token);
+    return this.http.get<any>(`${environment.apiUrl}/login`)
   };
 
   getToken(credentials: Credentials):string{

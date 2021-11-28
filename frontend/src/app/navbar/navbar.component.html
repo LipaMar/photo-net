@@ -3,19 +3,18 @@
     <img src="assets/images/logo.svg" alt="logo"/>
   </a>
   <nav>
-    <ul>
+    <ul *ngIf="isLogged">
 
+      <li><a href="/home">{{ 'nav.home' | translate}}</a></li>
+      <li><a href="#">{{ 'nav.followed' | translate}}</a></li>
+      <li><a href="#">{{ 'nav.discover' | translate}}</a></li>
+      <li><a href="#">{{ 'nav.profile' | translate}}</a></li>
+      <li><a href="/home" (click)="logout()">{{ 'nav.logout' | translate}}</a></li>
+    </ul>
+    <ul *ngIf="!isLogged && isLogged != undefined">
       <li><a href="#">{{ 'nav.home' | translate}}</a></li>
-      <ng-container *ngIf="isLogged else anonUserOptions">
-        <li><a href="#">{{ 'nav.followed' | translate}}</a></li>
-        <li><a href="#">{{ 'nav.discover' | translate}}</a></li>
-        <li><a href="#">{{ 'nav.profile' | translate}}</a></li>
-        <li><a href="/" (click)="logout()">{{ 'nav.logout' | translate}}</a></li>
-      </ng-container>
-      <ng-template #anonUserOptions>
-        <li><a href="/login">{{ 'nav.login' | translate}}</a></li>
-        <li><a href="/register">{{ 'nav.register' | translate}}</a></li>
-      </ng-template>
+      <li><a href="/login">{{ 'nav.login' | translate}}</a></li>
+      <li><a href="/register">{{ 'nav.register' | translate}}</a></li>
     </ul>
   </nav>
   <div class="search-box">

@@ -10,36 +10,36 @@ import {Subscription} from "rxjs";
 export class NavbarComponent implements OnInit, OnDestroy {
 
   onLogin: Subscription | undefined;
-  isLogged: boolean = false;
+  isLogged: boolean;
   userName: string = '';
+  subscriptions: Subscription[] = []
 
   constructor(private service: LoginService) {
-    this.getLoggedUser();
-    this.onLogin = this.service.onLogin$.subscribe($event => {
-      this.isLogged = $event;
-    });
+    this.isLogged = localStorage.getItem("isLogged") === 'true';
   }
 
   ngOnInit(): void {
+    this.subscriptions.push(this.service.onLogin$.subscribe($event => {
+        this.isLogged = $event;
+      }),
+      this.service.doGetIsLogged().subscribe(data => {
+        if (data) {
+          this.userName = data.userName;
+          this.isLogged = data.active && data.userName.length > 0;
+        } else {
+          this.isLogged = false;
+        }
+      }));
   }
 
-  getLoggedUser() {
-    this.service.doGetIsLogged().subscribe(data => {
-      if(data){
-        this.userName = data.userName;
-        this.isLogged = data.active && data.userName.length > 0;
-      }
-    })
-  }
-
-  logout(){
+  logout() {
     this.service.logout();
   }
 
   ngOnDestroy(): void {
-    if( this.onLogin){
-      this.onLogin.unsubscribe();
-    }
+    this.subscriptions.forEach(sub => {
+      sub.unsubscribe();
+    })
   }
 
 }

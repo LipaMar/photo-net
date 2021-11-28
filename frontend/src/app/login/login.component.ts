@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LoginService} from "./login.service";
 import {Credentials} from "./login.models";
 import {FormBuilder, Validators} from "@angular/forms";
@@ -30,12 +30,15 @@ export class LoginComponent implements OnInit {
   submitLogin() {
     this.service.login(this.credentials)
       .subscribe(data => {
-          console.log(data);
           if (data) {
             this.showSuccessMess();
             localStorage.setItem("token", this.service.getToken(this.credentials));
+            localStorage.setItem("isLogged", 'true');
             this.loginService.onLogin$.next(true);
             this.router.navigateByUrl("/home");
+          }
+          else {
+            this.showLoginFailureMess();
           }
         },
         (error => {

@@ -16,6 +16,8 @@ export class LoginInterceptor implements HttpInterceptor {
           Authorization: `Basic ${token}`,
         },
       });
+    } else {
+      localStorage.setItem("isLogged", 'false');
     }
     return next.handle(request);
   }
