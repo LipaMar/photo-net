@@ -27,6 +27,19 @@
       "loginButton": "Zaloguj",
       "noAcc": "Nie posiadasz konta?",
       "register": "Zarejestruj się!"
+    },
+    "register": {
+     "header":  "Rejestracja",
+     "username": "Nazwa użytkownika",
+     "provideUsername":  "Podaj nazwę użytkownika",
+     "email": "Adres e-mail",
+     "provideEmail":  "Podaj adres e-mail",
+     "password": "Hasło",
+     "providePass":  "Podaj hasło",
+     "repeat_password": "Powtórz hasło",
+     "providePass":  "",
+     "registerButton": "Zarejestruj się",
+      "alreadyExist": "Użytkownik już istnieje"
     }
   }
 

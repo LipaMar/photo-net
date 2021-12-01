@@ -1,1 +1,48 @@
-<p>register works!</p>
+<div class="container">
+  <div>
+    <h1>{{'page.register.header' | translate}}</h1>
+    <form #registerForm="ngForm" (ngSubmit)="register()">
+      <div class="form-group">
+        <label for="name">{{'page.register.username' | translate}}</label>
+        <input type="text" class="form-control" id="name"
+               required
+               [(ngModel)]="registerDto.userName" name="name"
+               #name="ngModel">
+        <div [hidden]="name.valid || name.pristine"
+             class="alert alert-danger">
+          {{'page.register.provideUsername' | translate}}
+        </div>
+        <label for="email">{{'page.register.email' | translate}}</label>
+        <input type="email" class="form-control" id="email"
+               required
+               [(ngModel)]="registerDto.email" name="email"
+               #email="ngModel">
+        <div [hidden]="email.valid || email.pristine"
+             class="alert alert-danger">
+          {{'page.register.provideEmail' | translate}}
+        </div>
+
+        <label for="password">{{'page.register.password' | translate}}</label>
+        <input required type="password" class="form-control" id="password"
+               [(ngModel)]="pass" name="password" #password="ngModel">
+        <div class="form-control" [hidden]="password.valid || password.pristine"
+             class="alert alert-danger">
+          {{'page.register.providePass' | translate}}
+        </div>
+
+        <label for="repeat_password">{{'page.register.repeat_password' | translate}}</label>
+        <input required type="password" class="form-control" id="repeat_password"
+               [(ngModel)]="repeatPass" name="repeat_password" #repeat_password="ngModel">
+        <div class="form-control" [hidden]="repeat_password.valid || repeat_password.pristine"
+             class="alert alert-danger">
+          {{'page.register.providePass' | translate}}
+        </div>
+
+      </div>
+
+      <button type="submit" class="btn btn-success"
+              [disabled]="!registerForm.form.valid">{{'page.register.registerButton' | translate}}</button>
+
+    </form>
+  </div>
+</div>

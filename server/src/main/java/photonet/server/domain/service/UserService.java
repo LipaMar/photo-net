@@ -3,6 +3,7 @@ package photonet.server.domain.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import photonet.server.config.Roles;
 import photonet.server.core.exception.AlreadyExistRestException;
 import photonet.server.core.exception.NotFoundRestException;
 import photonet.server.domain.entity.Photo;
@@ -39,7 +41,7 @@ public class UserService {
     @Transactional
     public void register(UserDto user) {
         if (userRepository.existsByUserNameOrEmail(user.getUserName(), user.getEmail())) {
-            throw new AlreadyExistRestException();
+            throw new AlreadyExistRestException("Użytkownik o podanym loginie już istnieje",HttpStatus.CONFLICT);
         }
         User toSave = userMapper.mapUserDtoToUser(user);
         userRepository.save(toSave);

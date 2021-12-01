@@ -20,6 +20,8 @@ import photonet.server.domain.service.UserService;
 import java.util.Collections;
 import java.util.List;
 
+import static photonet.server.config.Endpoints.*;
+
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -32,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().and()
                 .logout().and()
                 .authorizeRequests()
-                .antMatchers(Endpoints.HOME,Endpoints.LOGIN).permitAll()
+                .antMatchers(HOME, LOGIN, REGISTER).permitAll()
                 .antMatchers(HttpMethod.GET,"/h2-console/**").hasRole(Roles.ADMIN)
                 .anyRequest().authenticated();
         http.headers().frameOptions().disable();
@@ -54,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(10);
     }
 
     private static final String ALLOWED_METHODS = "*";

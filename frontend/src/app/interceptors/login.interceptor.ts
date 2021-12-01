@@ -11,6 +11,7 @@ export class LoginInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let token = localStorage.getItem('token');
     if (token) {
+      localStorage.setItem("isLogged", 'true');
       request = request.clone({
         setHeaders: {
           Authorization: `Basic ${token}`,

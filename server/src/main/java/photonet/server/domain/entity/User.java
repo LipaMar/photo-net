@@ -3,6 +3,7 @@ package photonet.server.domain.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import photonet.server.config.Roles;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,7 +26,7 @@ public class User {
     @Column(nullable = false)
     private Boolean active = true;
     private String password;
-    private String role;
+    private String role = Roles.USER;
     @OneToMany(orphanRemoval = true)
     private List<Comment> comments;
     @OneToOne
