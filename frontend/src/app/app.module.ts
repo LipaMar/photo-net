@@ -16,6 +16,7 @@ import {ToastrModule} from "ngx-toastr";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {LoginInterceptor} from "./interceptors/login.interceptor";
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {LoginInterceptor} from "./interceptors/login.interceptor";
     NotFoundComponent,
     FooterComponent,
     RegisterComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
