@@ -4,6 +4,7 @@ import {RegisterDto} from "./register.models";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import * as bcrypt from "bcryptjs";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private service: RegisterService,
               private toastr: ToastrService,
-              private router: Router) {
+              private router: Router,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -33,15 +35,15 @@ export class RegisterComponent implements OnInit {
     },
       (error => {
         if (error.status == 401)
-          this.toastr.error("message.register.failure");
+          this.toastr.error(this.translate.instant("message.register.failure"));
         if (error.status == 409)
-          this.toastr.error("message.register.alreadyExist");
+          this.toastr.error(this.translate.instant("message.register.alreadyExist"));
       })
     );
   }
 
   showSuccessMess() {
-    this.toastr.success('message.register.success');
+    this.toastr.success(this.translate.instant('message.register.success'));
   }
 
 }

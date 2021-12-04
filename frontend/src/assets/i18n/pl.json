@@ -15,6 +15,11 @@
     "login": {
      "success": "Pomyślnie zalogowano",
      "failure": "Błędny login lub hasło"
+    },
+    "register": {
+      "alreadyExist": "Użytkownik już istnieje",
+      "success": "Pomyślnie zarejstrowano",
+      "failure": "Rejestracja się nie powiodła"
     }
   },
   "page": {
@@ -38,8 +43,7 @@
      "providePass":  "Podaj hasło",
      "repeat_password": "Powtórz hasło",
      "providePass":  "",
-     "registerButton": "Zarejestruj się",
-      "alreadyExist": "Użytkownik już istnieje"
+     "registerButton": "Zarejestruj się"
     }
   }
 
