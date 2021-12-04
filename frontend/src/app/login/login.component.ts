@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {LoginService} from "./login.service";
 import {Credentials} from "./login.models";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {ModalConfig} from "../components/modal/modal.config";
-import {Observable} from "rxjs";
-import {compareSegments} from "@angular/compiler-cli/src/ngtsc/sourcemaps/src/segment_marker";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
+})
+@Injectable({ 
+  providedIn: 'root'
 })
 export class LoginComponent implements OnInit, ModalConfig {
   modalTitle: string = 'page.login.header';
@@ -23,7 +25,8 @@ export class LoginComponent implements OnInit, ModalConfig {
 
   constructor(private service: LoginService,
               private fb: FormBuilder,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -51,11 +54,11 @@ export class LoginComponent implements OnInit, ModalConfig {
   }
 
   showSuccessMess() {
-    this.toastr.success('message.login.success');
+    this.toastr.success(this.translate.instant('message.login.success'));
   }
 
   showLoginFailureMess() {
-    this.toastr.error("message.login.failure");
+    this.toastr.error(this.translate.instant("message.login.failure"));
   }
 
   async shouldClose() {

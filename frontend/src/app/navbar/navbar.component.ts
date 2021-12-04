@@ -18,12 +18,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isLogged: boolean;
   userName: string = '';
   subscriptions: Subscription[] = [];
-  modalConfig: ModalConfig = new LoginComponent(this.service,this.fb,this.toastr);
+  modalConfig: ModalConfig = this.login;
   @ViewChild('modal') private modalComponent: ModalComponent;
 
   constructor(private service: LoginService,
-              private fb: FormBuilder,
-              private toastr: ToastrService) {
+              private login: LoginComponent) {
     this.isLogged = localStorage.getItem("isLogged") === 'true';
   }
 
