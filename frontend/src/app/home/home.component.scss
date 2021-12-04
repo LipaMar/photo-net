@@ -1,0 +1,21 @@
+@import "src/styles";
+
+.container {
+  color: white;
+}
+
+//section {
+//  overflow: auto;
+//}
+  .light-blue {
+  color: $nav-blue-light;
+}
+
+hr {
+  background-color: $footer-brown;
+  border-radius: 7px 7px 7px 7px;
+  height: 20px;
+  opacity: 1;
+  margin: 50px 0;
+}
+

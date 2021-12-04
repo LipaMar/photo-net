@@ -4,9 +4,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: linear-gradient(0deg, $nav-blue 0%, $white 120%) no-repeat fixed;
+  background: linear-gradient(0deg, $nav-blue-light 35%, $white 65%) no-repeat;
 
   .content{
     margin-bottom: auto;
+    padding: 20px 0;
   }
 }
