@@ -1,16 +1,20 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginService} from "./login.service";
 import {Credentials} from "./login.models";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
-import {Router} from "@angular/router";
+import {ModalConfig} from "../components/modal/modal.config";
+import {Observable} from "rxjs";
+import {compareSegments} from "@angular/compiler-cli/src/ngtsc/sourcemaps/src/segment_marker";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, ModalConfig {
+  modalTitle: string = 'page.login.header';
+  logged: Promise<boolean>;
   credentials = new Credentials('', '');
   form = this.fb.group({
     login: ["", [Validators.required]],
@@ -19,9 +23,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private service: LoginService,
               private fb: FormBuilder,
-              private toastr: ToastrService,
-              private router: Router,
-              private loginService: LoginService) {
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -34,10 +36,10 @@ export class LoginComponent implements OnInit {
             this.showSuccessMess();
             localStorage.setItem("token", this.service.getToken(this.credentials));
             localStorage.setItem("isLogged", 'true');
-            this.loginService.onLogin$.next(true);
-            this.router.navigateByUrl("/home");
-          }
-          else {
+            this.service.onLogin$.next(true);
+            this.service.onLogin$.complete();
+            this.logged = Promise.resolve(true);
+          } else {
             this.showLoginFailureMess();
           }
         },
@@ -55,5 +57,19 @@ export class LoginComponent implements OnInit {
   showLoginFailureMess() {
     this.toastr.error("message.login.failure");
   }
+
+  async shouldClose() {
+    return this.service.onLogin$.toPromise().then(() => true);
+  }
+
+  hideCloseButton(): boolean {
+    return true;
+  }
+
+  hideDismissButton(): boolean {
+    return true;
+  }
+
+
 
 }

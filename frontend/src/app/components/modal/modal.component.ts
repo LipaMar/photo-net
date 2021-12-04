@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ModalConfig} from "./modal.config";
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'app-modal',
@@ -15,13 +15,21 @@ export class ModalComponent implements OnInit {
 
   constructor(private modalService: NgbModal) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.listenForClose();
+  }
 
   open(): Promise<boolean> {
     return new Promise<boolean>(resolve => {
       this.modalRef = this.modalService.open(this.modalContent)
       this.modalRef.result.then(resolve, resolve)
     })
+  }
+
+  async listenForClose(){
+    if (this.modalConfig.shouldClose && (await this.modalConfig.shouldClose())) {
+      this.modalRef.close();
+    }
   }
 
   async close(): Promise<void> {
@@ -36,6 +44,13 @@ export class ModalComponent implements OnInit {
       const result = this.modalConfig.onDismiss === undefined || (await this.modalConfig.onDismiss())
       this.modalRef.dismiss(result)
     }
+  }
+
+  isDismissButtonEnabled(){
+    return this.modalConfig.hideDismissButton === undefined || !this.modalConfig.hideDismissButton();
+  }
+  isCloseButtonEnabled(){
+    return this.modalConfig.hideCloseButton === undefined || !this.modalConfig.hideCloseButton();
   }
 }
 

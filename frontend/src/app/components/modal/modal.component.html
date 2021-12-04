@@ -1,22 +1,22 @@
 <ng-template #modal>
   <div class="modal-header">
-    <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
+    <h2 class="modal-title">{{ modalConfig.modalTitle | translate }}</h2>
   </div>
   <div class="modal-body">
     <ng-content></ng-content>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer" *ngIf="isDismissButtonEnabled() && isCloseButtonEnabled()">
     <button type="button"
             class="btn"
             (click)="dismiss()"
-            *ngIf="modalConfig.hideDismissButton === undefined || !modalConfig.hideDismissButton()"
+            *ngIf="isDismissButtonEnabled()"
             [disabled]="modalConfig.disableDismissButton !== undefined && modalConfig.disableDismissButton()">
       {{ modalConfig.dismissButtonLabel }}
     </button>
     <button type="button"
             class="btn"
             (click)="close()"
-            *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
+            *ngIf="isCloseButtonEnabled()"
             [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">
       {{ modalConfig.closeButtonLabel }}
     </button>

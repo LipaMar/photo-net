@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
     this.registerDto.password = bcrypt.hashSync(this.pass, salt);
     this.service.register(this.registerDto).subscribe(response=>{
         this.showSuccessMess();
-        this.router.navigateByUrl("/login");
+        this.router.navigateByUrl("/home");
     },
       (error => {
         if (error.status == 401)
