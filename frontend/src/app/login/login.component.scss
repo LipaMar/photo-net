@@ -1,0 +1,13 @@
+@import "src/styles";
+
+:host {
+  color: $blue-gray;
+}
+
+a {
+  color: $deep-blue;
+}
+
+button {
+  margin-top: 10px;
+}

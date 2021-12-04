@@ -1,7 +1,7 @@
 @import "src/styles";
 
 footer {
-  background-color: $footer-brown;
+  background-color: $middle-red;
   color: $white;
   font-family: $font-roboto;
   font-size: 1rem;
@@ -14,7 +14,7 @@ footer {
     font-size: 1.5rem;
     color: inherit;
     text-decoration: none;
-    margin: 0 30px;
+    margin: 0 50px;
   }
 
 }

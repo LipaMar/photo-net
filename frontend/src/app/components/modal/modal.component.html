@@ -7,14 +7,14 @@
   </div>
   <div class="modal-footer">
     <button type="button"
-            class="btn btn-outline-secondary"
+            class="btn"
             (click)="dismiss()"
             *ngIf="modalConfig.hideDismissButton === undefined || !modalConfig.hideDismissButton()"
             [disabled]="modalConfig.disableDismissButton !== undefined && modalConfig.disableDismissButton()">
       {{ modalConfig.dismissButtonLabel }}
     </button>
     <button type="button"
-            class="btn btn-outline-primary"
+            class="btn"
             (click)="close()"
             *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
             [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">

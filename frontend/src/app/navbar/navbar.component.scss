@@ -1,7 +1,7 @@
 @import 'src/styles.scss';
 
 #container {
-  background-color: $nav-blue;
+  background-color: $blue-gray;
   margin: 0 auto;
   padding: 0 50px;
 
@@ -16,7 +16,7 @@
   float: left;
   width: 290px;
   height: 72px;
-  border: 5px dashed white;
+  border: 5px dashed $white;
   padding: 10px;
 }
 
@@ -39,7 +39,7 @@ nav {
   }
 
   a {
-    color: white;
+    color: $white;
     text-decoration: none;
     font-family: $font-roboto;
     font-size: 1rem;
@@ -50,7 +50,7 @@ nav {
       //width: 0;
       width: 100%;
       display: block;
-      background-color: white;
+      background-color: $white;
       position: absolute;
       bottom: 0;
       //height: 15px;
@@ -77,14 +77,15 @@ nav {
     border: none;
     outline: none;
     margin-left: 15px;
-
+    padding-left: 10px;
   }
 
   .btn {
     border-radius: 0 15px 15px 0;
+    background-color: $nav-blue-light !important;
 
     i {
-      color: gray;
+      color: $white;
     }
   }
 }

@@ -1,15 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-$nav-blue: #6699cc;
-$nav-blue-light: #99ccff;
-$footer-brown: #cc9966;
+//fonts
 $dark-brown: #8b560e;
-$white: #ffffff;
 $font-roboto: Roboto, sans-serif;
+
+//colors
+$deep-taupe: #866562ff;
+$white: #FBFBFDff;
+$deep-blue: #1C468Aff;
+$deep-saffron: #F99746ff;
+$blue-gray: #6699CCff;
+$green: #82B378ff;
+$violet: #705C84ff;
+$middle-red: #E28569ff;
+$steel-teal: #71979Bff;
+$nav-blue-light: #99ccff;
+
+//other var
 $nav-height: 5rem;
 $footer-height: 3rem;
 
 html{
   font-size: 20px;
+}
+.btn{
+  background-color: $middle-red !important;
+  color: $white !important;
 }

@@ -1,7 +1,7 @@
 @import "src/styles";
 
 .container {
-  color: white;
+  color: $white;
 }
 
 //section {
@@ -12,7 +12,7 @@
 }
 
 hr {
-  background-color: $footer-brown;
+  background-color: $middle-red;
   border-radius: 7px 7px 7px 7px;
   height: 20px;
   opacity: 1;

@@ -1,32 +1,35 @@
 <div class="container">
-  <div>
-    <h1>{{'page.login.header' | translate}}</h1>
-    <form #loginForm="ngForm" (ngSubmit)="submitLogin()">
-      <div class="form-group">
-        <label for="name">{{'page.login.login' | translate}}</label>
-        <input type="text" class="form-control" id="name"
-               required
-               [(ngModel)]="credentials.username" name="name"
-               #name="ngModel">
-        <div [hidden]="name.valid || name.pristine"
-             class="alert alert-danger">
-          {{'page.login.provideLogin' | translate}}
+  <div class="row">
+    <div class="col-md-6">
+      <h1>{{'page.login.header' | translate}}</h1>
+      <form #loginForm="ngForm" (ngSubmit)="submitLogin()">
+        <div class="form-group">
+          <label for="name">{{'page.login.login' | translate}}</label>
+          <input type="text" class="form-control" id="name"
+                 required
+                 [(ngModel)]="credentials.username" name="name"
+                 #name="ngModel">
+          <div [hidden]="name.valid || name.pristine"
+               class="alert alert-danger">
+            {{'page.login.provideLogin' | translate}}
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="password">{{'page.login.password' | translate}}</label>
-        <input required type="password" class="form-control" id="password"
-               [(ngModel)]="credentials.password" name="password" #password="ngModel">
-        <div class="form-control" [hidden]="password.valid || password.pristine"
-             class="alert alert-danger">
-          {{'page.login.providePass' | translate}}
+        <div class="form-group">
+          <label for="password">{{'page.login.password' | translate}}</label>
+          <input required type="password" class="form-control" id="password"
+                 [(ngModel)]="credentials.password" name="password" #password="ngModel">
+          <div class="form-control" [hidden]="password.valid || password.pristine"
+               class="alert alert-danger">
+            {{'page.login.providePass' | translate}}
+          </div>
         </div>
-      </div>
 
-      <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">{{'page.login.loginButton' | translate}}</button>
+        <button type="submit" class="btn"
+                [disabled]="!loginForm.form.valid">{{'page.login.loginButton' | translate}}</button>
 
-    </form>
+      </form>
+    </div>
   </div>
 
   <p>{{'page.login.noAcc' | translate}} <a href="/register">{{'page.login.register' | translate}}</a></p>
