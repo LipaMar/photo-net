@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @ViewChild('modal') private modalComponent: ModalComponent;
 
   constructor(private service: LoginService,
-              private login: LoginComponent) {
+              private login: LoginComponent) { //TODO: i tak też nie
     this.isLogged = localStorage.getItem("isLogged") === 'true';
   }
 

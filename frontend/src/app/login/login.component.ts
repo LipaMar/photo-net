@@ -5,13 +5,14 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {ModalConfig} from "../components/modal/modal.config";
 import {TranslateService} from "@ngx-translate/core";
+import {AppToastrService} from "../core/toastr.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-@Injectable({ 
+@Injectable({  //TODO:tak sie chyba nie robi :(
   providedIn: 'root'
 })
 export class LoginComponent implements OnInit, ModalConfig {
@@ -25,8 +26,7 @@ export class LoginComponent implements OnInit, ModalConfig {
 
   constructor(private service: LoginService,
               private fb: FormBuilder,
-              private toastr: ToastrService,
-              private translate: TranslateService) {
+              private toastr: AppToastrService) {
   }
 
   ngOnInit(): void {
@@ -54,11 +54,11 @@ export class LoginComponent implements OnInit, ModalConfig {
   }
 
   showSuccessMess() {
-    this.toastr.success(this.translate.instant('message.login.success'));
+    this.toastr.success('message.login.success');
   }
 
   showLoginFailureMess() {
-    this.toastr.error(this.translate.instant("message.login.failure"));
+    this.toastr.error("message.login.failure");
   }
 
   async shouldClose() {

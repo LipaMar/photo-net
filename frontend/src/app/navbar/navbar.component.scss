@@ -1,3 +1,4 @@
+@use "sass:math";
 @import 'src/styles.scss';
 
 #container {
@@ -34,7 +35,7 @@ nav {
   }
 
   li {
-    padding: $nav-height/2-1rem 0;
+    padding: math.div($nav-height, 2)-1rem 0;
     position: relative;
   }
 

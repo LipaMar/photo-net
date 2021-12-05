@@ -28,3 +28,8 @@ html{
   background-color: $middle-red !important;
   color: $white !important;
 }
+.toastr-position{
+  position: fixed;
+  top: 100px;
+  right: 0;
+}
