@@ -17,6 +17,7 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {LoginInterceptor} from "./interceptors/login.interceptor";
 import { ModalComponent } from './components/modal/modal.component';
+import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -29,22 +30,23 @@ import { ModalComponent } from './components/modal/modal.component';
     RegisterComponent,
     ModalComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    ToastrModule.forRoot()
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        ToastrModule.forRoot(),
+        NgbCollapseModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

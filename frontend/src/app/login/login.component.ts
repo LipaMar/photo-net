@@ -6,6 +6,7 @@ import {ToastrService} from "ngx-toastr";
 import {ModalConfig} from "../components/modal/modal.config";
 import {TranslateService} from "@ngx-translate/core";
 import {AppToastrService} from "../core/toastr.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit, ModalConfig {
 
   constructor(private service: LoginService,
               private fb: FormBuilder,
-              private toastr: AppToastrService) {
+              private toastr: AppToastrService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit, ModalConfig {
             this.service.onLogin$.next(true);
             this.service.onLogin$.complete();
             this.logged = Promise.resolve(true);
+            this.router.navigateByUrl("/home");
           } else {
             this.showLoginFailureMess();
           }

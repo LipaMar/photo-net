@@ -1,74 +1,27 @@
 @use "sass:math";
 @import 'src/styles.scss';
 
-#container {
+.navbar {
   background-color: $blue-gray;
-  margin: 0 auto;
-  padding: 0 50px;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: nowrap;
+}
 
+#navbarSupportedContent {
+  justify-content: flex-end;
 }
 
 .logo img {
-  float: left;
-  width: 290px;
-  height: 72px;
+  height: 4rem;
   border: 5px dashed $white;
   padding: 10px;
+  margin: 4px 25px 5px 0;
 }
 
-nav {
-  margin: 0;
-  padding: 0;
-
-
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-transform: uppercase;
-    display: flex;
-  }
-
-  li {
-    padding: math.div($nav-height, 2)-1rem 0;
-    position: relative;
-  }
-
-  a {
-    color: $white;
-    text-decoration: none;
-    font-family: $font-roboto;
-    font-size: 1rem;
-    padding: 0 3vmax;
-
-    &:after {
-      content: '';
-      //width: 0;
-      width: 100%;
-      display: block;
-      background-color: $white;
-      position: absolute;
-      bottom: 0;
-      //height: 15px;
-      height: 0;
-      border-radius: 15px 15px 0 0;
-    }
-
-    &:hover {
-      color: $nav-blue-light;
-
-      &:after {
-        //width:  100%;
-        height: 15px;
-        transition: all ease-in-out 250ms;
-      }
-    }
-  }
+a {
+  color: $white;
+  text-decoration: none;
+  font-family: $font-roboto;
+  font-size: 1rem;
 }
 
 .search-box {
@@ -77,17 +30,85 @@ nav {
     border-radius: 15px 0 0 15px;
     border: none;
     outline: none;
-    margin-left: 15px;
     padding-left: 10px;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
   }
 
   .btn {
     border-radius: 0 15px 15px 0;
     background-color: $nav-blue-light !important;
-
-    i {
-      color: $white;
-    }
   }
 }
 
+i {
+  color: $white;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+@media (max-width: 1199.98px) { // small devices
+  ul {
+    list-style: none;
+    text-transform: uppercase;
+
+  }
+  .navbar {
+    padding: 0;
+  }
+}
+
+
+@media (min-width: 1200px) { // large devices
+  nav {
+    margin: 0;
+    padding: 0;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-transform: uppercase;
+      display: flex;
+      flex-grow: 1;
+      justify-content: space-around;
+      align-content: center;
+
+    }
+
+    li {
+      padding: math.div($nav-height, 2)-1rem 0px;
+      position: relative;
+      text-align: center;
+    }
+
+    a:not(.logo) {
+      padding: 0 20px;
+
+      &:after {
+        content: '';
+        width: 100%;
+        display: block;
+        background-color: $white;
+        position: absolute;
+        bottom: 0;
+        height: 0;
+        border-radius: 15px 15px 0 0;
+      }
+
+      &:hover {
+        color: $nav-blue-light;
+
+        &:after {
+          height: 15px;
+          transition: all ease-in-out 250ms;
+        }
+      }
+    }
+  }
+}

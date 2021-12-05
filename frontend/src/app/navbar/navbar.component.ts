@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   userName: string = '';
   subscriptions: Subscription[] = [];
   modalConfig: ModalConfig = this.login;
+  isNavbarCollapsed = true;
   @ViewChild('modal') private modalComponent: ModalComponent;
 
   constructor(private service: LoginService,

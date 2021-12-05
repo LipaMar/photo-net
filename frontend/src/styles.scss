@@ -22,7 +22,7 @@ $nav-height: 5rem;
 $footer-height: 3rem;
 
 html{
-  font-size: 20px;
+  font-size: 16px;
 }
 .btn{
   background-color: $middle-red !important;
@@ -30,6 +30,6 @@ html{
 }
 .toastr-position{
   position: fixed;
-  top: 100px;
+  top: 5rem;
   right: 0;
 }

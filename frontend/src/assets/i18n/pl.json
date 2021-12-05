@@ -1,12 +1,12 @@
 {
   "nav": {
-    "home": "strona główna",
-    "followed": "obserwowani",
-    "discover": "odkryj",
-    "profile": "profil",
-    "login": "zaloguj się",
-    "logout": "wyloguj się",
-    "register": "zarejestruj się"
+    "home": "Strona główna",
+    "followed": "Obserwowani",
+    "discover": "Odkryj",
+    "profile": "Profil",
+    "login": "Zaloguj się",
+    "logout": "Wyloguj się",
+    "register": "Zarejestruj się"
   },
   "footer": {
     "followUs": "Obserwuj nas na"
