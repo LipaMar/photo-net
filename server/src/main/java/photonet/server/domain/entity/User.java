@@ -3,6 +3,7 @@ package photonet.server.domain.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 import photonet.server.config.Roles;
 
 import javax.persistence.*;
@@ -34,6 +35,10 @@ public class User {
     @OneToMany(mappedBy = "author")
     private List<Post> posts;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "target")
-    private List<Rate> rating;
+    private List<Rate> ratings;
+    @Formula("(select count(r.id) from rate r where r.target_id = id)")
+    private Integer ratingCount;
+    @Formula("(select avg(r.rating) from rate r where r.target_id = id)")
+    private Double rating;
 
 }
