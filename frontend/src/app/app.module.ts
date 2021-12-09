@@ -18,6 +18,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {LoginInterceptor} from "./interceptors/login.interceptor";
 import { ModalComponent } from './components/modal/modal.component';
 import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
+import { DiscoverComponent } from './pages/discover/discover.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
     FooterComponent,
     RegisterComponent,
     ModalComponent,
+    DiscoverComponent,
   ],
     imports: [
         BrowserModule,

@@ -6,7 +6,7 @@
     <div [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse" id="navbarSupportedContent">
       <ul *ngIf="isLogged" class="navbar-nav mr-auto">
         <li><a href="#">{{ 'nav.followed' | translate}}</a></li>
-        <li><a href="#">{{ 'nav.discover' | translate}}</a></li>
+        <li><a href="/discover">{{ 'nav.discover' | translate}}</a></li>
         <li><a href="#">{{ 'nav.profile' | translate}}</a></li>
         <li><a href="/home" (click)="logout()">{{ 'nav.logout' | translate}}</a></li>
       </ul>
