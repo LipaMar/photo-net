@@ -14,5 +14,5 @@ export const routes = {
 export const endpoints = {
   discover: `${environment.apiUrl}/discover`,
   login: `${environment.apiUrl}/login`,
-
+  register: `${environment.apiUrl}/register`,
 };

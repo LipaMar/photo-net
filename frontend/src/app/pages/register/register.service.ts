@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {RegisterDto} from "./register.models";
 import {Observable} from "rxjs";
-import {environment} from "../../../environments/environment";
+import {endpoints} from "../../core/const/consts";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,6 @@ export class RegisterService {
   }
 
   register(dto: RegisterDto): Observable<any> {
-    return this.http.post(environment.apiUrl + "/register", dto);
+    return this.http.post(endpoints.register, dto);
   }
 }
