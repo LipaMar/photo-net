@@ -3,7 +3,7 @@ import {RegisterService} from "./register.service";
 import {RegisterDto} from "./register.models";
 import {Router} from "@angular/router";
 import * as bcrypt from "bcryptjs";
-import {AppToastrService} from "../core/toastr.service";
+import {AppToastrService} from "../../core/toastr.service";
 
 @Component({
   selector: 'app-register',

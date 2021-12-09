@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {LoginService} from "../login/login.service";
+import {LoginService} from "../../login/login.service";
 import {Subscription} from "rxjs";
-import {ModalComponent} from "../components/modal/modal.component";
-import {ModalConfig} from "../components/modal/modal.config";
-import {LoginComponent} from "../login/login.component";
+import {ModalComponent} from "../modal/modal.component";
+import {ModalConfig} from "../modal/modal.config";
+import {LoginComponent} from "../../login/login.component";
 import {NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
