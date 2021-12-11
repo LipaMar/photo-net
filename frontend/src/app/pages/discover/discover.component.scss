@@ -1,0 +1,29 @@
+@import "src/styles";
+
+.profilePic{
+  border-radius: 50px ;
+  height: 100px;
+  float: right;
+  overflow: auto;
+  &:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+.card-header,{
+  background-color: $middle-red;
+  color: $white;
+}
+
+.star {
+  font-size: 1.5rem;
+  color: $gray;
+}
+.filled {
+  color: $middle-red;
+}
+.side-nav{
+  background-color: white;
+  border-radius: 20px;
+}

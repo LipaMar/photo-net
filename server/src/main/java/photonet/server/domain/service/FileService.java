@@ -23,7 +23,7 @@ public class FileService {
 
     public byte[] getBlob(String url) {
         try {
-            File file = new File(this.getClass().getClassLoader().getResource(url).getFile());
+            File file = new File(url);
             return (new FileInputStream(file)).readAllBytes();
         } catch (IOException e) {
             log.error(e.getMessage(), e);

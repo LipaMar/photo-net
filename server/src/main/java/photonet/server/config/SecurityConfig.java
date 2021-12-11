@@ -59,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(10);
     }
 
+    private static final List<String> ALLOWED_ORIGINS = List.of("http://localhost:4200", "http://192.168.0.160:4200");
     private static final String ALLOWED_METHODS = "*";
     private static final String ALLOWED_HEADERS = "*";
     private static final String EXPOSED_HEADERS = "Content-Disposition";
@@ -67,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         var configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedOrigins(ALLOWED_ORIGINS);
         configuration.setAllowCredentials(true);
         configuration.setAllowedMethods(Collections.singletonList(ALLOWED_METHODS));
         configuration.setAllowedHeaders(Collections.singletonList(ALLOWED_HEADERS));

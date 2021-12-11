@@ -2,20 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 //fonts
-$dark-brown: #8b560e;
 $font-roboto: Roboto, sans-serif;
 
 //colors
-$deep-taupe: #866562ff;
-$white: #FBFBFDff;
-$deep-blue: #1C468Aff;
-$deep-saffron: #F99746ff;
-$blue-gray: #6699CCff;
-$green: #82B378ff;
-$violet: #705C84ff;
-$middle-red: #E28569ff;
-$steel-teal: #71979Bff;
-$nav-blue-light: #99ccff;
+$deep-taupe: #866562FF;
+$white: #FBFBFDFF;
+$gray: #cccccc;
+$deep-blue: #1C468AFF;
+$deep-saffron: #F99746FF;
+$blue-gray: #6699CCFF;
+$green: #82B378FF;
+$violet: #705C84FF;
+$middle-red: #E28569FF;
+$steel-teal: #71979BFF;
+$nav-blue-light: #99CCFF;
+$dark-blue: #495d75;
 
 //other var
 $nav-height: 5rem;
@@ -33,3 +34,6 @@ html{
   top: 5rem;
   right: 0;
 }
+
+//html, body { height: 100%; }
+//body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
