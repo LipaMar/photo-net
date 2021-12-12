@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sticky-top side-nav p-4">
+        <form>
+          <div class="form-group">
+
+            <h4>{{ 'filters.header' | translate}}</h4>
+            <label for="rating-filter">{{ 'filters.rating' | translate}}</label>
+            <div id="rating-filter">
+              <ngb-rating [(rate)]="currentRate" [max]="5">
+                <ng-template let-fill="fill" let-index="index">
+                  <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                </ng-template>
+              </ngb-rating>
+            </div>
+            <label for="rating-count-filter">{{ 'filters.ratingCount' | translate}}</label>
+            <div id="rating-count-filter">
+              <mat-slider
+                [max]="500"
+                [min]="0"
+                [step]="50"
+                aria-labelledby="example-name-label">
+              </mat-slider>
+              <!--                [disabled]="disabled"-->
+              <!--                [invert]="invert"-->
+              <!--                [max]="max"-->
+              <!--                [min]="min"-->
+              <!--                [step]="step"-->
+              <!--                [thumbLabel]="thumbLabel"-->
+              <!--                [tickInterval]="getSliderTickInterval()"-->
+              <!--                [(ngModel)]="value"-->
+              <!--                [vertical]="vertical"-->
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-9 content">
+      <div>
+        <div class="row">
+          <app-sort></app-sort>
+        </div>
+        <div class="row" *ngFor="let profile of profiles">
+          <a href="{{routeToProfile+profile.userName}}">
+            <div class="mb-2 col-lg-9">
+            <div class="card">
+              <h5 class="card-header">
+                {{profile.userName}}
+              </h5>
+              <div class="card-body">
+                <img [src]=showPic(profile.profilePicture) class="profile-pic">
+                <ul class="list-attributes">
+                  <li class="city mb-1">{{profile.city}}</li>
+                  <li class="gallery mb-1">{{profile.postsCount}}</li>
+                  <li class="price mb-1">{{profile.price}}</li>
+                  <li>
+                    <ngb-rating [readonly]="true" [(rate)]="profile.rating" [max]="5">
+                      <ng-template #t let-fill="fill">
+                        <span class="star" [class.full]="fill === 100">
+                          <span class="half" [style.width.%]="fill">&#9733;</span>
+                          &#9733;
+                        </span>
+                      </ng-template>
+                    </ngb-rating>
+                </ul>
+              </div>
+              <div class="card-footer">
+                <div class="category-chips px-2 py-1" *ngFor="let category of profile.categories">{{category}}</div>
+              </div>
+            </div>
+          </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

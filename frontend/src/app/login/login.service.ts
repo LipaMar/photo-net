@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from "../../environments/environment";
-import {Credentials, LoggedDto} from "./login.models";
+import {Credentials, LoggedDto} from "../core/models/login.models";
 import {Observable, Subject} from "rxjs";
+import {endpoints} from "../core/const/consts";
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +21,15 @@ export class LoginService {
         'Authorization': "Basic " + this.getToken(credentials)
       })
     };
-    return this.http.get<any>(`${environment.apiUrl}/login`, httpOptions)
+    return this.http.get<any>(endpoints.login, httpOptions)
   };
 
-  getToken(credentials: Credentials):string{
+  getToken(credentials: Credentials): string {
     return btoa(credentials.username + ':' + credentials.password);
   }
 
   doGetIsLogged(): Observable<LoggedDto> {
-    return this.http.get<LoggedDto>(environment.apiUrl + '/login');
+    return this.http.get<LoggedDto>(endpoints.login);
   }
 
   logout() {

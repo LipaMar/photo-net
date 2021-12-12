@@ -32,10 +32,11 @@ public class User {
     private List<Comment> comments;
     @OneToOne
     private Photo profilePicture;
-    @OneToMany(mappedBy = "author")
-    private List<Post> posts;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "target")
     private List<Rate> ratings;
+    @OneToOne(orphanRemoval = true)
+    private Photographer photographer;
+
     @Formula("(select count(r.id) from rate r where r.target_id = id)")
     private Integer ratingCount;
     @Formula("(select avg(r.rating) from rate r where r.target_id = id)")

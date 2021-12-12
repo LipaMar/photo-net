@@ -1,6 +1,6 @@
-INSERT into PHOTO (path) values ('db/test-photos/image.jfif');
-INSERT into PHOTO (path) values ('db/test-photos/image1.jfif');
-INSERT into PHOTO (path) values ('db/test-photos/image2.jfif');
+INSERT into PHOTO (path) values ('photos/image.png');
+INSERT into PHOTO (path) values ('photos/image1.png');
+INSERT into PHOTO (path) values ('photos/image2.png');
 
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('admin', '$2a$12$q0NXCRNQTetsXx1NSMuL1eOddYPlTlUMN.aMhXNv6EmCIrjNHCRwW', 'ADMIN', 'admin', 'admin', true, null);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('tgoldin0', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec', 'areek0@soup.io', true, null);
@@ -8,7 +8,7 @@ insert into USER (user_name, password, role, bio, email, active, profile_picture
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('mackermann2', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'donec dapibus duis at velit eu est congue elementum in hac habitasse platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien placerat ante nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis in faucibus orci', 'adefreyne2@lulu.com', false, 1);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('ttennock3', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'vel nulla eget eros elementum pellentesque quisque porta volutpat erat quisque erat eros viverra eget congue eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo odio porttitor id consequat in consequat ut nulla sed accumsan felis ut at dolor quis odio consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam', 'dstiegar3@oracle.com', true, 2);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('asorrell4', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet', 'bbelmont4@eepurl.com', true, 1);
-insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('sstubbin5', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum', 'rpieterick5@tamu.edu', true, 2);
+insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('sstubbin5', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum', 'rpieterick5@tamu.edu', true, 3);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('cmcall6', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa', 'anellen6@disqus.com', true, 1);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('mplom7', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida nisi at', 'rthorneywork7@behance.net', false, null);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('mknotte8', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula', 'amandal8@census.gov', false, 2);
@@ -154,7 +154,7 @@ insert into USER (user_name, password, role, bio, email, active, profile_picture
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('aocridigan44', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'tortor id nulla ultrices aliquet maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat dui maecenas tristique est et tempus semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit amet diam in magna bibendum imperdiet nullam', 'ztolliday44@youtube.com', true, null);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('srudloff45', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent', 'dtowle45@smugmug.com', true, null);
 
-INSERT into POST (author_id, photo_id) values (2, 1);
+-- INSERT into POST (author_id, photo_id) values (2, 1);
 
 insert into rate (rating, author_id, target_id) values (4, 71, 79);
 insert into rate (rating, author_id, target_id) values (4, 35, 115);
@@ -656,3 +656,100 @@ insert into rate (rating, author_id, target_id) values (3, 125, 8);
 insert into rate (rating, author_id, target_id) values (3, 131, 58);
 insert into rate (rating, author_id, target_id) values (4, 133, 69);
 insert into rate (rating, author_id, target_id) values (1, 52, 6);
+
+insert into category (name) values ('fashion');
+insert into category (name) values ('glamour');
+insert into category (name) values ('portret');
+insert into category (name) values ('akt');
+insert into category (name) values ('edytorial');
+insert into category (name) values ('nagość zakryta');
+insert into category (name) values ('stylizacja');
+
+insert into photographer (user_id, price, city) values (1, 400, 'warszawa');
+insert into photographer (user_id, price, city) values (2, 260, 'kraków');
+insert into photographer (user_id, price, city) values (3, 50, 'łódź');
+insert into photographer (user_id, price, city) values (4, 80, 'wroclaw');
+insert into photographer (user_id, price, city) values (5, 220, 'poznań');
+insert into photographer (user_id, price, city) values (6, 60, 'szczecin');
+insert into photographer (user_id, price, city) values (7, 300, 'bydgoszcz');
+insert into photographer (user_id, price, city) values (8, 140, 'lublin');
+insert into photographer (user_id, price, city) values (9, 360, 'białystok');
+insert into photographer (user_id, price, city) values (10, 160, 'warszawa');
+insert into photographer (user_id, price, city) values (11, 70, 'warszawa');
+insert into photographer (user_id, price, city) values (12, 380, 'kraków');
+insert into photographer (user_id, price, city) values (13, 60, 'łódź');
+insert into photographer (user_id, price, city) values (14, 190, 'wroclaw');
+insert into photographer (user_id, price, city) values (15, 300, 'poznań');
+insert into photographer (user_id, price, city) values (16, 440, 'szczecin');
+insert into photographer (user_id, price, city) values (17, 420, 'bydgoszcz');
+insert into photographer (user_id, price, city) values (18, 330, 'lublin');
+insert into photographer (user_id, price, city) values (19, 280, 'białystok');
+insert into photographer (user_id, price, city) values (20, 480, 'warszawa');
+
+
+
+
+
+
+
+
+
+
+insert into photographer_categories (photographer_id, categories_id) values (1, 1);
+insert into photographer_categories (photographer_id, categories_id) values (1, 2);
+insert into photographer_categories (photographer_id, categories_id) values (1, 3);
+insert into photographer_categories (photographer_id, categories_id) values (1, 4);
+insert into photographer_categories (photographer_id, categories_id) values (1, 5);
+insert into photographer_categories (photographer_id, categories_id) values (1, 6);
+insert into photographer_categories (photographer_id, categories_id) values (1, 7);
+insert into photographer_categories (photographer_id, categories_id) values (16, 4);
+insert into photographer_categories (photographer_id, categories_id) values (14, 4);
+insert into photographer_categories (photographer_id, categories_id) values (18, 1);
+insert into photographer_categories (photographer_id, categories_id) values (4, 1);
+insert into photographer_categories (photographer_id, categories_id) values (5, 4);
+insert into photographer_categories (photographer_id, categories_id) values (12, 3);
+insert into photographer_categories (photographer_id, categories_id) values (18, 6);
+insert into photographer_categories (photographer_id, categories_id) values (4, 6);
+insert into photographer_categories (photographer_id, categories_id) values (8, 3);
+insert into photographer_categories (photographer_id, categories_id) values (5, 7);
+insert into photographer_categories (photographer_id, categories_id) values (2, 6);
+insert into photographer_categories (photographer_id, categories_id) values (16, 3);
+insert into photographer_categories (photographer_id, categories_id) values (18, 7);
+insert into photographer_categories (photographer_id, categories_id) values (8, 6);
+insert into photographer_categories (photographer_id, categories_id) values (3, 4);
+insert into photographer_categories (photographer_id, categories_id) values (18, 2);
+insert into photographer_categories (photographer_id, categories_id) values (6, 4);
+insert into photographer_categories (photographer_id, categories_id) values (5, 7);
+insert into photographer_categories (photographer_id, categories_id) values (12, 7);
+insert into photographer_categories (photographer_id, categories_id) values (14, 1);
+insert into photographer_categories (photographer_id, categories_id) values (17, 7);
+insert into photographer_categories (photographer_id, categories_id) values (10, 1);
+insert into photographer_categories (photographer_id, categories_id) values (2, 1);
+insert into photographer_categories (photographer_id, categories_id) values (3, 2);
+insert into photographer_categories (photographer_id, categories_id) values (18, 3);
+insert into photographer_categories (photographer_id, categories_id) values (19, 2);
+insert into photographer_categories (photographer_id, categories_id) values (16, 3);
+insert into photographer_categories (photographer_id, categories_id) values (5, 3);
+insert into photographer_categories (photographer_id, categories_id) values (2, 6);
+insert into photographer_categories (photographer_id, categories_id) values (11, 3);
+insert into photographer_categories (photographer_id, categories_id) values (20, 3);
+insert into photographer_categories (photographer_id, categories_id) values (5, 5);
+insert into photographer_categories (photographer_id, categories_id) values (11, 1);
+insert into photographer_categories (photographer_id, categories_id) values (2, 6);
+insert into photographer_categories (photographer_id, categories_id) values (13, 5);
+insert into photographer_categories (photographer_id, categories_id) values (5, 3);
+insert into photographer_categories (photographer_id, categories_id) values (2, 3);
+insert into photographer_categories (photographer_id, categories_id) values (8, 4);
+insert into photographer_categories (photographer_id, categories_id) values (16, 3);
+insert into photographer_categories (photographer_id, categories_id) values (16, 6);
+insert into photographer_categories (photographer_id, categories_id) values (17, 7);
+insert into photographer_categories (photographer_id, categories_id) values (16, 7);
+insert into photographer_categories (photographer_id, categories_id) values (8, 6);
+insert into photographer_categories (photographer_id, categories_id) values (6, 6);
+insert into photographer_categories (photographer_id, categories_id) values (10, 3);
+insert into photographer_categories (photographer_id, categories_id) values (18, 6);
+insert into photographer_categories (photographer_id, categories_id) values (20, 6);
+insert into photographer_categories (photographer_id, categories_id) values (8, 2);
+insert into photographer_categories (photographer_id, categories_id) values (7, 4);
+insert into photographer_categories (photographer_id, categories_id) values (7, 2);
+

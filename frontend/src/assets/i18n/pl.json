@@ -44,7 +44,14 @@
      "repeat_password": "Powtórz hasło",
      "providePass":  "",
      "registerButton": "Zarejestruj się"
-    }
-  }
+    },
+    "discover":{
 
+    }
+  },
+  "filters": {
+    "header": "Filtry",
+    "rating": "Średnia ocen",
+    "ratingCount": "Liczba ocen"
+  }
 }

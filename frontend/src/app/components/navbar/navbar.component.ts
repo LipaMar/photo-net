@@ -7,6 +7,7 @@ import {LoginComponent} from "../../login/login.component";
 import {NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
+import {routes} from "../../core/const/consts";
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   modalConfig: ModalConfig = this.login;
   isNavbarCollapsed = true;
+
+  followedRef = routes.followed;
+  discoverRef = routes.discover;
+  profileRef = routes.profile;
+  registerRef = routes.register;
+  homeRef = routes.home;
+
   @ViewChild('modal') private modalComponent: ModalComponent;
 
   constructor(private service: LoginService,

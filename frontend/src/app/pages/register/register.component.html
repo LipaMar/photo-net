@@ -10,6 +10,7 @@
           <label for="name">{{'page.register.username' | translate}}</label>
           <input type="text" class="form-control" id="name"
                  required
+                 placeholder="JKowalski"
                  [(ngModel)]="registerDto.userName" name="name"
                  #name="ngModel">
           <div [hidden]="name.valid || name.pristine"
@@ -19,6 +20,7 @@
           <label for="email">{{'page.register.email' | translate}}</label>
           <input type="email" class="form-control" id="email"
                  required
+                 placeholder="Jan.Kowalski@email.com"
                  [(ngModel)]="registerDto.email" name="email"
                  #email="ngModel">
           <div [hidden]="email.valid || email.pristine"

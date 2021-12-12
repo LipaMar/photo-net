@@ -16,8 +16,12 @@ import {ToastrModule} from "ngx-toastr";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {LoginInterceptor} from "./interceptors/login.interceptor";
-import { ModalComponent } from './components/modal/modal.component';
-import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
+import {ModalComponent} from './components/modal/modal.component';
+import {NgbCollapseModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {DiscoverComponent} from './pages/discover/discover.component';
+import {SortComponent} from './components/sort/sort.component';
+import {MaterialModule} from "../material.module";
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,9 @@ import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
     FooterComponent,
     RegisterComponent,
     ModalComponent,
+    DiscoverComponent,
+    SortComponent,
+    ProfileComponent,
   ],
     imports: [
         BrowserModule,
@@ -45,7 +52,9 @@ import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
             }
         }),
         ToastrModule.forRoot(),
-        NgbCollapseModule
+        NgbCollapseModule,
+        MaterialModule,
+        NgbModule
     ],
   providers: [
     {
