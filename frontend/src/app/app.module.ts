@@ -21,6 +21,7 @@ import {NgbCollapseModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {DiscoverComponent} from './pages/discover/discover.component';
 import {SortComponent} from './components/sort/sort.component';
 import {MaterialModule} from "../material.module";
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {MaterialModule} from "../material.module";
     ModalComponent,
     DiscoverComponent,
     SortComponent,
+    ProfileComponent,
   ],
     imports: [
         BrowserModule,

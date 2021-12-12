@@ -21,7 +21,7 @@ public class Post {
     @OneToMany
     private List<Comment> comments;
     @ManyToOne
-    private User author;
+    private Photographer author;
     @OneToMany(mappedBy = "post", orphanRemoval = true)
     private List<AppLike> likes;
 

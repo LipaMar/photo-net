@@ -5,5 +5,9 @@ export interface DiscoverDto {
   profilePicture: any;
   rating: number;
   rateCount: bigint;
+  postsCount: number;
+  categories: string[];
+  price: number;
+  city: string;
 
 }

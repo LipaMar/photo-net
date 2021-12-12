@@ -154,7 +154,7 @@ insert into USER (user_name, password, role, bio, email, active, profile_picture
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('aocridigan44', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'tortor id nulla ultrices aliquet maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat dui maecenas tristique est et tempus semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit amet diam in magna bibendum imperdiet nullam', 'ztolliday44@youtube.com', true, null);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('srudloff45', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent', 'dtowle45@smugmug.com', true, null);
 
-INSERT into POST (author_id, photo_id) values (2, 1);
+-- INSERT into POST (author_id, photo_id) values (2, 1);
 
 insert into rate (rating, author_id, target_id) values (4, 71, 79);
 insert into rate (rating, author_id, target_id) values (4, 35, 115);
@@ -656,3 +656,100 @@ insert into rate (rating, author_id, target_id) values (3, 125, 8);
 insert into rate (rating, author_id, target_id) values (3, 131, 58);
 insert into rate (rating, author_id, target_id) values (4, 133, 69);
 insert into rate (rating, author_id, target_id) values (1, 52, 6);
+
+insert into category (name) values ('fashion');
+insert into category (name) values ('glamour');
+insert into category (name) values ('portret');
+insert into category (name) values ('akt');
+insert into category (name) values ('edytorial');
+insert into category (name) values ('nagość zakryta');
+insert into category (name) values ('stylizacja');
+
+insert into photographer (user_id, price, city) values (1, 400, 'warszawa');
+insert into photographer (user_id, price, city) values (2, 260, 'kraków');
+insert into photographer (user_id, price, city) values (3, 50, 'łódź');
+insert into photographer (user_id, price, city) values (4, 80, 'wroclaw');
+insert into photographer (user_id, price, city) values (5, 220, 'poznań');
+insert into photographer (user_id, price, city) values (6, 60, 'szczecin');
+insert into photographer (user_id, price, city) values (7, 300, 'bydgoszcz');
+insert into photographer (user_id, price, city) values (8, 140, 'lublin');
+insert into photographer (user_id, price, city) values (9, 360, 'białystok');
+insert into photographer (user_id, price, city) values (10, 160, 'warszawa');
+insert into photographer (user_id, price, city) values (11, 70, 'warszawa');
+insert into photographer (user_id, price, city) values (12, 380, 'kraków');
+insert into photographer (user_id, price, city) values (13, 60, 'łódź');
+insert into photographer (user_id, price, city) values (14, 190, 'wroclaw');
+insert into photographer (user_id, price, city) values (15, 300, 'poznań');
+insert into photographer (user_id, price, city) values (16, 440, 'szczecin');
+insert into photographer (user_id, price, city) values (17, 420, 'bydgoszcz');
+insert into photographer (user_id, price, city) values (18, 330, 'lublin');
+insert into photographer (user_id, price, city) values (19, 280, 'białystok');
+insert into photographer (user_id, price, city) values (20, 480, 'warszawa');
+
+
+
+
+
+
+
+
+
+
+insert into photographer_categories (photographer_id, categories_id) values (1, 1);
+insert into photographer_categories (photographer_id, categories_id) values (1, 2);
+insert into photographer_categories (photographer_id, categories_id) values (1, 3);
+insert into photographer_categories (photographer_id, categories_id) values (1, 4);
+insert into photographer_categories (photographer_id, categories_id) values (1, 5);
+insert into photographer_categories (photographer_id, categories_id) values (1, 6);
+insert into photographer_categories (photographer_id, categories_id) values (1, 7);
+insert into photographer_categories (photographer_id, categories_id) values (16, 4);
+insert into photographer_categories (photographer_id, categories_id) values (14, 4);
+insert into photographer_categories (photographer_id, categories_id) values (18, 1);
+insert into photographer_categories (photographer_id, categories_id) values (4, 1);
+insert into photographer_categories (photographer_id, categories_id) values (5, 4);
+insert into photographer_categories (photographer_id, categories_id) values (12, 3);
+insert into photographer_categories (photographer_id, categories_id) values (18, 6);
+insert into photographer_categories (photographer_id, categories_id) values (4, 6);
+insert into photographer_categories (photographer_id, categories_id) values (8, 3);
+insert into photographer_categories (photographer_id, categories_id) values (5, 7);
+insert into photographer_categories (photographer_id, categories_id) values (2, 6);
+insert into photographer_categories (photographer_id, categories_id) values (16, 3);
+insert into photographer_categories (photographer_id, categories_id) values (18, 7);
+insert into photographer_categories (photographer_id, categories_id) values (8, 6);
+insert into photographer_categories (photographer_id, categories_id) values (3, 4);
+insert into photographer_categories (photographer_id, categories_id) values (18, 2);
+insert into photographer_categories (photographer_id, categories_id) values (6, 4);
+insert into photographer_categories (photographer_id, categories_id) values (5, 7);
+insert into photographer_categories (photographer_id, categories_id) values (12, 7);
+insert into photographer_categories (photographer_id, categories_id) values (14, 1);
+insert into photographer_categories (photographer_id, categories_id) values (17, 7);
+insert into photographer_categories (photographer_id, categories_id) values (10, 1);
+insert into photographer_categories (photographer_id, categories_id) values (2, 1);
+insert into photographer_categories (photographer_id, categories_id) values (3, 2);
+insert into photographer_categories (photographer_id, categories_id) values (18, 3);
+insert into photographer_categories (photographer_id, categories_id) values (19, 2);
+insert into photographer_categories (photographer_id, categories_id) values (16, 3);
+insert into photographer_categories (photographer_id, categories_id) values (5, 3);
+insert into photographer_categories (photographer_id, categories_id) values (2, 6);
+insert into photographer_categories (photographer_id, categories_id) values (11, 3);
+insert into photographer_categories (photographer_id, categories_id) values (20, 3);
+insert into photographer_categories (photographer_id, categories_id) values (5, 5);
+insert into photographer_categories (photographer_id, categories_id) values (11, 1);
+insert into photographer_categories (photographer_id, categories_id) values (2, 6);
+insert into photographer_categories (photographer_id, categories_id) values (13, 5);
+insert into photographer_categories (photographer_id, categories_id) values (5, 3);
+insert into photographer_categories (photographer_id, categories_id) values (2, 3);
+insert into photographer_categories (photographer_id, categories_id) values (8, 4);
+insert into photographer_categories (photographer_id, categories_id) values (16, 3);
+insert into photographer_categories (photographer_id, categories_id) values (16, 6);
+insert into photographer_categories (photographer_id, categories_id) values (17, 7);
+insert into photographer_categories (photographer_id, categories_id) values (16, 7);
+insert into photographer_categories (photographer_id, categories_id) values (8, 6);
+insert into photographer_categories (photographer_id, categories_id) values (6, 6);
+insert into photographer_categories (photographer_id, categories_id) values (10, 3);
+insert into photographer_categories (photographer_id, categories_id) values (18, 6);
+insert into photographer_categories (photographer_id, categories_id) values (20, 6);
+insert into photographer_categories (photographer_id, categories_id) values (8, 2);
+insert into photographer_categories (photographer_id, categories_id) values (7, 4);
+insert into photographer_categories (photographer_id, categories_id) values (7, 2);
+

@@ -1,29 +1,82 @@
 @import "src/styles";
 
-.profilePic{
-  border-radius: 50px ;
-  height: 100px;
+.profile-pic {
+  border-radius: 75px;
+  height: 120px;
   float: right;
   overflow: auto;
+
   &:after {
     content: "";
     clear: both;
     display: table;
   }
 }
-.card-header,{
+a{
+  color: inherit;
+  text-decoration: none;
+}
+.card-header, {
   background-color: $middle-red;
   color: $white;
 }
 
 .star {
-  font-size: 1.5rem;
-  color: $gray;
+  position: relative;
+  display: inline-block;
+  color: #d3d3d3;
+  font-size: 2rem;
 }
-.filled {
+.full, .filled, .half {
   color: $middle-red;
 }
-.side-nav{
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.filled {
+}
+
+.side-nav {
   background-color: white;
   border-radius: 20px;
 }
+
+.category-chips {
+  display: inline-flex;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.list-attributes {
+  list-style: none;
+  padding: 0;
+
+  .price, .gallery, .city {
+    &:before {
+      width: 1.5em;
+      display: inline-block;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+    }
+  }
+
+  .price:before {
+    content: "\f155";
+  }
+
+  .price:after {
+    content: "zł";
+  }
+
+  .gallery:before {
+    content: "\f302";
+  }
+
+  .city:before {
+    content: "\f3c5";
+  }
+}
+
