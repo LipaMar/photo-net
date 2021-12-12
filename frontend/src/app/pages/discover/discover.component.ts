@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DiscoverService} from "./discover.service";
 import {DiscoverDto} from "../../core/models/discover.models";
 import {Subscription} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
 import {routes} from "../../core/const/consts";
+import {ProfileService} from "../profile/profile.service";
 
 @Component({
   selector: 'app-discover',
   templateUrl: './discover.component.html',
   styleUrls: ['./discover.component.scss']
 })
-export class DiscoverComponent implements OnInit {
+export class DiscoverComponent implements OnInit, OnDestroy {
 
   profiles: DiscoverDto[];
   subscriptions: Subscription[] = [];
@@ -18,7 +19,8 @@ export class DiscoverComponent implements OnInit {
   routeToProfile = routes.profile+'/';
 
   constructor(private service: DiscoverService,
-              private domSanitizer: DomSanitizer) {
+              private domSanitizer: DomSanitizer,
+              private profileService: ProfileService) {
   }
 
   ngOnInit(): void {
@@ -29,19 +31,14 @@ export class DiscoverComponent implements OnInit {
   }
 
   firstLetterUpper(str: string) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    return this.profileService.firstLetterUpper(str);
   }
 
   showPic(url: string) {
-    return url == null ? "assets/images/anon.svg" : this.transform(url);
+    return this.profileService.showPic(url);
   }
 
-  transform(val: string) {
-    return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + val);
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub=>sub.unsubscribe());
   }
-
-  joinCategories(list: string[]) {
-    return list.join(", ");
-  }
-
 }

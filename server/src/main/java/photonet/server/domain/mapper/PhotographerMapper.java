@@ -29,6 +29,12 @@ public interface PhotographerMapper {
     };
 
     @Mapping(source = "user.bio", target = "bio")
+    @Mapping(source = "user.active", target = "active")
+    @Mapping(source = "user.userName", target = "userName")
+    @Mapping(source = "user.profilePicture", target = "profilePicture")
+    @Mapping(source = "user.ratings", target = "rating")
+    @Mapping(source = "user.ratings", target = "rateCount")
+    @Mapping(target = "postsCount", source = "posts")
     ProfileDto mapToDto(Photographer source);
 
 

@@ -1,13 +1,13 @@
-export interface ProfileDto {
+import {DiscoverDto} from "./discover.models";
 
-  active: boolean;
-  userName: string;
-  profilePicture: any;
-  rating: number;
-  rateCount: bigint;
-  postsCount: number;
-  categories: string[];
-  price: number;
-  city: string;
+export interface ProfileDto extends DiscoverDto {
+  bio: string,
+  posts: {
+    id: number,
+    photo: any,
+    comments: number,
+    likes: number,
+    author: string
+  }[]
 
 }
