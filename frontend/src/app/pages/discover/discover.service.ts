@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {DiscoverDto} from "./discover.models";
+import {DiscoverDto} from "../../core/models/discover.models";
 import {endpoints} from "../../core/const/consts";
 import {Pageable} from "../../core/models/pageable";
 

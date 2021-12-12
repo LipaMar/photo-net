@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DiscoverService} from "./discover.service";
-import {DiscoverDto} from "./discover.models";
+import {DiscoverDto} from "../../core/models/discover.models";
 import {Subscription} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
 import {routes} from "../../core/const/consts";

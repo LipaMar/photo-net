@@ -1,6 +1,6 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {LoginService} from "./login.service";
-import {Credentials} from "./login.models";
+import {Credentials} from "../core/models/login.models";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {ModalConfig} from "../components/modal/modal.config";

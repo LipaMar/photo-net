@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Credentials, LoggedDto} from "./login.models";
+import {Credentials, LoggedDto} from "../core/models/login.models";
 import {Observable, Subject} from "rxjs";
 import {endpoints} from "../core/const/consts";
 

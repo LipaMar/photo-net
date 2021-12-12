@@ -5,11 +5,12 @@ import org.mapstruct.Mapping;
 import photonet.server.domain.entity.Category;
 import photonet.server.domain.entity.Photographer;
 import photonet.server.domain.entity.Post;
+import photonet.server.webui.dto.ProfileDto;
 import photonet.server.webui.dto.discover.PhotographerBasicDto;
 
 import java.util.List;
 
-@Mapper(uses = {RateMapper.class, PhotoMapper.class, PostMapper.class})
+@Mapper(uses = {RateMapper.class, UserMapper.class, PhotoMapper.class, PostMapper.class})
 public interface PhotographerMapper {
 
     @Mapping(source = "user.active", target = "active")
@@ -27,6 +28,8 @@ public interface PhotographerMapper {
         return category.getName();
     };
 
+    @Mapping(source = "user.bio", target = "bio")
+    ProfileDto mapToDto(Photographer source);
 
 
 }

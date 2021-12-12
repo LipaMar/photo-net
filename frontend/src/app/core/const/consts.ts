@@ -15,4 +15,6 @@ export const endpoints = {
   discover: `${environment.apiUrl}/discover`,
   login: `${environment.apiUrl}/login`,
   register: `${environment.apiUrl}/register`,
+  profile: `${environment.apiUrl}/profiles`
+
 };

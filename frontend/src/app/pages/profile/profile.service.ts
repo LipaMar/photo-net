@@ -1,18 +1,20 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {RegisterDto} from "../../core/models/register.models";
 import {Observable} from "rxjs";
+import {ProfileDto} from "../../core/models/profile.models";
 import {endpoints} from "../../core/const/consts";
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterService {
+export class ProfileService {
 
   constructor(private http: HttpClient) {
   }
 
-  register(dto: RegisterDto): Observable<any> {
-    return this.http.post(endpoints.register, dto);
+  getProfileDetails(username: string): Observable<ProfileDto> {
+    return this.http.get<ProfileDto>(`${endpoints.profile}/${username}`);
+
   }
+
 }
