@@ -686,15 +686,6 @@ insert into photographer (user_id, price, city) values (18, 330, 'lublin');
 insert into photographer (user_id, price, city) values (19, 280, 'białystok');
 insert into photographer (user_id, price, city) values (20, 480, 'warszawa');
 
-
-
-
-
-
-
-
-
-
 insert into photographer_categories (photographer_id, categories_id) values (1, 1);
 insert into photographer_categories (photographer_id, categories_id) values (1, 2);
 insert into photographer_categories (photographer_id, categories_id) values (1, 3);
@@ -753,3 +744,8 @@ insert into photographer_categories (photographer_id, categories_id) values (8, 
 insert into photographer_categories (photographer_id, categories_id) values (7, 4);
 insert into photographer_categories (photographer_id, categories_id) values (7, 2);
 
+insert into post (author_id, photo_id) values (1, 1);
+insert into post (author_id, photo_id) values (2, 2);
+insert into post (author_id, photo_id) values (3, 3);
+insert into post (author_id, photo_id) values (3, 1);
+insert into post (author_id, photo_id) values (1, 2);

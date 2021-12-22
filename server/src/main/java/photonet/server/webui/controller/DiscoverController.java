@@ -27,8 +27,7 @@ public class DiscoverController {
             @And({
                     @Spec(path = "user.active", defaultVal = "true", spec = Equal.class),
                     @Spec(path = "user", spec = NotNull.class),
-                    @Spec(path = "user.userName", spec = LikeIgnoreCase.class),
-                    @Spec(path = "user.userName", spec = LikeIgnoreCase.class),
+                    @Spec(path = "user.userName", params = "userName", spec = LikeIgnoreCase.class),
                     @Spec(path = "user.rating", params = "ratingMoreThan", spec = GreaterThanOrEqual.class),
                     @Spec(path = "user.rating", params = "ratingLessThan", spec = LessThanOrEqual.class),
                     @Spec(path = "user.ratingCount", params = "rateCountMoreThan", spec = GreaterThanOrEqual.class),

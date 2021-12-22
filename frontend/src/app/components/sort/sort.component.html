@@ -1,1 +1,21 @@
-<p>sort works!</p>
+<div class="container-fluid px-2 d-flex justify-content-between">
+    <mat-form-field appearance="standard">
+      <mat-label>Sortuj po:  </mat-label>
+      <mat-select #fieldMatSelect>
+        <mat-option *ngFor="let field of fields" [value]="field.value">
+          {{field.display}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Kolejność:  </mat-label>
+      <mat-select #orderMatSelect>
+        <mat-option *ngFor="let field of order" [value]="field.value">
+          {{field.display}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  <div class="py-4">
+    <button (click)="sort()" mat-raised-button>Sortuj</button>
+  </div>
+</div>

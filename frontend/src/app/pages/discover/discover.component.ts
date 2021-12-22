@@ -1,10 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DiscoverService} from "./discover.service";
-import {DiscoverDto} from "../../core/models/discover.models";
+import {DiscoverDto, SortOption} from "../../core/models/discover.models";
 import {Subscription} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
 import {routes} from "../../core/const/consts";
 import {ProfileService} from "../profile/profile.service";
+import {SortComponent} from "../../components/sort/sort.component";
+import {SortParams} from "../../core/models/basic.models";
 
 @Component({
   selector: 'app-discover',
@@ -16,7 +18,15 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   profiles: DiscoverDto[];
   subscriptions: Subscription[] = [];
   currentRate = 0;
-  routeToProfile = routes.profile+'/';
+  routeToProfile = routes.profile + '/';
+  @ViewChild("sort") sortComponent: SortComponent;
+
+  sortOptions: SortOption[] = [
+    {value: "rating", display: "Średniej ocen"},
+    {value: "posts", display: "Liczbie zdjęć"},
+    {value: "price", display: "Cenie"},
+    {value: "ratingCount", display: "Ilości ocen"},
+  ]
 
   constructor(private service: DiscoverService,
               private domSanitizer: DomSanitizer,
@@ -28,6 +38,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
       this.profiles = data.content;
       this.profiles.forEach(x => x.city = this.firstLetterUpper(x.city))
     }));
+
   }
 
   firstLetterUpper(str: string) {
@@ -38,7 +49,14 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     return this.profileService.showPic(url);
   }
 
+  showParams(event: SortParams){
+    this.service.getList(undefined, event).subscribe(data => {
+      this.profiles = data.content;
+      this.profiles.forEach(x => x.city = this.firstLetterUpper(x.city))
+    })
+  }
+
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub=>sub.unsubscribe());
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

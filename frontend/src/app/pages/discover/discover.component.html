@@ -38,13 +38,12 @@
     </div>
 
     <div class="col-md-9 content">
-      <div>
-        <div class="row">
-          <app-sort></app-sort>
-        </div>
-        <div class="row" *ngFor="let profile of profiles">
+      <div class="row">
+        <app-sort #sort (sortParams)="showParams($event)" [fields]="sortOptions" class="mb-2 col-lg-9"></app-sort>
+      </div>
+      <div class="row" *ngFor="let profile of profiles">
+        <div class="mb-2 col-lg-9">
           <a href="{{routeToProfile+profile.userName}}">
-            <div class="mb-2 col-lg-9">
             <div class="card">
               <h5 class="card-header">
                 {{profile.userName}}
@@ -70,7 +69,6 @@
                 <div class="category-chips px-2 py-1" *ngFor="let category of profile.categories">{{category}}</div>
               </div>
             </div>
-          </div>
           </a>
         </div>
       </div>

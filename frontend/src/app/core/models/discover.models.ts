@@ -11,3 +11,18 @@ export interface DiscoverDto {
   city: string;
 
 }
+export interface DiscoverFilters {
+
+  userName: string;
+  ratingMoreThan: number;
+  ratingLessThan: number;
+  rateCountMoreThan: number;
+  rateCountLessThan: number;
+
+}
+
+
+export interface SortOption {
+  value: any;
+  display: string;
+}
