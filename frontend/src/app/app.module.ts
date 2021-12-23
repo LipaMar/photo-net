@@ -22,6 +22,7 @@ import {DiscoverComponent} from './pages/discover/discover.component';
 import {SortComponent} from './components/sort/sort.component';
 import {MaterialModule} from "../material.module";
 import { ProfileComponent } from './pages/profile/profile.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     DiscoverComponent,
     SortComponent,
     ProfileComponent,
+    FilterComponent,
   ],
     imports: [
         BrowserModule,

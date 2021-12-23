@@ -11,14 +11,13 @@ export interface DiscoverDto {
   city: string;
 
 }
-export interface DiscoverFilters {
 
-  userName: string;
-  ratingMoreThan: number;
-  ratingLessThan: number;
-  rateCountMoreThan: number;
+export class DiscoverFilters {
   rateCountLessThan: number;
-
+  rateCountMoreThan: number;
+  ratingLessThan: number;
+  ratingMoreThan: number;
+  userName: string;
 }
 
 

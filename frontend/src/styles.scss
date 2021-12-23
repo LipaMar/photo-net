@@ -34,6 +34,17 @@ html{
   top: 5rem;
   right: 0;
 }
-
-//html, body { height: 100%; }
-//body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.star {
+  position: relative;
+  display: inline-block;
+  color: #d3d3d3;
+  font-size: 2rem;
+}
+.full, .filled, .half {
+  color: $middle-red;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+}

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DiscoverService} from "./discover.service";
-import {DiscoverDto, SortOption} from "../../core/models/discover.models";
+import {DiscoverDto, DiscoverFilters, SortOption} from "../../core/models/discover.models";
 import {Subscription} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
 import {routes} from "../../core/const/consts";
@@ -17,9 +17,8 @@ export class DiscoverComponent implements OnInit, OnDestroy {
 
   profiles: DiscoverDto[];
   subscriptions: Subscription[] = [];
-  currentRate = 0;
   routeToProfile = routes.profile + '/';
-  @ViewChild("sort") sortComponent: SortComponent;
+  @ViewChild("sortProfiles") sortComponent: SortComponent;
 
   sortOptions: SortOption[] = [
     {value: "rating", display: "Średniej ocen"},
@@ -29,7 +28,6 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   ]
 
   constructor(private service: DiscoverService,
-              private domSanitizer: DomSanitizer,
               private profileService: ProfileService) {
   }
 
@@ -49,11 +47,15 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     return this.profileService.showPic(url);
   }
 
-  showParams(event: SortParams){
+  sort(event: SortParams){
     this.service.getList(undefined, event).subscribe(data => {
       this.profiles = data.content;
       this.profiles.forEach(x => x.city = this.firstLetterUpper(x.city))
     })
+  }
+
+  filter(event: DiscoverFilters){
+    console.log(event);
   }
 
   ngOnDestroy(): void {

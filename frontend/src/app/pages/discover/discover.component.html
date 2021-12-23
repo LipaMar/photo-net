@@ -2,44 +2,13 @@
   <div class="row">
     <div class="col-md-3">
       <div class="sticky-top side-nav p-4">
-        <form>
-          <div class="form-group">
-
-            <h4>{{ 'filters.header' | translate}}</h4>
-            <label for="rating-filter">{{ 'filters.rating' | translate}}</label>
-            <div id="rating-filter">
-              <ngb-rating [(rate)]="currentRate" [max]="5">
-                <ng-template let-fill="fill" let-index="index">
-                  <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                </ng-template>
-              </ngb-rating>
-            </div>
-            <label for="rating-count-filter">{{ 'filters.ratingCount' | translate}}</label>
-            <div id="rating-count-filter">
-              <mat-slider
-                [max]="500"
-                [min]="0"
-                [step]="50"
-                aria-labelledby="example-name-label">
-              </mat-slider>
-              <!--                [disabled]="disabled"-->
-              <!--                [invert]="invert"-->
-              <!--                [max]="max"-->
-              <!--                [min]="min"-->
-              <!--                [step]="step"-->
-              <!--                [thumbLabel]="thumbLabel"-->
-              <!--                [tickInterval]="getSliderTickInterval()"-->
-              <!--                [(ngModel)]="value"-->
-              <!--                [vertical]="vertical"-->
-            </div>
-          </div>
-        </form>
+        <filter (filters)="filter($event)"></filter>
       </div>
     </div>
 
     <div class="col-md-9 content">
       <div class="row">
-        <app-sort #sort (sortParams)="showParams($event)" [fields]="sortOptions" class="mb-2 col-lg-9"></app-sort>
+        <app-sort #sortProfiles (sortParams)="sort($event)" [fields]="sortOptions" class="mb-2 col-lg-9"></app-sort>
       </div>
       <div class="row" *ngFor="let profile of profiles">
         <div class="mb-2 col-lg-9">

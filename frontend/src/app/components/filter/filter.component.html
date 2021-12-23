@@ -1,0 +1,26 @@
+<form>
+  <div class="form-group">
+
+    <h4>{{ 'filters.header' | translate}}</h4>
+    <label for="rating-filter">{{ 'filters.rating' | translate}}</label>
+    <div id="rating-filter">
+      <ngb-rating [(rate)]="filtersParam.ratingMoreThan" [max]="5">
+        <ng-template let-fill="fill" let-index="index">
+          <span class="star" [class.filled]="fill === 100">&#9733;</span>
+        </ng-template>
+      </ngb-rating>
+    </div>
+    <label for="rating-count-filter">{{ 'filters.ratingCount' | translate}}</label>
+    <div id="rating-count-filter">
+      <mat-slider
+        [max]="500"
+        [min]="0"
+        [step]="50"
+        (change)="setRateCount($event)"
+        aria-labelledby="example-name-label">
+      </mat-slider>
+    </div>
+    <button (click)="filter()">
+    </button>
+  </div>
+</form>
