@@ -13,11 +13,11 @@ export interface DiscoverDto {
 }
 
 export class DiscoverFilters {
-  rateCountLessThan: number;
-  rateCountMoreThan: number;
-  ratingLessThan: number;
-  ratingMoreThan: number;
-  userName: string;
+  rateCountLessThan?: number;
+  rateCountMoreThan: number = 0;
+  ratingMoreThan: number = 0;
+  userName?: string;
+  categories?: string[]=[];
 }
 
 

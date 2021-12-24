@@ -2,6 +2,7 @@
   <div class="form-group">
 
     <h4>{{ 'filters.header' | translate}}</h4>
+
     <label for="rating-filter">{{ 'filters.rating' | translate}}</label>
     <div id="rating-filter">
       <ngb-rating [(rate)]="filtersParam.ratingMoreThan" [max]="5">
@@ -10,6 +11,7 @@
         </ng-template>
       </ngb-rating>
     </div>
+
     <label for="rating-count-filter">{{ 'filters.ratingCount' | translate}}</label>
     <div id="rating-count-filter">
       <mat-slider
@@ -20,7 +22,18 @@
         aria-labelledby="example-name-label">
       </mat-slider>
     </div>
-    <button (click)="filter()">
+
+    <label for="category-filter">{{ 'filters.categories' | translate}}</label>
+    <div id="category-filter">
+      <mat-chip-list selectable multiple>
+        <mat-chip #c="matChip" removable *ngFor="let category of categories" [value]="category" (click)="toggleSelection(c)">
+          {{category}}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+
+    <button (click)="filter()" mat-raised-button>
+      Filtruj
     </button>
   </div>
 </form>

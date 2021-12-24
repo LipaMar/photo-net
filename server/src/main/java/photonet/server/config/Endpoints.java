@@ -8,4 +8,7 @@ public class Endpoints {
     public static final String REGISTER = "/register";
     public static final String USER_PROFILE = PROFILES+"/my-profile";
     public static final String DISCOVER = "/discover";
+
+    public static final String DICTIONARY = "/dictionary";
+    public static final String CATEGORIES = "/categories";
 }

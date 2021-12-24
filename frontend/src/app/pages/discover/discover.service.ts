@@ -15,14 +15,25 @@ export class DiscoverService {
   }
 
   getList(filters?: DiscoverFilters, sort?: SortParams): Observable<Pageable<DiscoverDto>> {
-    return this.http.get<Pageable<DiscoverDto>>(endpoints.discover,{params: this.buildParams(filters, sort)})
+    return this.http.get<Pageable<DiscoverDto>>(endpoints.discover, {params: this.buildParams(filters, sort)})
   };
 
   private buildParams(filters: DiscoverFilters | undefined, sort: SortParams | undefined) {
-    //Todo: filters
+    if (filters) {
+      // this.removeNullFilters(filters);
+      return new HttpParams().appendAll(<any>filters);
+    }
     if (sort) {
       return new HttpParams().append("sort", `${sort?.field},${sort?.order}`);
     }
     return new HttpParams();
   }
+
+  getCategories(): Observable<string[]> {
+    return this.http.get<string[]>(endpoints.categories);
+  };
+  //
+  // private removeNullFilters(filters: DiscoverFilters) {
+  //   filters.rateCountLessThan = filters.rateCountLessThan?filters.rateCountLessThan:null;
+  // }
 }

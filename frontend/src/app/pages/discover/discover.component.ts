@@ -26,6 +26,9 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     {value: "price", display: "Cenie"},
     {value: "ratingCount", display: "Ilości ocen"},
   ]
+  categories: string[] = [];
+  filters: DiscoverFilters;
+  sorting: SortParams;
 
   constructor(private service: DiscoverService,
               private profileService: ProfileService) {
@@ -36,7 +39,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
       this.profiles = data.content;
       this.profiles.forEach(x => x.city = this.firstLetterUpper(x.city))
     }));
-
+    this.subscriptions.push(    this.service.getCategories().subscribe(value => this.categories = value));
   }
 
   firstLetterUpper(str: string) {
@@ -48,14 +51,20 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   }
 
   sort(event: SortParams){
-    this.service.getList(undefined, event).subscribe(data => {
-      this.profiles = data.content;
-      this.profiles.forEach(x => x.city = this.firstLetterUpper(x.city))
-    })
+    this.sorting = event;
+    this.sortAndFilter();
   }
 
   filter(event: DiscoverFilters){
-    console.log(event);
+    this.filters = event;
+    this.sortAndFilter();
+  }
+
+  private sortAndFilter() {
+    this.service.getList(this.filters, this.sorting).subscribe(data => {
+      this.profiles = data.content;
+      this.profiles.forEach(x => x.city = this.firstLetterUpper(x.city))
+    })
   }
 
   ngOnDestroy(): void {
