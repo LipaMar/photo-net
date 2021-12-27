@@ -9,11 +9,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import photonet.server.config.Endpoints;
 import photonet.server.domain.entity.Photographer;
 import photonet.server.domain.service.DiscoverService;
 import photonet.server.webui.dto.discover.PhotographerBasicDto;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -31,10 +34,10 @@ public class DiscoverController {
                     @Spec(path = "user.rating", params = "ratingMoreThan", spec = GreaterThanOrEqual.class),
                     @Spec(path = "user.rating", params = "ratingLessThan", spec = LessThanOrEqual.class),
                     @Spec(path = "user.ratingCount", params = "rateCountMoreThan", spec = GreaterThanOrEqual.class),
-                    @Spec(path = "user.ratingCount", params = "rateCountLessThan", spec = LessThanOrEqual.class)
+                    @Spec(path = "user.ratingCount", params = "rateCountLessThan", spec = LessThanOrEqual.class),
             })
-                    Specification<Photographer> specification, Pageable pageable) {
-        return service.findAll(specification, pageable);
+                    Specification<Photographer> specification, Pageable pageable, @RequestParam(required = false) List<String> categories) {
+        return service.findAll(specification, pageable, categories);
     }
 
 }

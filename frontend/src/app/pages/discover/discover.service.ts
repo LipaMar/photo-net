@@ -19,11 +19,11 @@ export class DiscoverService {
   };
 
   private buildParams(filters: DiscoverFilters | undefined, sort: SortParams | undefined) {
-    if (filters) {
-      // this.removeNullFilters(filters);
+    if (filters && sort) {
+      return new HttpParams().appendAll(<any>filters).append("sort", `${sort?.field},${sort?.order}`);
+    } else if (filters) {
       return new HttpParams().appendAll(<any>filters);
-    }
-    if (sort) {
+    } else if (sort) {
       return new HttpParams().append("sort", `${sort?.field},${sort?.order}`);
     }
     return new HttpParams();
@@ -32,8 +32,4 @@ export class DiscoverService {
   getCategories(): Observable<string[]> {
     return this.http.get<string[]>(endpoints.categories);
   };
-  //
-  // private removeNullFilters(filters: DiscoverFilters) {
-  //   filters.rateCountLessThan = filters.rateCountLessThan?filters.rateCountLessThan:null;
-  // }
 }
