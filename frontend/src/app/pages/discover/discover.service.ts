@@ -26,7 +26,7 @@ export class DiscoverService {
     } else if (sort) {
       return new HttpParams().append("sort", `${sort?.field},${sort?.order}`);
     }
-    return new HttpParams();
+    return new HttpParams().append("sort", `userUserName`);
   }
 
   getCategories(): Observable<string[]> {

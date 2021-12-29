@@ -39,7 +39,7 @@ public class User {
 
     @Formula("(select count(r.id) from rate r where r.target_id = id)")
     private Integer ratingCount;
-    @Formula("(select avg(r.rating) from rate r where r.target_id = id)")
+    @Formula("(select avg(CAST(r.rating as double)) from rate r where r.target_id = id)")
     private Double rating;
 
 }
