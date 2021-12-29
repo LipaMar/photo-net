@@ -12,17 +12,6 @@
       </ngb-rating>
     </div>
 
-    <label for="rating-count-filter">{{ 'filters.ratingCount' | translate}}</label>
-    <div id="rating-count-filter">
-      <mat-slider
-        [max]="500"
-        [min]="0"
-        [step]="50"
-        (change)="setRateCount($event)"
-        aria-labelledby="example-name-label">
-      </mat-slider>
-    </div>
-
     <label for="category-filter">{{ 'filters.categories' | translate}}</label>
     <div id="category-filter">
       <mat-chip-list selectable multiple>
