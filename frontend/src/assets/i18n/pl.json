@@ -51,7 +51,7 @@
   },
   "filters": {
     "header": "Filtry",
-    "rating": "Średnia ocen",
+    "rating": "Średnia ocen od",
     "ratingCount": "Liczba ocen",
     "categories": "Kategorie"
   }

@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DiscoverFilters} from "../../core/models/discover.models";
 import {MatChip} from "@angular/material/chips";
-import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'filter',
@@ -13,28 +12,21 @@ export class FilterComponent implements OnInit {
   @Input() categories: string[];
   @Output() filters = new EventEmitter<DiscoverFilters>();
   filtersParam = new DiscoverFilters();
+
   constructor() {
   }
 
   ngOnInit(): void {
   }
 
-  setRateCount(event: any) {
-    this.filtersParam.rateCountLessThan = event.value;
-  }
-  show(event:any){
-    console.log(event);
-  }
-
   toggleSelection(chip: MatChip) {
     chip.toggleSelected();
     let chipVal = chip.value;
-    if(!this.filtersParam.categories)
+    if (!this.filtersParam.categories)
       return;
-    if(chip.selected){
+    if (chip.selected) {
       this.filtersParam.categories.push(chipVal);
-    }
-    else {
+    } else {
       this.removeFirst(this.filtersParam.categories, chipVal)
     }
   }
@@ -49,6 +41,4 @@ export class FilterComponent implements OnInit {
   filter() {
     this.filters.emit(this.filtersParam);
   }
-
-
 }
