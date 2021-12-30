@@ -24,14 +24,7 @@
                   <li class="gallery mb-1">{{profile.postsCount}}</li>
                   <li class="price mb-1">{{profile.price}}</li>
                   <li>
-                    <ngb-rating [readonly]="true" [(rate)]="profile.rating" [max]="5">
-                      <ng-template #t let-fill="fill">
-                        <span class="star" [class.full]="fill === 100">
-                          <span class="half" [style.width.%]="fill">&#9733;</span>
-                          &#9733;
-                        </span>
-                      </ng-template>
-                    </ngb-rating>
+                    <star-rating [(rate)]="profile.rating"></star-rating>
                 </ul>
               </div>
               <div class="card-footer">

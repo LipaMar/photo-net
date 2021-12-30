@@ -5,11 +5,7 @@
 
     <label for="rating-filter">{{ 'filters.rating' | translate}}</label>
     <div id="rating-filter">
-      <ngb-rating [(rate)]="filtersParam.ratingMoreThan" [max]="5">
-        <ng-template let-fill="fill" let-index="index">
-          <span class="star" [class.filled]="fill === 100">&#9733;</span>
-        </ng-template>
-      </ngb-rating>
+      <star-rating [(rate)]="filtersParam.ratingMoreThan" [readonly]="false"></star-rating>
     </div>
 
     <label for="category-filter">{{ 'filters.categories' | translate}}</label>

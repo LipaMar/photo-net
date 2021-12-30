@@ -23,6 +23,7 @@ import {SortComponent} from './components/sort/sort.component';
 import {MaterialModule} from "../material.module";
 import { ProfileComponent } from './pages/profile/profile.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FilterComponent } from './components/filter/filter.component';
     SortComponent,
     ProfileComponent,
     FilterComponent,
+    StarRatingComponent,
   ],
     imports: [
         BrowserModule,
