@@ -28,8 +28,10 @@ public class User {
     private Boolean active = true;
     private String password;
     private String role = Roles.USER;
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true, mappedBy = "target")
     private List<Comment> comments;
+    @OneToMany(orphanRemoval = true, mappedBy = "author")
+    private List<Comment> commentsAuthored;
     @OneToOne
     private Photo profilePicture;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "target")

@@ -10,7 +10,7 @@ import photonet.server.webui.dto.discover.PhotographerBasicDto;
 
 import java.util.List;
 
-@Mapper(uses = {RateMapper.class, UserMapper.class, PhotoMapper.class, PostMapper.class})
+@Mapper(uses = {RateMapper.class, UserMapper.class, PhotoMapper.class, PostMapper.class, CommentMapper.class})
 public interface PhotographerMapper {
 
     @Mapping(source = "user.active", target = "active")
@@ -34,7 +34,8 @@ public interface PhotographerMapper {
     @Mapping(source = "user.profilePicture", target = "profilePicture")
     @Mapping(source = "user.ratings", target = "rating")
     @Mapping(source = "user.ratings", target = "rateCount")
-    @Mapping(target = "postsCount", source = "posts")
+    @Mapping(source = "posts", target = "postsCount")
+    @Mapping(source = "user.comments", target = "comments")
     ProfileDto mapToDto(Photographer source);
 
 

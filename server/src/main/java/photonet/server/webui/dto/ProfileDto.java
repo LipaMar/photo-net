@@ -12,6 +12,7 @@ public class ProfileDto extends PhotographerBasicDto {
 
     private String bio;
     private List<PostSimpleDto> posts;
+    private List<CommentDto> comments;
 
 }
 

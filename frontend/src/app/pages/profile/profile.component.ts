@@ -2,15 +2,14 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProfileService} from "./profile.service";
 import {Subscription} from "rxjs";
-import {routes} from "../../core/const/consts";
-import {DiscoverService} from "../discover/discover.service";
-import {DomSanitizer} from "@angular/platform-browser";
 import {ProfileDto} from "../../core/models/profile.models";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  providers: [DatePipe]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 
@@ -18,7 +17,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profile: ProfileDto;
 
   constructor(private route: ActivatedRoute,
-              private service: ProfileService) {
+              private service: ProfileService,
+              private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -27,15 +27,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.profile = data;
     }));
   }
-  firstLetterUpper(str: string) {
-    return this.service.firstLetterUpper(str);
+
+  formatDate(date: Date) {
+    return this.datePipe.transform(date, 'dd.MM.yyyy HH:mm');
   }
 
   showPic(url: string) {
-    return this.service.showPic(url);
+      return this.service.showPic(url);
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub=>sub.unsubscribe());
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

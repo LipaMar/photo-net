@@ -1,22 +1,53 @@
 <div class="container">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6">
-        <img height="300px" [src]="showPic(profile.profilePicture)" alt="profile pic"/>
+    <div class="row justify-content-evenly">
+      <div class="col-md-4 bg-light profile-pic">
+        <img class="img-fluid rounded-3" [src]="showPic(profile.profilePicture)" alt="profile pic"/>
+        <div class="rate bg-light rounded-end d-inline">
+          <span class="align-baseline">Ocena ogólna: </span>
+          <span class="align-baseline"><b>{{profile.rating}}</b></span>
+        </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-8 bg-light">
         <h1>{{profile.userName}}</h1>
+        <button class="btn">Obserwuj</button>
+        <hr>
+        <div class="about-me">
+          <h5>O mnie</h5>
+          <p>{{profile.rating}}</p>
+          <p>{{profile.city}}</p>
+          <p>{{profile.price}}</p>
+          <p>{{profile.rateCount}}</p>
+          <p>{{profile.categories}}</p>
+          <p>{{profile.bio}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-between">
+      <div class="col-md-6 bg-light">
+        <mat-tab-group>
+          <mat-tab label="Zdjęcia({{profile.postsCount}})">
+            <div class="container row">
+              <div class="col-md-4 bg-light" *ngFor="let post of profile.posts">
+                <img class="img-fluid" [src]="showPic(post.photo)">
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Komentarze({{profile.comments?.length}})">
+            <div class="p-2" *ngFor="let comment of profile.comments">
+
+              <p><b>{{comment.author}}: </b>{{comment.content}}</p>
+              <p>{{formatDate(comment.added)}}</p>
+              <hr>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div class="col-md-3">
+        <mat-card class="calendar-card">
+          <mat-calendar></mat-calendar>
+        </mat-card>
       </div>
     </div>
   </div>
-
-
-  <p>{{profile.rating}}</p>
-  <p>{{profile.city}}</p>
-  <p>{{profile.postsCount}}</p>
-  <p>{{profile.price}}</p>
-  <p>{{profile.rateCount}}</p>
-  <p>{{profile.categories}}</p>
-  <p>{{profile.bio}}</p>
-  <p>{{profile.posts}}</p>
 </div>

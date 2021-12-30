@@ -24,6 +24,10 @@ public interface UserMapper {
 
     LoginDto mapToLoginDto(User user);
 
+    default String mapUserToString(User user){
+        return user.getUserName();
+    }
+
     default UserDetails mapUserToUserDetails(User user) {
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUserName())

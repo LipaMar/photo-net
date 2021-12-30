@@ -14,8 +14,8 @@ export class ProfileService {
               private domSanitizer: DomSanitizer) {
   }
 
-  getProfileDetails(username: any): Observable<any> {
-    return this.http.get<any>(`${endpoints.profile}/${username}`);
+  getProfileDetails(username: any): Observable<ProfileDto> {
+    return this.http.get<ProfileDto>(`${endpoints.profile}/${username}`);
   }
 
   firstLetterUpper(str: string) {

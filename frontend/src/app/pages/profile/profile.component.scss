@@ -1,0 +1,18 @@
+@import "src/styles";
+
+.about-me{
+  color: $font-dark;
+}
+
+.rate{
+  position: relative;
+  bottom: 75px;
+  padding: 10px 15px;
+  width: fit-content;
+  b{
+    font-size: 1.3rem;
+  }
+}
+.row{
+  margin-bottom: 15px;
+}

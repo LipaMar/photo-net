@@ -154,8 +154,6 @@ insert into USER (user_name, password, role, bio, email, active, profile_picture
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('aocridigan44', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'tortor id nulla ultrices aliquet maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat dui maecenas tristique est et tempus semper est quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit amet diam in magna bibendum imperdiet nullam', 'ztolliday44@youtube.com', true, null);
 insert into USER (user_name, password, role, bio, email, active, profile_picture_id) values ('srudloff45', '$2a$12$M.IzVkoEdW7XI83oTbW2E.Kd4UOWlLGVZm0S/Cq95K95wohkaFolG', 'USER', 'habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent', 'dtowle45@smugmug.com', true, null);
 
--- INSERT into POST (author_id, photo_id) values (2, 1);
-
 insert into rate (rating, author_id, target_id) values (4, 71, 79);
 insert into rate (rating, author_id, target_id) values (4, 35, 115);
 insert into rate (rating, author_id, target_id) values (3, 14, 28);
@@ -749,3 +747,19 @@ insert into post (author_id, photo_id) values (2, 2);
 insert into post (author_id, photo_id) values (3, 3);
 insert into post (author_id, photo_id) values (3, 1);
 insert into post (author_id, photo_id) values (1, 2);
+
+insert into comment (author_id, target_id, content, added) values (1, 3, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (2, 1, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (3, 2, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (4, 3, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (5, 4, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (6, 5, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (7, 6, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (8, 7, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (9, 8, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (10,9, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (11, 10, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (12, 11, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (13, 12, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (14, 13, 'testowy komentarz', CURRENT_DATE );
+insert into comment (author_id, target_id, content, added) values (15, 14, 'testowy komentarz', CURRENT_DATE );
