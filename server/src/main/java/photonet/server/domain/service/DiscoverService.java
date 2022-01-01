@@ -25,6 +25,7 @@ public class DiscoverService {
 
     public Page<PhotographerBasicDto> findAll(Specification<Photographer> specification, Pageable pageable,
                                               List<String> categories) {
+        specification = specification.and(photographerRepository.notLoggedUser());
         if (categories != null) {
             return filterByCategories(specification, pageable, categories);
         }

@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import photonet.server.config.Roles;
 import photonet.server.core.exception.AlreadyExistRestException;
 import photonet.server.core.exception.NotFoundRestException;
+import photonet.server.core.utils.SecurityUtils;
 import photonet.server.domain.entity.Photo;
 import photonet.server.domain.entity.User;
 import photonet.server.domain.mapper.UserMapper;
@@ -54,7 +55,7 @@ public class UserService {
     }
 
     public ProfileDto getLoggedUserProfile() {
-        return userRepository.findByUserName(loggedUserName())
+        return userRepository.findByUserName(SecurityUtils.loggedUserName())
                 .map(userMapper::mapUserToProfileDto)
                 .orElseThrow(NotFoundRestException::new);
     }
@@ -67,7 +68,7 @@ public class UserService {
 
     @Transactional
     public void uploadPicture(MultipartFile file) {
-        var user = userRepository.findByUserName(loggedUserName())
+        var user = userRepository.findByUserName(SecurityUtils.loggedUserName())
                 .orElseThrow(NotFoundRestException::new);
         var filePath = fileService.saveFile(file);
         var photo = photoRepository.save(buildPhoto(filePath));
@@ -76,8 +77,8 @@ public class UserService {
     }
 
     public LoginDto isLogged() {
-        var auth = getAuthentication();
-        return userRepository.findByUserName(loggedUserName())
+        var auth = SecurityUtils.getAuthentication();
+        return userRepository.findByUserName(SecurityUtils.loggedUserName())
                 .filter((x)->auth.isAuthenticated())
                 .filter((x)->!(auth instanceof AnonymousAuthenticationToken))
                 .map(userMapper::mapToLoginDto)
@@ -90,11 +91,4 @@ public class UserService {
         return photo;
     }
 
-    private String loggedUserName() {
-        return getAuthentication().getName();
-    }
-
-    private Authentication getAuthentication() {
-        return SecurityContextHolder.getContext().getAuthentication();
-    }
 }
