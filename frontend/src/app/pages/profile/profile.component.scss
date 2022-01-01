@@ -16,3 +16,9 @@
 .row{
   margin-bottom: 15px;
 }
+.category-chips {
+  display: inline-flex;
+  background-color: $middle-red;
+  border-radius: 20px;
+  color: $white;
+}
