@@ -30,6 +30,11 @@ html{
   background-color: $middle-red !important;
   color: $white !important;
 }
+.btn-dark{
+  background-color: $deep-taupe !important;
+  color: $white !important;
+  border: none !important;
+}
 .toastr-position{
   position: fixed;
   top: 5rem;

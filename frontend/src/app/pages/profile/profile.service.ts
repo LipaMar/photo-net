@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ProfileDto} from "../../core/models/profile.models";
 import {endpoints} from "../../core/const/consts";
@@ -16,6 +16,22 @@ export class ProfileService {
 
   getProfileDetails(username: any): Observable<ProfileDto> {
     return this.http.get<ProfileDto>(`${endpoints.profile}/${username}`);
+  }
+
+  isFollowed(userName: string | any): Observable<boolean> {
+    return this.http.get<boolean>(endpoints.follow, {params: this.buildParams(userName)});
+  }
+
+  follow(userName: string): Observable<void> {
+    return this.http.post<void>(endpoints.follow, this.buildParams(userName));
+  }
+
+  unfollow(userName: string): Observable<void> {
+    return this.http.delete<void>(endpoints.follow, {params: this.buildParams(userName)});
+  }
+
+  private buildParams(userName: string) {
+    return new HttpParams().append('userName', userName);
   }
 
   firstLetterUpper(str: string) {

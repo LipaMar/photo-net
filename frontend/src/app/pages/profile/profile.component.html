@@ -1,18 +1,18 @@
 <div class="container">
   <div class="container-fluid">
     <div class="row justify-content-between">
-      <div class="col-md-4 bg-light profile-pic">
-        <img class="img-fluid rounded-3" [src]="showPic(profile.profilePicture)" alt="profile pic"/>
+      <div class="col-md-4 bg-light profile?-pic">
+        <img class="img-fluid rounded-3" [src]="showPic(profile?.profilePicture)" alt="profile? pic"/>
         <div class="rate bg-light rounded-end d-inline">
           <span class="align-baseline">Ocena ogólna: </span>
-          <span class="align-baseline"><b>{{profile.rating}}</b></span>
+          <span class="align-baseline"><b>{{profile?.rating}}</b></span>
         </div>
       </div>
       <div class="col-md-6 bg-light">
         <div class="mt-3 pr-3 d-flex justify-content-between">
-          <h1>{{profile.userName}}</h1>
+          <h1>{{profile?.userName}}</h1>
           <div class="align-self-center">
-            <button class="btn mx-2">Obserwuj</button>
+            <button #followBtn class="mx-2 btn" (click)="followOnClick()">Obserwuj</button>
             <button class="btn mx-2">Wiadomość</button>
           </div>
 
@@ -20,26 +20,26 @@
         <hr>
         <div class="about-me">
           <h5>O mnie</h5>
-          <p>{{profile.bio}}</p>
-          <p>{{profile.city}}</p>
-          <p>{{profile.price}}</p>
-          <p>{{profile.rateCount}}</p>
-          <div class="category-chips px-2 py-1" *ngFor="let category of profile.categories">{{category}}</div>
+          <p>{{profile?.bio}}</p>
+          <p>{{profile?.city}}</p>
+          <p>{{profile?.price}}</p>
+          <p>{{profile?.rateCount}}</p>
+          <div class="category-chips px-2 py-1" *ngFor="let category of profile?.categories">{{category}}</div>
         </div>
       </div>
     </div>
     <div class="row justify-content-between">
       <div class="col-md-8 bg-light">
         <mat-tab-group>
-          <mat-tab label="Zdjęcia({{profile.postsCount}})">
+          <mat-tab label="Zdjęcia({{profile?.postsCount}})">
             <div class="container row">
-              <div class="col-md-4 bg-light" *ngFor="let post of profile.posts">
+              <div class="col-md-4 bg-light" *ngFor="let post of profile?.posts">
                 <img class="img-fluid" [src]="showPic(post.photo)">
               </div>
             </div>
           </mat-tab>
-          <mat-tab label="Komentarze({{profile.comments?.length}})">
-            <div class="p-2" *ngFor="let comment of profile.comments">
+          <mat-tab label="Komentarze({{profile?.comments?.length}})">
+            <div class="p-2" *ngFor="let comment of profile?.comments">
 
               <p><b>{{comment.author}}: </b>{{comment.content}}</p>
               <p>{{formatDate(comment.added)}}</p>
