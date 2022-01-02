@@ -1,17 +1,16 @@
 package photonet.server.domain.service;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import photonet.server.config.Roles;
 import photonet.server.core.exception.AlreadyExistRestException;
 import photonet.server.core.exception.NotFoundRestException;
 import photonet.server.core.utils.SecurityUtils;
@@ -20,6 +19,7 @@ import photonet.server.domain.entity.User;
 import photonet.server.domain.mapper.UserMapper;
 import photonet.server.domain.repository.PhotoRepository;
 import photonet.server.domain.repository.UserRepository;
+import photonet.server.domain.service.upload.FileService;
 import photonet.server.webui.dto.LoginDto;
 import photonet.server.webui.dto.ProfileBasicDto;
 import photonet.server.webui.dto.ProfileDto;
@@ -32,7 +32,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PhotoRepository photoRepository;
     private final UserMapper userMapper;
-    private final FileService fileService;
+    @Qualifier("CloudService") private final FileService fileService;
 
     public Page<ProfileBasicDto> getBasicProfileList(Pageable pageable) {
         var users = userRepository.findAll(pageable);

@@ -1,10 +1,13 @@
-package photonet.server.domain.service;
+package photonet.server.domain.service.upload.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import photonet.server.core.exception.IORestException;
+import photonet.server.core.utils.FileUtils;
+import photonet.server.domain.service.upload.FileService;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,9 +20,8 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-public class FileService {
-
-    private final String DIR = "photos";
+@Qualifier("LocalService")
+class LocalFileService implements FileService {
 
     public byte[] getBlob(String url) {
         try {
@@ -33,19 +35,10 @@ public class FileService {
 
     public String saveFile(byte[] file) throws IOException {
         createDirIfNotExist();
-        var newFile = Files.createFile(Path.of(generatePath()));
+        var newFile = Files.createFile(Path.of(FileUtils.generatePath(DIR)));
         Files.write(newFile, file);
         log.info("Created file: {}", newFile);
         return newFile.toString();
-    }
-
-    public String saveFile(MultipartFile file) {
-        try {
-            return saveFile(file.getBytes());
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
-            throw new IORestException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     private void createDirIfNotExist() throws IOException {
@@ -56,11 +49,4 @@ public class FileService {
             throw new IOException();
         }
     }
-
-    private String generatePath() {
-        LocalDateTime dateTime = LocalDateTime.now();
-        var fileName = dateTime.format(DateTimeFormatter.ofPattern("yyMMdd_HHmm_")) + UUID.randomUUID() + ".jpg";
-        return String.join(File.separator, DIR, fileName);
-    }
-
 }

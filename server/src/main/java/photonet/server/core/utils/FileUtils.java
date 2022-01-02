@@ -7,7 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 import photonet.server.core.exception.IORestException;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 public class FileUtils {
@@ -84,6 +87,12 @@ public class FileUtils {
             }
             return sb.toString();
         }
+    }
+
+    public static String generatePath(String dir) {
+        LocalDateTime dateTime = LocalDateTime.now();
+        var fileName = dateTime.format(DateTimeFormatter.ofPattern("yyMMdd_HHmm_")) + UUID.randomUUID() + ".jpg";
+        return String.join(File.separator, dir, fileName);
     }
 
 }

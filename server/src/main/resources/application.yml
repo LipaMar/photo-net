@@ -12,3 +12,6 @@ spring:
       data-locations: classpath:db/data.sql
   jpa:
     defer-datasource-initialization: true
+  cloud:
+    gcp:
+      project-id: ringed-choir-337013
