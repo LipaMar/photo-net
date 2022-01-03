@@ -24,6 +24,7 @@ import {MaterialModule} from "../material.module";
 import { ProfileComponent } from './pages/profile/profile.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { CommentSectionComponent } from './components/comment-section/comment-section.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
     ProfileComponent,
     FilterComponent,
     StarRatingComponent,
+    CommentSectionComponent,
   ],
     imports: [
         BrowserModule,

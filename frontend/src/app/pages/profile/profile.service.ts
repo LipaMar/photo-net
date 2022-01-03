@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {ProfileDto} from "../../core/models/profile.models";
+import {CommentDto, ProfileDto} from "../../core/models/profile.models";
 import {endpoints} from "../../core/const/consts";
 import {DomSanitizer} from "@angular/platform-browser";
 
@@ -32,6 +32,10 @@ export class ProfileService {
 
   private buildParams(userName: string) {
     return new HttpParams().append('userName', userName);
+  }
+
+  addComment(comment: CommentDto){
+    return this.http.post<CommentDto>(endpoints.comment, comment);
   }
 
   firstLetterUpper(str: string) {

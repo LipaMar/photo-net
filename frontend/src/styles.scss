@@ -23,23 +23,36 @@ $font-dark: #5a5a5a;
 $nav-height: 5rem;
 $footer-height: 3rem;
 
-html{
+html {
   font-size: 16px;
 }
-.btn{
+
+.btn {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.btn-brown {
   background-color: $middle-red !important;
   color: $white !important;
 }
-.btn-dark{
+
+.btn-blue {
+  background-color: $blue-gray !important;
+  color: $white !important;
+}
+
+.btn-dark-brown {
   background-color: $deep-taupe !important;
   color: $white !important;
-  border: none !important;
 }
-.toastr-position{
+
+.toastr-position {
   position: fixed;
   top: 5rem;
   right: 0;
 }
+
 .star {
   position: relative;
   display: inline-block;
@@ -47,9 +60,11 @@ html{
   font-size: 2rem;
   margin-top: -0.5rem;
 }
+
 .full, .filled, .half {
   color: $middle-red;
 }
+
 .half {
   position: absolute;
   display: inline-block;

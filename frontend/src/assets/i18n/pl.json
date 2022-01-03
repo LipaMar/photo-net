@@ -20,6 +20,10 @@
       "alreadyExist": "Użytkownik już istnieje",
       "success": "Pomyślnie zarejstrowano",
       "failure": "Rejestracja się nie powiodła"
+    },
+    "addComment": {
+      "success": "Dodano komentarz",
+      "failure": "Błąd"
     }
   },
   "page": {

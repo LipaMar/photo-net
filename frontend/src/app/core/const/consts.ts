@@ -18,4 +18,5 @@ export const endpoints = {
   profile: `${environment.apiUrl}/profiles`,
   categories: `${environment.apiUrl}/dictionary/categories`,
   follow: `${environment.apiUrl}/follow`,
+  comment: `${environment.apiUrl}/profiles/comment`,
 };

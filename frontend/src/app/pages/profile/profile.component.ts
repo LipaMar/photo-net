@@ -2,8 +2,9 @@ import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core
 import {ActivatedRoute} from "@angular/router";
 import {ProfileService} from "./profile.service";
 import {Subscription} from "rxjs";
-import {ProfileDto} from "../../core/models/profile.models";
+import {CommentDto, ProfileDto} from "../../core/models/profile.models";
 import {DatePipe} from "@angular/common";
+import {AppToastrService} from "../../core/toastr.service";
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +23,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private service: ProfileService,
-              private datePipe: DatePipe) {
+              private toastr: AppToastrService) {
   }
 
   ngOnInit(): void {
@@ -37,10 +38,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.styleFollowBtn(bool);
   }
 
-  formatDate(date: Date) {
-    return this.datePipe.transform(date, 'dd.MM.yyyy HH:mm');
-  }
-
   showPic(url: string) {
     return this.service.showPic(url);
   }
@@ -52,10 +49,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   styleFollowBtn(bool: boolean) {
     if (bool) {
       this.followBtn.nativeElement.innerHTML =  "Nie obserwuj";
-      this.followBtn.nativeElement.className =  "mx-2 btn btn-dark";
+      this.followBtn.nativeElement.className =  "mx-2 btn btn-dark-brown";
     } else {
       this.followBtn.nativeElement.innerHTML =  "Obserwuj";
-      this.followBtn.nativeElement.className = "mx-2 btn" ;
+      this.followBtn.nativeElement.className = "mx-2 btn btn-brown" ;
     }
   }
 
@@ -69,6 +66,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
     } else {
       this.doIsFollowing(!this.isFollowing);
       this.service.follow(this.userName).subscribe();
+    }
+  }
+
+  addComment(comment: CommentDto){
+    if(this.userName){
+      comment.target = this.userName;
+      this.service.addComment(comment).subscribe(response=> {
+        this.toastr.success('message.addComment.success');
+      },
+        ()=>this.toastr.error("message.addComment.failure"));
     }
   }
 }

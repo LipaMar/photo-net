@@ -3,7 +3,9 @@ package photonet.server.domain.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
@@ -13,8 +15,10 @@ import java.util.Date;
 @Setter
 @Getter
 @NoArgsConstructor
+@SuperBuilder
 public class Comment extends Opinion {
 
+    @Column(columnDefinition="TEXT")
     private String content;
     private Date added;
     private boolean anonymous;

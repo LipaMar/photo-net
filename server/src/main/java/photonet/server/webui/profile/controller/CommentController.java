@@ -13,17 +13,17 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping()
-    public void addComment(CommentDto dto) {
+    @PostMapping
+    public void addComment(@RequestBody CommentDto dto) {
         commentService.addComment(dto);
     }
 
-    @DeleteMapping()
+    @DeleteMapping
     public void deleteComment(long id) {
         commentService.deleteComment(id);
     }
 
-    @PutMapping()
+    @PutMapping
     public void editComment(CommentDto dto) {
         commentService.editComment(dto);
     }
