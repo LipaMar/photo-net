@@ -1,7 +1,7 @@
 package photonet.server.webui.dto.discover;
 
 import lombok.Data;
-import photonet.server.webui.dto.ProfileBasicDto;
+import photonet.server.webui.profile.dto.ProfileBasicDto;
 
 import java.math.BigDecimal;
 import java.util.List;

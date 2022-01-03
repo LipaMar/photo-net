@@ -17,5 +17,6 @@ public class Comment extends Opinion {
 
     private String content;
     private Date added;
+    private boolean anonymous;
 
 }

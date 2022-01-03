@@ -1,4 +1,4 @@
-package photonet.server.webui.dto;
+package photonet.server.webui.profile.dto;
 
 import lombok.Data;
 

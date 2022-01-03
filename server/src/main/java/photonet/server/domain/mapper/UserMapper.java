@@ -5,8 +5,8 @@ import org.mapstruct.Mapping;
 import org.springframework.security.core.userdetails.UserDetails;
 import photonet.server.domain.entity.User;
 import photonet.server.webui.dto.LoginDto;
-import photonet.server.webui.dto.ProfileBasicDto;
-import photonet.server.webui.dto.ProfileDto;
+import photonet.server.webui.profile.dto.ProfileBasicDto;
+import photonet.server.webui.profile.dto.ProfileDto;
 import photonet.server.webui.dto.UserDto;
 
 @Mapper(uses = {RateMapper.class, PhotoMapper.class, PostMapper.class})

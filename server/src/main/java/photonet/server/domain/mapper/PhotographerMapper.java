@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import photonet.server.domain.entity.Category;
 import photonet.server.domain.entity.Photographer;
 import photonet.server.domain.entity.Post;
-import photonet.server.webui.dto.ProfileDto;
+import photonet.server.webui.profile.dto.ProfileDto;
 import photonet.server.webui.dto.discover.PhotographerBasicDto;
 
 import java.util.List;

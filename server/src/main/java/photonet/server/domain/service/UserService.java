@@ -1,6 +1,5 @@
 package photonet.server.domain.service;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -21,8 +20,8 @@ import photonet.server.domain.repository.PhotoRepository;
 import photonet.server.domain.repository.UserRepository;
 import photonet.server.domain.service.upload.FileService;
 import photonet.server.webui.dto.LoginDto;
-import photonet.server.webui.dto.ProfileBasicDto;
-import photonet.server.webui.dto.ProfileDto;
+import photonet.server.webui.profile.dto.ProfileBasicDto;
+import photonet.server.webui.profile.dto.ProfileDto;
 import photonet.server.webui.dto.UserDto;
 
 @Service

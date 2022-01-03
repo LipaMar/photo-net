@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import photonet.server.core.exception.NotFoundRestException;
 import photonet.server.domain.mapper.PhotographerMapper;
 import photonet.server.domain.repository.PhotographerRepository;
-import photonet.server.webui.dto.ProfileDto;
+import photonet.server.webui.profile.dto.ProfileDto;
 
 @Service
 @RequiredArgsConstructor
