@@ -43,7 +43,7 @@ export class ProfileService {
   }
 
   showPic(url: string) {
-    return url == null ? "assets/images/anon.svg" : this.transform(url);
+    return url == null ? "assets/images/anon.svg" : url;
   }
 
   transform(val: string) {

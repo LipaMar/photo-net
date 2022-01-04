@@ -18,4 +18,8 @@ public abstract class PhotoMapper {
         return photo == null ? null : fileService.getBlob(photo.getPath());
     }
 
+    public String getPhotoLink(Photo photo) {
+        return photo == null ? null : fileService.getUrl(photo.getPath());
+    }
+
 }

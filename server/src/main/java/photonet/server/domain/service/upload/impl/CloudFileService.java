@@ -31,6 +31,11 @@ class CloudFileService implements FileService {
     }
 
     @Override
+    public String getUrl(String url) {
+        return String.format("https://storage.googleapis.com/%s/%s",BUCKET_NAME, url);
+    }
+
+    @Override
     public String saveFile(byte[] file) {
         return uploadObject(projectIdProvider.getProjectId(), BUCKET_NAME, "test", file);
     }

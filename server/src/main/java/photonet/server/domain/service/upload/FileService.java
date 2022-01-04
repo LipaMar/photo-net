@@ -12,6 +12,10 @@ public interface FileService {
 
     byte[] getBlob(String url);
 
+    default String getUrl(String url){
+        return "";
+    }
+
     String saveFile(byte[] file) throws IOException;
 
     default String saveFile(MultipartFile file) {
