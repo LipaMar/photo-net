@@ -1,16 +1,22 @@
 <div class="p-2" *ngFor="let comment of comments">
 
-  <p><b>{{comment.author}}: </b>{{comment.content}}</p>
+  <p>
+    <b [className]="getColor(comment.anonymous)">{{comment.author}}: </b>
+    {{comment.content}}
+  </p>
   <p>{{formatDate(comment.added)}}</p>
   <hr>
 </div>
 <form #form class="py-1 px-2" (ngSubmit)="sendComment(); form.reset()">
   <mat-form-field class="w-100" appearance="fill">
-    <textarea matInput [maxLength]="1000" required minlength="10" [(ngModel)]="comment.content"  name="content" placeholder="Treść komentarza..." #content="ngModel"></textarea>
+    <textarea matInput [maxLength]="1000" required minlength="10" [(ngModel)]="comment.content" name="content"
+              placeholder="Treść komentarza..." #content="ngModel"></textarea>
     <mat-hint [align]="'end'">min: 10 max: 1000 znaków</mat-hint>
-  </mat-form-field><br>
+  </mat-form-field>
+  <br>
   <button type="submit" class="btn btn-blue" [disabled]="!content.valid">Dodaj komentarz</button>
-  <mat-checkbox class="px-2" [(ngModel)]="comment.anonymous" name="anonymous" color="primary" labelPosition="before" [ngbTooltip]="'Anonimowy komentarz'">
+  <mat-checkbox class="px-2" [(ngModel)]="comment.anonymous" name="anonymous" color="primary" labelPosition="before"
+                [ngbTooltip]="'Anonimowy komentarz'">
     <i class="fas fa-user-secret fa-2x"></i>
   </mat-checkbox>
 </form>

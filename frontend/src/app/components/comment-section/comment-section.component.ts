@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {CommentDto} from "../../core/models/profile.models";
 
@@ -11,6 +11,7 @@ export class CommentSectionComponent implements OnInit {
 
   @Input() comments: CommentDto[];
   @Output() commentAdded = new EventEmitter<CommentDto>();
+
 
   comment = new CommentDto();
 
@@ -27,5 +28,9 @@ export class CommentSectionComponent implements OnInit {
   sendComment() {
     this.commentAdded.emit(this.comment);
     this.comment.content="";
+  }
+
+  getColor(anonymous: boolean) {
+    return anonymous ? "anon" : "normal";
   }
 }

@@ -1,10 +1,10 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProfileService} from "./profile.service";
-import {Subscription} from "rxjs";
 import {CommentDto, ProfileDto} from "../../core/models/profile.models";
 import {DatePipe} from "@angular/common";
 import {AppToastrService} from "../../core/toastr.service";
+import {SubscriptionContainer} from "../../core/utils/subscription-container";
 
 @Component({
   selector: 'app-profile',
@@ -14,10 +14,10 @@ import {AppToastrService} from "../../core/toastr.service";
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 
-  subscriptions: Subscription[] = [];
   profile: ProfileDto;
   @ViewChild('followBtn') followBtn: ElementRef;
   private userName = this.route.snapshot.paramMap.get('username');
+  subs = new SubscriptionContainer();
 
   isFollowing: boolean = false;
 
@@ -27,10 +27,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(this.service.getProfileDetails(this.userName).subscribe(data => {
-      this.profile = data;
-    }));
-    this.subscriptions.push(this.service.isFollowed(this.userName).subscribe(bool => this.doIsFollowing(bool)));
+    this.subs.add = this.service.getProfileDetails(this.userName).subscribe(data => this.profile = data);
+    this.subs.add = this.service.isFollowed(this.userName).subscribe(bool => this.doIsFollowing(bool));
   }
 
   private doIsFollowing(bool: boolean) {
@@ -43,21 +41,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subs.dispose();
   }
 
   styleFollowBtn(bool: boolean) {
     if (bool) {
-      this.followBtn.nativeElement.innerHTML =  "Nie obserwuj";
-      this.followBtn.nativeElement.className =  "mx-2 btn btn-dark-brown";
+      this.followBtn.nativeElement.innerHTML = "Nie obserwuj";
+      this.followBtn.nativeElement.className = "mx-2 btn btn-dark-brown";
     } else {
-      this.followBtn.nativeElement.innerHTML =  "Obserwuj";
-      this.followBtn.nativeElement.className = "mx-2 btn btn-brown" ;
+      this.followBtn.nativeElement.innerHTML = "Obserwuj";
+      this.followBtn.nativeElement.className = "mx-2 btn btn-brown";
     }
   }
 
   followOnClick() {
-    if(!this.userName){
+    if (!this.userName) {
       return;
     }
     if (this.isFollowing) {
@@ -69,13 +67,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  addComment(comment: CommentDto){
-    if(this.userName){
+  addComment(comment: CommentDto) {
+    if (this.userName) {
       comment.target = this.userName;
-      this.service.addComment(comment).subscribe(response=> {
-        this.toastr.success('message.addComment.success');
-      },
-        ()=>this.toastr.error("message.addComment.failure"));
+      this.subs.add = this.service.addComment(comment).subscribe(() => {
+          this.toastr.success('message.addComment.success');
+          this.subs.add = this.service.getProfileDetails(this.userName).subscribe(data => this.profile = data);
+
+        },
+        () => this.toastr.error("message.addComment.failure"));
     }
   }
 }
