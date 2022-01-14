@@ -21,10 +21,11 @@ import {NgbCollapseModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {DiscoverComponent} from './pages/discover/discover.component';
 import {SortComponent} from './components/sort/sort.component';
 import {MaterialModule} from "../material.module";
-import { ProfileComponent } from './pages/profile/profile.component';
-import { FilterComponent } from './components/filter/filter.component';
-import { StarRatingComponent } from './components/star-rating/star-rating.component';
-import { CommentSectionComponent } from './components/comment-section/comment-section.component';
+import {ProfileComponent} from './pages/profile/profile.component';
+import {FilterComponent} from './components/filter/filter.component';
+import {StarRatingComponent} from './components/star-rating/star-rating.component';
+import {CommentSectionComponent} from './components/comment-section/comment-section.component';
+import {IsLoggedGuard} from "./guards/is-logged.guard";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { CommentSectionComponent } from './components/comment-section/comment-se
       provide: HTTP_INTERCEPTORS,
       useClass: LoginInterceptor,
       multi: true,
-    }
+    },
+    IsLoggedGuard
   ],
   bootstrap: [AppComponent]
 })

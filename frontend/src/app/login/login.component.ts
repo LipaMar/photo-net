@@ -55,8 +55,11 @@ export class LoginComponent implements OnInit, ModalConfig {
           }
         },
         (error => {
-          if (error.status == 401)
+          if (error.status == 401){
             this.showLoginFailureMess();
+            localStorage.removeItem("token");
+            localStorage.setItem("isLogged", 'false');
+          }
         })
       );
   }

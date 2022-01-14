@@ -1,13 +1,10 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {LoginService} from "../../login/login.service";
-import {Subscription} from "rxjs";
 import {ModalComponent} from "../modal/modal.component";
 import {ModalConfig} from "../modal/modal.config";
 import {LoginComponent} from "../../login/login.component";
-import {NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
-import {FormBuilder} from "@angular/forms";
-import {ToastrService} from "ngx-toastr";
 import {routes} from "../../core/const/consts";
+import {SubscriptionContainer} from "../../core/utils/subscription-container";
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +15,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   isLogged: boolean;
   userName: string = '';
-  subscriptions: Subscription[] = [];
+  subscriptions = new SubscriptionContainer();
   modalConfig: ModalConfig = this.login;
   isNavbarCollapsed = true;
 
@@ -40,17 +37,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(this.service.onLogin$.subscribe($event => {
-        this.isLogged = $event;
-      }),
-      this.service.doGetIsLogged().subscribe(data => {
-        if (data) {
-          this.userName = data.userName;
-          this.isLogged = data.active && data.userName.length > 0;
-        } else {
-          this.isLogged = false;
-        }
-      }));
+    this.subscriptions.add = this.service.onLogin$.subscribe($event => {
+      this.isLogged = $event;
+    })
+    this.subscriptions.add = this.service.doGetIsLogged().subscribe(data => {
+      if (data) {
+        this.userName = data.userName;
+        this.isLogged = data.active && data.userName.length > 0;
+      } else {
+        this.isLogged = false;
+        this.service.logout();
+      }
+    });
+
   }
 
   logout() {
@@ -58,9 +57,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => {
-      sub.unsubscribe();
-    })
+    this.subscriptions.dispose();
   }
 
 }

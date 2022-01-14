@@ -6,13 +6,14 @@ import {RegisterComponent} from "./pages/register/register.component";
 import {DiscoverComponent} from "./pages/discover/discover.component";
 import {routes} from "./core/const/consts";
 import {ProfileComponent} from "./pages/profile/profile.component";
+import {IsLoggedGuard} from "./guards/is-logged.guard";
 
 const appRoutes: Routes = [
   {path: "home", component: HomeComponent},
   {path: "", redirectTo: routes.home, pathMatch: "full"},
   {path: "register", component: RegisterComponent},
-  {path: "discover", component: DiscoverComponent},
-  {path: "profile/:username", component: ProfileComponent},
+  {path: "discover", canActivate: [IsLoggedGuard], component: DiscoverComponent},
+  {path: "profile/:username", canActivate: [IsLoggedGuard], component: ProfileComponent},
   {path: "**", component: NotFoundComponent},
 ];
 
