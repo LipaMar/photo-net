@@ -5,6 +5,7 @@ import {ModalConfig} from "../modal/modal.config";
 import {LoginComponent} from "../../login/login.component";
 import {routes} from "../../core/const/consts";
 import {SubscriptionContainer} from "../../core/utils/subscription-container";
+import {LoggedDto} from "../../core/models/login.models";
 
 @Component({
   selector: 'app-navbar',
@@ -39,17 +40,25 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.add = this.service.onLogin$.subscribe($event => {
       this.isLogged = $event;
-    })
+      this.subscriptions.add = this.service.doGetIsLogged().subscribe(data => {
+        this.setUserInfo(data);
+      });
+    });
     this.subscriptions.add = this.service.doGetIsLogged().subscribe(data => {
-      if (data) {
-        this.userName = data.userName;
-        this.isLogged = data.active && data.userName.length > 0;
-      } else {
-        this.isLogged = false;
-        this.service.logout();
-      }
+      this.setUserInfo(data);
     });
 
+
+  }
+
+  private setUserInfo(data: LoggedDto) {
+    if (data) {
+      this.userName = data.userName;
+      this.isLogged = data.active && data.userName.length > 0;
+    } else {
+      this.isLogged = false;
+      this.service.logout();
+    }
   }
 
   logout() {
