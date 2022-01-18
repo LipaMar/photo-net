@@ -38,5 +38,4 @@ public interface PhotographerMapper {
     @Mapping(source = "user.comments", target = "comments")
     ProfileDto mapToDto(Photographer source);
 
-
 }

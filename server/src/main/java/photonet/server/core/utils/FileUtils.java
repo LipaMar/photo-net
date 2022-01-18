@@ -90,9 +90,13 @@ public class FileUtils {
     }
 
     public static String generatePath(String dir) {
+        return generatePath(dir, File.separator);
+    }
+
+    public static String generatePath(String dir, String separator) {
         LocalDateTime dateTime = LocalDateTime.now();
         var fileName = dateTime.format(DateTimeFormatter.ofPattern("yyMMdd_HHmm_")) + UUID.randomUUID() + ".jpg";
-        return String.join(File.separator, dir, fileName);
+        return String.join(separator, dir, fileName);
     }
 
 }

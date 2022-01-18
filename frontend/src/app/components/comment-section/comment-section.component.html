@@ -7,7 +7,7 @@
   <p>{{formatDate(comment.added)}}</p>
   <hr>
 </div>
-<form #form class="py-1 px-2" (ngSubmit)="sendComment(); form.reset()">
+<form *ngIf="addCommentsEnabled" #form class="py-1 px-2" (ngSubmit)="sendComment(); form.reset()">
   <mat-form-field class="w-100" appearance="fill">
     <textarea matInput [maxLength]="1000" required minlength="10" [(ngModel)]="comment.content" name="content"
               placeholder="Treść komentarza..." #content="ngModel"></textarea>

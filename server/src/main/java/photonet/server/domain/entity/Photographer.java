@@ -1,8 +1,6 @@
 package photonet.server.domain.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
@@ -14,6 +12,8 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
+@Builder(toBuilder = true)
+@AllArgsConstructor
 public class Photographer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

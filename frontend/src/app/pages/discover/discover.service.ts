@@ -28,8 +28,4 @@ export class DiscoverService {
     }
     return new HttpParams().append("sort", `userUserName`);
   }
-
-  getCategories(): Observable<string[]> {
-    return this.http.get<string[]>(endpoints.categories);
-  };
 }

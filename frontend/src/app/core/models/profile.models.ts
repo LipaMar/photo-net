@@ -13,6 +13,14 @@ export interface ProfileDto extends DiscoverDto {
   comments: CommentDto[] | any
 }
 
+export interface ProfileUpdateDto extends DiscoverDto {
+  bio: string | any,
+  userName: string | any,
+  price: number | any,
+  city: string | any,
+  categories: string[] | any,
+}
+
 export class CommentDto {
   author?: string;
   target: string;

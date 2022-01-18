@@ -1,30 +1,75 @@
 <div class="container">
   <div class="container-fluid">
     <div class="row justify-content-between">
-      <div class="col-md-4 bg-light profile?-pic">
-        <img class="img-fluid rounded-3" [src]="showPic(profile?.profilePicture)" alt="profile? pic"/>
+      <div class="col-md-4 bg-light">
+        <img class="img-fluid rounded-3" width="516px" [src]="showPic(profile?.profilePicture)"
+             alt="Zdjęcie profilowe"/>
+        <button *ngIf="isMyProfile" class="my-1 float-end" type="button" mat-raised-button (click)="fileInput.click()">
+          Dodaj zdjęcie
+        </button>
+        <input hidden #fileInput (click)="fileInput.value =''" (change)="onFileSelected($event)" type="file" id="file">
         <div class="rate bg-light rounded-end d-inline">
           <span class="align-baseline">Ocena ogólna: </span>
           <span class="align-baseline"><b>{{profile?.rating}}</b></span>
         </div>
       </div>
+      <div class="col-md-2 bg-light">
+      </div>
       <div class="col-md-6 bg-light">
-        <div class="mt-3 pr-3 d-flex justify-content-between">
+        <div class="mt-3 pr-3 d-flex align-items-center justify-content-between">
+          <span></span>
           <h1>{{profile?.userName}}</h1>
-          <div class="align-self-center">
-            <button #followBtn class="mx-2 btn btn-brown" (click)="followOnClick()">Obserwuj</button>
-            <button class="btn btn-brown mx-2">Wiadomość</button>
+          <div>
+            <ng-container *ngIf="!isMyProfile">
+              <button #followBtn class="mx-2 btn btn-brown" (click)="followOnClick()">Obserwuj</button>
+              <button class="btn btn-brown mx-2">Wiadomość</button>
+            </ng-container>
+            <ng-container *ngIf="isMyProfile">
+              <button *ngIf="!inEditMode" (click)="onEditClicked()" class="mx-2 btn btn-brown"><i
+                class="fas fa-user-edit"></i> Edytuj
+              </button>
+              <button *ngIf="inEditMode" (click)="onSaveClicked()" class="mx-1 btn btn-brown">Zapisz</button>
+              <button *ngIf="inEditMode" (click)="onCancelClicked()" class="mx-1 btn btn-brown">Anuluj</button>
+            </ng-container>
           </div>
 
         </div>
         <hr>
         <div class="about-me">
           <h5>O mnie</h5>
-          <p>{{profile?.bio}}</p>
-          <p>{{profile?.city}}</p>
-          <p>{{profile?.price}}</p>
-          <p>{{profile?.rateCount}}</p>
-          <div class="category-chips px-2 py-1" *ngFor="let category of profile?.categories">{{category}}</div>
+          <div class="about-me-inputs">
+            <form *ngIf="isMyProfile" [formGroup]="profileUpdateForm">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Opis</mat-label>
+                <textarea formControlName="bio" rows="4" class="description-input" matInput></textarea>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Miasto</mat-label>
+                <input formControlName="city" matNativeControl>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Cena za sesję</mat-label>
+                <input matInput formControlName="price" type="number">
+                <span matSuffix>zł</span>
+              </mat-form-field>
+            </form>
+            <ng-container *ngIf="!isMyProfile">
+              <p>{{profile?.bio}}</p>
+              <p>{{profile?.city}}</p>
+              <p>{{profile?.price}}</p>
+              <p>{{profile?.rateCount}}</p>
+            </ng-container>
+          </div>
+          <div class="mb-3">
+            <chips-select #categorySelect
+                          [labels]="allCategories"
+                          [checked]="profile.categories"
+                          [disabled]="!inEditMode"
+                          (selected)="onCategorySelected($event)">
+            </chips-select>
+          </div>
         </div>
       </div>
     </div>
@@ -39,7 +84,8 @@
             </div>
           </mat-tab>
           <mat-tab label="Komentarze({{profile?.comments?.length}})">
-            <comment-section [comments]="profile?.comments" (commentAdded)="addComment($event)"></comment-section>
+            <comment-section [addCommentsEnabled]="!isMyProfile" [comments]="profile?.comments"
+                             (commentAdded)="addComment($event)"></comment-section>
           </mat-tab>
         </mat-tab-group>
       </div>

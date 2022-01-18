@@ -19,25 +19,6 @@ export class FilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  toggleSelection(chip: MatChip) {
-    chip.toggleSelected();
-    let chipVal = chip.value;
-    if (!this.filtersParam.categories)
-      return;
-    if (chip.selected) {
-      this.filtersParam.categories.push(chipVal);
-    } else {
-      this.removeFirst(this.filtersParam.categories, chipVal)
-    }
-  }
-
-  private removeFirst<T>(array: T[], toRemove: T): void {
-    const index = array.indexOf(toRemove);
-    if (index !== -1) {
-      array.splice(index, 1);
-    }
-  }
-
   filter() {
     this.filters.emit(this.filtersParam);
   }

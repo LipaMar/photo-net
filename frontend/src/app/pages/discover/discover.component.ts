@@ -2,11 +2,11 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DiscoverService} from "./discover.service";
 import {DiscoverDto, DiscoverFilters, SortOption} from "../../core/models/discover.models";
 import {Subscription} from "rxjs";
-import {DomSanitizer} from "@angular/platform-browser";
 import {routes} from "../../core/const/consts";
 import {ProfileService} from "../profile/profile.service";
 import {SortComponent} from "../../components/sort/sort.component";
 import {SortParams} from "../../core/models/basic.models";
+import {CategoryService} from "../../dictionaries/category.service";
 
 @Component({
   selector: 'app-discover',
@@ -32,6 +32,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   sorting: SortParams;
 
   constructor(private service: DiscoverService,
+              private categoryService: CategoryService,
               private profileService: ProfileService) {
   }
 
@@ -40,7 +41,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
       this.profiles = data.content;
       this.profiles.forEach(x => x.city = this.firstLetterUpper(x.city))
     }));
-    this.subscriptions.push(    this.service.getCategories().subscribe(value => this.categories = value));
+    this.subscriptions.push(this.categoryService.getCategories().subscribe(value => this.categories = value));
   }
 
   firstLetterUpper(str: string) {
@@ -51,12 +52,12 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     return this.profileService.showPic(url);
   }
 
-  sort(event: SortParams){
+  sort(event: SortParams) {
     this.sorting = event;
     this.sortAndFilter();
   }
 
-  filter(event: DiscoverFilters){
+  filter(event: DiscoverFilters) {
     this.filters = event;
     this.sortAndFilter();
   }

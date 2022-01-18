@@ -14,6 +14,7 @@ const appRoutes: Routes = [
   {path: "register", component: RegisterComponent},
   {path: "discover", canActivate: [IsLoggedGuard], component: DiscoverComponent},
   {path: "profile/:username", canActivate: [IsLoggedGuard], component: ProfileComponent},
+  {path: "my-profile", canActivate: [IsLoggedGuard], component: ProfileComponent},
   {path: "**", component: NotFoundComponent},
 ];
 

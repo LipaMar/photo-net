@@ -26,6 +26,7 @@ import {FilterComponent} from './components/filter/filter.component';
 import {StarRatingComponent} from './components/star-rating/star-rating.component';
 import {CommentSectionComponent} from './components/comment-section/comment-section.component';
 import {IsLoggedGuard} from "./guards/is-logged.guard";
+import { ChipsSelectComponent } from './components/chips-select/chips-select.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {IsLoggedGuard} from "./guards/is-logged.guard";
     FilterComponent,
     StarRatingComponent,
     CommentSectionComponent,
+    ChipsSelectComponent,
   ],
     imports: [
         BrowserModule,

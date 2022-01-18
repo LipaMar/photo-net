@@ -1,0 +1,8 @@
+@import "src/styles";
+
+.mat-chip-selected{
+  background-color: $middle-red !important;
+}
+.mat-chip-disabled{
+  opacity: 1 !important;
+}

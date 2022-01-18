@@ -24,6 +24,7 @@ class CloudFileService implements FileService {
     private final String BUCKET_NAME = "photo-net";
     private final GcpProjectIdProvider projectIdProvider;
     private final Storage storage;
+    private final String separator = "/";
 
     @Override
     public byte[] getBlob(String url) {
@@ -37,16 +38,11 @@ class CloudFileService implements FileService {
 
     @Override
     public String saveFile(byte[] file) {
-        return uploadObject(projectIdProvider.getProjectId(), BUCKET_NAME, "test", file);
-    }
-
-    @Override
-    public String saveFile(MultipartFile file) {
-        return null;
+        return uploadObject(projectIdProvider.getProjectId(), BUCKET_NAME, FileUtils.generatePath(DIR), file);
     }
 
     private String uploadObject( String projectId, String bucketName, String objectName, byte[] file) {
-        var path = FileUtils.generatePath(DIR);
+        var path = FileUtils.generatePath(DIR, separator);
         BlobId blobId = BlobId.of(bucketName, path);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
         storage.create(blobInfo, file);

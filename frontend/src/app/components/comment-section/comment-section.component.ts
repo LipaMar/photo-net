@@ -10,6 +10,7 @@ import {CommentDto} from "../../core/models/profile.models";
 export class CommentSectionComponent implements OnInit {
 
   @Input() comments: CommentDto[];
+  @Input() addCommentsEnabled: boolean = true;
   @Output() commentAdded = new EventEmitter<CommentDto>();
 
 

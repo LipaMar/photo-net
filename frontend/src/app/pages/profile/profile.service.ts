@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {CommentDto, ProfileDto} from "../../core/models/profile.models";
+import {CommentDto, ProfileDto, ProfileUpdateDto} from "../../core/models/profile.models";
 import {endpoints} from "../../core/const/consts";
 import {DomSanitizer} from "@angular/platform-browser";
 
@@ -34,7 +34,7 @@ export class ProfileService {
     return new HttpParams().append('userName', userName);
   }
 
-  addComment(comment: CommentDto){
+  addComment(comment: CommentDto) {
     return this.http.post<CommentDto>(endpoints.comment, comment);
   }
 
@@ -48,5 +48,15 @@ export class ProfileService {
 
   transform(val: string) {
     return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + val);
+  }
+
+  uploadProfilePicture(picture: any) {
+    const fd = new FormData();
+    fd.append('file', picture);
+    return this.http.post(endpoints.myProfile, fd);
+  }
+
+  updateProfile(data: ProfileUpdateDto): Observable<ProfileDto> {
+    return this.http.put<ProfileDto>(endpoints.myProfile, data);
   }
 }

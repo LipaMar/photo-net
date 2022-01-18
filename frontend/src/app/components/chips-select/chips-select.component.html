@@ -1,0 +1,5 @@
+<mat-chip-list multiple>
+  <mat-chip #c="matChip"   [disabled]="disabled" removable *ngFor="let value of chips | keyvalue" [value]="value.key" [selected]="value.value" (click)="toggleSelection(c)">
+    {{value.key}}
+  </mat-chip>
+</mat-chip-list>

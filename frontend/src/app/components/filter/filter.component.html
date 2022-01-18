@@ -10,14 +10,10 @@
 
     <label for="category-filter">{{ 'filters.categories' | translate}}</label>
     <div id="category-filter">
-      <mat-chip-list selectable multiple>
-        <mat-chip #c="matChip" removable *ngFor="let category of categories" [value]="category" (click)="toggleSelection(c)">
-          {{category}}
-        </mat-chip>
-      </mat-chip-list>
+      <chips-select [labels]="categories" (selected)="filtersParam.categories = $event"></chips-select>
     </div>
 
-    <button class="mt-3 btn btn-brown" (click)="filter()" mat-raised-button>
+    <button class="mt-3" mat-raised-button (click)="filter()">
       Filtruj
     </button>
   </div>
