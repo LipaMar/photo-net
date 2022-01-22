@@ -62,7 +62,7 @@
               <p>{{profile?.rateCount}}</p>
             </ng-container>
           </div>
-          <div class="mb-3">
+          <div class="mb-3" *ngIf="profile && profile.categories">
             <chips-select #categorySelect
                           [labels]="allCategories"
                           [checked]="profile.categories"
