@@ -1,6 +1,9 @@
 package photonet.server.domain.mapper;
 
-import org.mapstruct.*;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import photonet.server.domain.entity.Comment;
 import photonet.server.webui.dto.CommentDto;
 
@@ -14,8 +17,8 @@ public interface CommentMapper extends OpinionMapper<Comment> {
     Comment dtoToEntity(CommentDto commentDto);
 
     @AfterMapping
-    default void changeAuthorIfAnonymous(@MappingTarget CommentDto dto, Comment comment){
-        if(comment.isAnonymous()){
+    default void changeAuthorIfAnonymous(@MappingTarget CommentDto dto, Comment comment) {
+        if (comment.isAnonymous()) {
             dto.setAuthor("Anonim");
         }
     }

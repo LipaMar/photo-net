@@ -21,11 +21,11 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   @ViewChild("sortProfiles") sortComponent: SortComponent;
 
   sortOptions: SortOption[] = [
-    {value: "userUserName", display: "Nazwie użytkownika"},
-    {value: "userRating", display: "Średniej ocen"},
+    {value: "userName", display: "Nazwie użytkownika"},
+    {value: "rating", display: "Średniej ocen"},
     {value: "posts", display: "Liczbie zdjęć"},
     {value: "price", display: "Cenie"},
-    {value: "userRatingCount", display: "Ilości ocen"},
+    {value: "ratingCount", display: "Ilości ocen"},
   ]
   categories: string[] = [];
   filters: DiscoverFilters;

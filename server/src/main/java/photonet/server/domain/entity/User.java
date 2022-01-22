@@ -5,6 +5,8 @@ import org.hibernate.annotations.Formula;
 import photonet.server.config.Roles;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -28,6 +30,13 @@ public class User {
     private Boolean active = true;
     private String password;
     private String role = Roles.USER;
+    private BigDecimal price;
+    private String city;
+    @OneToMany(mappedBy = "author")
+    private List<Post> posts;
+    @ManyToMany
+    @NotEmpty
+    private List<Category> categories;
     @OneToMany(orphanRemoval = true, mappedBy = "target")
     private List<Comment> comments;
     @OneToMany(orphanRemoval = true, mappedBy = "author")
@@ -36,8 +45,6 @@ public class User {
     private Photo profilePicture;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "target")
     private List<Rate> ratings;
-    @OneToOne(orphanRemoval = true)
-    private Photographer photographer;
 
     @Formula("(select count(r.id) from rate r where r.target_id = id)")
     private Integer ratingCount;

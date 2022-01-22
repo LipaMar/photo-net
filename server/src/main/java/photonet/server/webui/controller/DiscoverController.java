@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import photonet.server.config.Endpoints;
-import photonet.server.domain.entity.Photographer;
+import photonet.server.domain.entity.User;
 import photonet.server.domain.service.DiscoverService;
 import photonet.server.webui.dto.discover.PhotographerBasicDto;
 
@@ -28,15 +28,14 @@ public class DiscoverController {
     @GetMapping
     public Page<PhotographerBasicDto> getProfiles(
             @And({
-                    @Spec(path = "user.active", defaultVal = "true", spec = Equal.class),
-                    @Spec(path = "user", spec = NotNull.class),
-                    @Spec(path = "user.userName", params = "userName", spec = LikeIgnoreCase.class),
-                    @Spec(path = "user.rating", params = "ratingMoreThan", spec = GreaterThanOrEqual.class),
-                    @Spec(path = "user.rating", params = "ratingLessThan", spec = LessThanOrEqual.class),
-                    @Spec(path = "user.ratingCount", params = "rateCountMoreThan", spec = GreaterThanOrEqual.class),
-                    @Spec(path = "user.ratingCount", params = "rateCountLessThan", spec = LessThanOrEqual.class),
+                    @Spec(path = "active", defaultVal = "true", spec = Equal.class),
+                    @Spec(path = "userName", params = "userName", spec = LikeIgnoreCase.class),
+                    @Spec(path = "rating", params = "ratingMoreThan", spec = GreaterThanOrEqual.class),
+                    @Spec(path = "rating", params = "ratingLessThan", spec = LessThanOrEqual.class),
+                    @Spec(path = "ratingCount", params = "rateCountMoreThan", spec = GreaterThanOrEqual.class),
+                    @Spec(path = "ratingCount", params = "rateCountLessThan", spec = LessThanOrEqual.class),
             })
-                    Specification<Photographer> specification, Pageable pageable, @RequestParam(required = false) List<String> categories) {
+                    Specification<User> specification, Pageable pageable, @RequestParam(required = false) List<String> categories) {
         return service.findAll(specification, pageable, categories);
     }
 

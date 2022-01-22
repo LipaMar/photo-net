@@ -6,9 +6,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import photonet.server.domain.entity.Photographer;
-import photonet.server.domain.mapper.PhotographerMapper;
-import photonet.server.domain.repository.PhotographerRepository;
+import photonet.server.domain.entity.User;
+import photonet.server.domain.mapper.UserMapper;
+import photonet.server.domain.repository.UserRepository;
 import photonet.server.webui.dto.discover.PhotographerBasicDto;
 
 import javax.persistence.criteria.Predicate;
@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DiscoverService {
 
-    private final PhotographerRepository photographerRepository;
-    private final PhotographerMapper photographerMapper;
+    private final UserRepository photographerRepository;
+    private final UserMapper photographerMapper;
 
-    public Page<PhotographerBasicDto> findAll(Specification<Photographer> specification, Pageable pageable,
+    public Page<PhotographerBasicDto> findAll(Specification<User> specification, Pageable pageable,
                                               List<String> categories) {
         specification = specification.and(photographerRepository.notLoggedUser());
         if (categories != null) {
@@ -33,7 +33,7 @@ public class DiscoverService {
                 .map(photographerMapper::mapToBasicProfile);
     }
 
-    private Page<PhotographerBasicDto> filterByCategories(Specification<Photographer> specification,
+    private Page<PhotographerBasicDto> filterByCategories(Specification<User> specification,
                                                           Pageable pageable,
                                                           List<String> categories) {
         var list = photographerRepository.findAll(specification, pageable.getSort())
@@ -45,7 +45,7 @@ public class DiscoverService {
     }
 
     //TODO: obsłużyć filtry przez criteria api
-    private Specification<Photographer> filterByCategories(List<String> categories) {
+    private Specification<User> filterByCategories(List<String> categories) {
         return (photographer, query, cb) -> {
             if (categories == null) {
                 return cb.and();
