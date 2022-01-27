@@ -12,5 +12,5 @@ public class Endpoints {
     public static final String CATEGORIES = "/categories";
     public static final String FOLLOW = "/follow";
     public static final String COMMENT = PROFILES + "/comment";
-
+    public static final String SCHEDULE = "/schedule";
 }

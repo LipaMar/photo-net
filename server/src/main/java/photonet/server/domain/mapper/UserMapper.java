@@ -13,6 +13,7 @@ import photonet.server.webui.profile.dto.ProfileBasicDto;
 import photonet.server.webui.profile.dto.ProfileDto;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper(uses = {RateMapper.class, PhotoMapper.class, PostMapper.class, CommentMapper.class})
 public interface UserMapper {
@@ -30,7 +31,7 @@ public interface UserMapper {
     LoginDto mapToLoginDto(User user);
 
     default String mapUserToString(User user) {
-        return user.getUserName();
+        return Optional.ofNullable(user).map(User::getUserName).orElse(null);
     }
 
     default UserDetails mapUserToUserDetails(User user) {
