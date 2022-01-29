@@ -10,7 +10,7 @@
       <div class="row">
         <app-sort #sortProfiles (sortParams)="sort($event)" [fields]="sortOptions" class="mb-2 col-lg-9"></app-sort>
       </div>
-      <p *ngIf="profiles.length === 0" class="text-center mt-3 col-lg-9 h1">
+      <p *ngIf="profiles?.length === 0" class="text-center mt-3 col-lg-9 h1">
         Brak wyników
       </p>
       <div class="row" *ngFor="let profile of profiles">
