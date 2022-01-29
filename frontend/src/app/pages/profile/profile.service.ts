@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {CommentDto, ProfileDto, ProfileUpdateDto} from "../../core/models/profile.models";
+import {CommentDto, ProfileDto, ProfileUpdateDto, ScheduleDto} from "../../core/models/profile.models";
 import {endpoints} from "../../core/const/consts";
 import {DomSanitizer} from "@angular/platform-browser";
 
@@ -58,5 +58,9 @@ export class ProfileService {
 
   updateProfile(data: ProfileUpdateDto): Observable<ProfileDto> {
     return this.http.put<ProfileDto>(endpoints.myProfile, data);
+  }
+
+  getSchedule(userName: string): Observable<ScheduleDto> {
+    return this.http.get<ScheduleDto>(endpoints.schedule, {params:{userName: userName}});
   }
 }

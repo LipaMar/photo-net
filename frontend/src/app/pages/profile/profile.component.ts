@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProfileService} from "./profile.service";
-import {CommentDto, ProfileDto, ProfileUpdateDto} from "../../core/models/profile.models";
+import {CommentDto, ProfileDto, ProfileUpdateDto, ScheduleDto} from "../../core/models/profile.models";
 import {DatePipe} from "@angular/common";
 import {AppToastrService} from "../../core/toastr.service";
 import {SubscriptionContainer} from "../../core/utils/subscription-container";
@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   backupCategories: string[] = [];
   @ViewChild('followBtn') followBtn: ElementRef;
   @ViewChild('categorySelect') categorySelect: ChipsSelectComponent;
-  private userName = this.route.snapshot.paramMap.get('username');
+  userName = this.route.snapshot.paramMap.get('username');
   subscriptions = new SubscriptionContainer();
   profileUpdateForm = new FormGroup({
     bio: new FormControl({disabled: true}),
@@ -34,6 +34,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   isFollowing: boolean = false;
   isMyProfile: boolean = false;
   inEditMode: boolean = false;
+  schedule: ScheduleDto;
 
   constructor(private route: ActivatedRoute,
               private profileService: ProfileService,
@@ -50,12 +51,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
     this.subscriptions.add = this.categoryService.getCategories().subscribe(categories => {
       this.allCategories = categories;
-    })
+    });
   }
 
   private getProfileDetails() {
     this.subscriptions.add = this.profileService.getProfileDetails(this.userName).subscribe(data => this.profile = data);
     this.subscriptions.add = this.profileService.isFollowed(this.userName).subscribe(bool => this.doIsFollowing(bool));
+    this.getSchedule(this.userName);
   }
 
   private getMyProfileDetails() {
@@ -68,8 +70,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.setFormFieldsFromProfile();
           this.profileUpdateForm.disable();
         });
+        this.getSchedule(this.userName);
       }
     })
+  }
+
+  private getSchedule(userName: string | any) {
+    this.subscriptions.add = this.profileService.getSchedule(userName).subscribe(schedule => {
+      this.schedule = schedule;
+    });
   }
 
   private doIsFollowing(bool: boolean) {
@@ -122,12 +131,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onFileSelected(input: any) {
     if (input.target.files && input.target.files[0]) {
-      var reader = new FileReader();
+      let reader = new FileReader();
 
       reader.readAsDataURL(input.target.files[0]);
 
-      this.subscriptions.add = this.profileService.uploadProfilePicture(input.target.files[0]).subscribe(() => {
-      }, () => console.log("OLAGOGA"));
+      this.subscriptions.add = this.profileService.uploadProfilePicture(input.target.files[0]).subscribe();
       reader.onload = (event) => this.profile.profilePicture = event.target?.result;
     }
   }
@@ -172,4 +180,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
   onCategorySelected(selectedCategories: string[]) {
     this.profile.categories = selectedCategories;
   }
+
 }

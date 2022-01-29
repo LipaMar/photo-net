@@ -28,3 +28,28 @@ export class CommentDto {
   added: Date;
   anonymous: boolean = false;
 }
+
+export enum MeetingStatus {
+
+  FREE,
+  NEW,
+  ACCEPTED,
+  ARCHIVAL,
+  CANCELED
+
+}
+
+export interface MeetingDto {
+  id: number,
+  date: string,
+  timeStart: string,
+  hours: number,
+  status: MeetingStatus,
+  userBooked?: string,
+}
+
+export interface ScheduleDto {
+  owner: string,
+  disabled: boolean,
+  meetings: MeetingDto[],
+}

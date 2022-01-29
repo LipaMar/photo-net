@@ -100,7 +100,11 @@ insert into comment (author_id, target_id, content, added, anonymous) values (14
 insert into comment (author_id, target_id, content, added, anonymous) values (15, 14, 'testowy komentarz', CURRENT_DATE, false);
 
 insert into schedule (is_disabled, owner_id) values (false, 1);
+insert into schedule (is_disabled, owner_id) values (false, 14);
 
-insert into meeting (date, hours, status, time_start, schedule_id, user_booked_id  ) values ('2022-01-27', 2, 0, '19:17:57', 1, null );
-insert into meeting (date, hours, status, time_start, schedule_id, user_booked_id  ) values ('2022-01-28', 2, 0, '19:17:57', 1, null );
+insert into meeting (date, hours, status, time_start, schedule_id, user_booked_id  ) values ('2022-01-27', 2, 1, '19:17:57', 1, null );
+insert into meeting (date, hours, status, time_start, schedule_id, user_booked_id  ) values ('2022-01-28', 2, 2, '19:17:57', 1, null );
 insert into meeting (date, hours, status, time_start, schedule_id, user_booked_id  ) values ('2022-01-29', 2, 0, '19:17:57', 1, null );
+insert into meeting (date, hours, status, time_start, schedule_id, user_booked_id  ) values ('2022-01-29', 2, 1, '19:17:57', 2, null );
+insert into meeting (date, hours, status, time_start, schedule_id, user_booked_id  ) values ('2022-01-30', 2, 2, '19:17:57', 2, 1 );
+insert into meeting (date, hours, status, time_start, schedule_id, user_booked_id  ) values ('2022-02-01', 2, 0, '19:17:57', 2, null );

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import photonet.server.core.exception.NotFoundRestException;
 import photonet.server.domain.meetings.ScheduleMapper;
+import photonet.server.domain.meetings.entity.Schedule;
 import photonet.server.domain.meetings.repository.ScheduleRepository;
 import photonet.server.webui.dto.ScheduleDto;
 
@@ -16,7 +17,13 @@ public class ScheduleService {
 
     public ScheduleDto getScheduleForUser(String userName) {
         var schedule = scheduleRepository.findByOwnerUserName(userName)
-                .orElseThrow(NotFoundRestException::new);
+                .orElse(mockSchedule());
         return scheduleMapper.scheduleToDto(schedule);
+    }
+
+    private Schedule mockSchedule() {
+            var schedule = new Schedule();
+            schedule.setDisabled(true);
+            return schedule;
     }
 }

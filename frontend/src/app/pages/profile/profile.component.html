@@ -89,10 +89,8 @@
           </mat-tab>
         </mat-tab-group>
       </div>
-      <div class="col-md-4">
-        <mat-card class="calendar-card">
-          <mat-calendar></mat-calendar>
-        </mat-card>
+      <div class="col-md-4" >
+        <calendar *ngIf="schedule" [schedule]="schedule"></calendar>
       </div>
     </div>
   </div>

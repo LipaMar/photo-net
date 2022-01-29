@@ -27,6 +27,7 @@ import {StarRatingComponent} from './components/star-rating/star-rating.componen
 import {CommentSectionComponent} from './components/comment-section/comment-section.component';
 import {IsLoggedGuard} from "./guards/is-logged.guard";
 import { ChipsSelectComponent } from './components/chips-select/chips-select.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ChipsSelectComponent } from './components/chips-select/chips-select.com
     StarRatingComponent,
     CommentSectionComponent,
     ChipsSelectComponent,
+    CalendarComponent,
   ],
     imports: [
         BrowserModule,

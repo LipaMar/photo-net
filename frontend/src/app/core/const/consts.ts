@@ -21,4 +21,5 @@ export const endpoints = {
   categories: `${environment.apiUrl}/dictionary/categories`,
   follow: `${environment.apiUrl}/follow`,
   comment: `${environment.apiUrl}/profiles/comment`,
+  schedule: `${environment.apiUrl}/schedule`,
 };
