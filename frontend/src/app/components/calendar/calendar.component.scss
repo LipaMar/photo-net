@@ -1,0 +1,24 @@
+$transparency: 0.25;
+.free, .new, .archival, .accepted, .canceled {
+  border-radius: 100%;
+}
+
+.free {
+  background: rgba(0, 255, 0, $transparency);
+}
+
+.new {
+  background: rgba(255, 213, 0, $transparency);
+}
+
+.archival {
+  background: rgba(56, 47, 47, $transparency);
+}
+
+.accepted {
+  background: rgba(255, 0, 0, $transparency);
+}
+
+.canceled {
+  background: rgba(79, 0, 0, $transparency);
+}

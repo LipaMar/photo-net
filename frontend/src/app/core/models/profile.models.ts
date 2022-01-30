@@ -30,13 +30,11 @@ export class CommentDto {
 }
 
 export enum MeetingStatus {
-
-  FREE,
-  NEW,
-  ACCEPTED,
-  ARCHIVAL,
-  CANCELED
-
+  FREE = 'FREE',
+  NEW = 'NEW',
+  ACCEPTED = 'ACCEPTED',
+  ARCHIVAL = 'ARCHIVAL',
+  CANCELED = 'CANCELED'
 }
 
 export interface MeetingDto {
