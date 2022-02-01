@@ -1,0 +1,7 @@
+<div class="container-fluid">
+  <h3 class="text-center mb-3">Wybierz godziny dostępności</h3>
+  <chips-select [labels]="hours"
+                [checked]="selected"
+                (selected)="selectedChange.emit($event)">
+  </chips-select>
+</div>

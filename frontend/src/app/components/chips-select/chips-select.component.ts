@@ -9,7 +9,7 @@ import {MatChip} from "@angular/material/chips";
 export class ChipsSelectComponent implements OnInit, OnChanges {
 
   @Output() selected = new EventEmitter<string[]>();
-  @Input() labels: string[] = [];
+  @Input() labels: any[] = [];
   @Input() checked: string[] = [];
   @Input() disabled: boolean = false;
 

@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -28,6 +28,9 @@ import {CommentSectionComponent} from './components/comment-section/comment-sect
 import {IsLoggedGuard} from "./guards/is-logged.guard";
 import { ChipsSelectComponent } from './components/chips-select/chips-select.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import {MAT_DATE_LOCALE} from "@angular/material/core";
+import '@angular/common/locales/global/pl';
+import { TimePickerComponent } from './components/time-picker/time-picker.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     CommentSectionComponent,
     ChipsSelectComponent,
     CalendarComponent,
+    TimePickerComponent,
   ],
     imports: [
         BrowserModule,
@@ -73,6 +77,10 @@ import { CalendarComponent } from './components/calendar/calendar.component';
       useClass: LoginInterceptor,
       multi: true,
     },
+    {
+      provide: MAT_DATE_LOCALE, useValue: 'pl-PL'
+    },
+    { provide: LOCALE_ID, useValue: 'pl-PL' },
     IsLoggedGuard
   ],
   bootstrap: [AppComponent]

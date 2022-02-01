@@ -7,14 +7,15 @@
   </div>
   <div class="modal-footer" *ngIf="isDismissButtonEnabled() && isCloseButtonEnabled()">
     <button type="button"
-            class="btn"
+            mat-raised-button
             (click)="dismiss()"
             *ngIf="isDismissButtonEnabled()"
             [disabled]="modalConfig.disableDismissButton !== undefined && modalConfig.disableDismissButton()">
       {{ modalConfig.dismissButtonLabel }}
     </button>
     <button type="button"
-            class="btn"
+            class="ms-3"
+            mat-raised-button
             (click)="close()"
             *ngIf="isCloseButtonEnabled()"
             [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">

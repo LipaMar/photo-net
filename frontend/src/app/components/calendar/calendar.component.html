@@ -1,3 +1,28 @@
 <mat-card class="calendar-card">
-  <mat-calendar [minDate]="minDate" [dateClass]="dateClass" [dateFilter]="dateFilter"></mat-calendar>
+  <mat-calendar [minDate]="minDate"
+                [dateClass]="dateClass"
+                [dateFilter]="dateFilter"
+                (selectedChange)="addMeeting($event)">
+  </mat-calendar>
+  <div class="d-flex justify-content-evenly">
+    <button class="btn btn-brown"
+            *ngIf="!calendarEditMode"
+            (click)="switchCalendarEditMode()">Edytuj grafik <i class="fas fa-edit"></i>
+    </button>
+    <button class="btn btn-brown"
+            *ngIf="calendarEditMode"
+            (click)="switchCalendarEditMode()">Anuluj
+    </button>
+    <button class="btn btn-brown"
+            *ngIf="calendarEditMode"
+            (click)="switchCalendarEditMode()">Zapisz
+    </button>
+  </div>
 </mat-card>
+
+<app-modal #modal
+           [modalConfig]="modalConfig">
+  <time-picker></time-picker>
+
+</app-modal>
+
