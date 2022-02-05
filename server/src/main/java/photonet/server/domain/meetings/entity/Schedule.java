@@ -1,8 +1,6 @@
 package photonet.server.domain.meetings.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import photonet.server.domain.entity.User;
 
 import javax.persistence.*;
@@ -13,6 +11,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Schedule {
 
     @Id

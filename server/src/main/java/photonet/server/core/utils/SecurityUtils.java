@@ -9,6 +9,14 @@ public class SecurityUtils {
         return getAuthentication().getName();
     }
 
+    public static boolean isLoggedUser(String userName) {
+        return userName.equals(loggedUserName());
+    }
+
+    public static boolean isNotLoggedUser(String userName) {
+        return !isLoggedUser(userName);
+    }
+
     public static Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
     }

@@ -21,7 +21,6 @@ public class Meeting {
     private Long id;
     private LocalDate date;
     private LocalTime timeStart;
-    private int hours;
     private MeetingStatus status;
     @ManyToOne
     private Schedule schedule;

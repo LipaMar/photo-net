@@ -12,7 +12,6 @@ public class MeetingDto {
     private Long id;
     private LocalDate date;
     private LocalTime timeStart;
-    private int hours;
     private MeetingStatus status;
     private String userBooked;
 
