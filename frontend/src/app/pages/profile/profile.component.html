@@ -92,7 +92,8 @@
       <div class="col-md-4 bg-light">
         <calendar *ngIf="schedule"
                   [schedule]="schedule"
-                  [isMyProfile]="isMyProfile">
+                  [isMyProfile]="isMyProfile"
+                  (savedSchedule)="onSaveSchedule($event)" >
         </calendar>
       </div>
     </div>

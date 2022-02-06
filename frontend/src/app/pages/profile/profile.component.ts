@@ -1,7 +1,7 @@
-import {Component, ElementRef, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProfileService} from "./profile.service";
-import {CommentDto, ProfileDto, ProfileUpdateDto, ScheduleDto} from "../../core/models/profile.models";
+import {CommentDto, MeetingDto, ProfileDto, ProfileUpdateDto, ScheduleDto} from "../../core/models/profile.models";
 import {DatePipe} from "@angular/common";
 import {AppToastrService} from "../../core/toastr.service";
 import {SubscriptionContainer} from "../../core/utils/subscription-container";
@@ -181,4 +181,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.profile.categories = selectedCategories;
   }
 
+  onSaveSchedule(event: { meetings: MeetingDto[], saveDate: any }) {
+    if (this.userName) {
+      const dto: ScheduleDto = {
+        owner: this.userName,
+        disabled: false,
+        meetings: event.meetings,
+        saveDate: event.saveDate
+      };
+      this.subscriptions.add = this.profileService.updateSchedule(dto).subscribe(() => this.getSchedule(this.userName));
+    }
+  }
 }

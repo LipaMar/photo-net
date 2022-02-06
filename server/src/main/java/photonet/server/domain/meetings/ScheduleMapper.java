@@ -2,6 +2,7 @@ package photonet.server.domain.meetings;
 
 import lombok.Setter;
 import org.mapstruct.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import photonet.server.core.exception.NotFoundRestException;
 import photonet.server.domain.entity.User;
 import photonet.server.domain.mapper.UserMapper;
@@ -15,6 +16,7 @@ import photonet.server.webui.dto.ScheduleDto;
 @Setter
 public abstract class ScheduleMapper {
 
+    @Autowired
     private UserRepository userRepository;
 
     public abstract ScheduleDto scheduleToDto(Schedule schedule);
@@ -27,6 +29,9 @@ public abstract class ScheduleMapper {
 
 
     public User findUserByUserName(String userName) {
+        if(userName == null ) {
+            return null;
+        }
         return userRepository.findByUserName(userName)
                              .orElseThrow(NotFoundRestException::new);
     }

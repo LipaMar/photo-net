@@ -10,7 +10,7 @@ public class SecurityUtils {
     }
 
     public static boolean isLoggedUser(String userName) {
-        return userName.equals(loggedUserName());
+        return loggedUserName().equals(userName);
     }
 
     public static boolean isNotLoggedUser(String userName) {

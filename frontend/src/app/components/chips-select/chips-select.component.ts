@@ -41,6 +41,11 @@ export class ChipsSelectComponent implements OnInit, OnChanges {
     this.populateChips();
   }
 
+  refresh(){
+    this.chips = new Map();
+    this.populateChips();
+  }
+
   toggleSelection(chip: MatChip) {
     if(this.disabled){
       return;

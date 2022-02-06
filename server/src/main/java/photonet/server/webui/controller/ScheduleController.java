@@ -19,7 +19,7 @@ public class ScheduleController {
         return scheduleService.getScheduleForUser(userName);
     }
     @PostMapping
-    public void createFreeEvent(ScheduleDto scheduleDto){
+    public void createFreeEvent(@RequestBody ScheduleDto scheduleDto){
         scheduleService.createFreeEvent(scheduleDto);
     }
 

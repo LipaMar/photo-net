@@ -1,10 +1,22 @@
-import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {MeetingStatus, ScheduleDto} from "../../core/models/profile.models";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
+import {MeetingDto, MeetingStatus, ScheduleDto} from "../../core/models/profile.models";
 import {MatCalendarCellClassFunction} from "@angular/material/datepicker/calendar-body";
 import {ModalComponent} from "../modal/modal.component";
 import {ModalConfig} from "../modal/modal.config";
 import {CalendarModalConfig} from "./CalendarModalConfig";
 import {DatePipe} from "@angular/common";
+import {MatCalendar} from "@angular/material/datepicker";
+import {TimePickerComponent} from "../time-picker/time-picker.component";
 
 @Component({
   selector: 'calendar',
@@ -12,33 +24,35 @@ import {DatePipe} from "@angular/common";
   styleUrls: ['./calendar.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnChanges {
 
   @Input() schedule: ScheduleDto;
   @Input() isMyProfile: boolean;
+  @Output() savedSchedule = new EventEmitter<{ meetings: MeetingDto[], saveDate: any }>();
   @ViewChild('modal') private modalComponent: ModalComponent;
+  @ViewChild(MatCalendar) calendar: MatCalendar<Date>;
+  @ViewChild(TimePickerComponent) timePicker: TimePickerComponent;
 
   dateFilter = (date: Date) => true;
   minDate = new Date();
   dateClass: MatCalendarCellClassFunction<Date>;
-  calendarEditMode: boolean = false;
   modalConfig: ModalConfig = new CalendarModalConfig();
 
   hoursSelected: string[] = [];
+  dateSelected: Date;
 
   constructor(private datePipe: DatePipe) {
     this.modalConfig.onClose = () => this.onScheduleHourSave();
-    this.modalConfig.onDismiss = () => this.onScheduleHourCancel();
   }
 
   ngOnInit(): void {
     this.dateClass = (cellDate, view) => this.computeClass(cellDate, view);
     if (!this.isMyProfile) {
-      this.dateFilter = (date: Date) => this.filterDate(date);
+      this.dateFilter = (date: Date) => this.filterFreeDates(date);
     }
   }
 
-  compareDates(date1: Date, date2: Date): boolean {
+  isDateEqual(date1: Date, date2: Date): boolean {
     return date1.getFullYear() == date2.getFullYear() &&
       date1.getDate() == date2.getDate() &&
       date1.getMonth() == date2.getMonth();
@@ -48,7 +62,7 @@ export class CalendarComponent implements OnInit {
     let dateClass = '';
     if (view === 'month') {
       this.schedule.meetings.forEach(meeting => {
-        if (this.compareDates(new Date(meeting.date), cellDate)) {
+        if (this.isDateEqual(new Date(meeting.date), cellDate)) {
           switch (meeting.status) {
             case MeetingStatus.FREE:
               dateClass = 'free';
@@ -72,35 +86,73 @@ export class CalendarComponent implements OnInit {
     return dateClass;
   };
 
-  private filterDate(date: Date) {
+  private filterFreeDates(date: Date) {
     const {meetings} = this.schedule;
     if (this.schedule && meetings) {
-      return meetings.some(meeting => this.compareDates(new Date(meeting.date), date));
+      return meetings.some(meeting => this.hasMeetingStatus(meeting, date, [MeetingStatus.FREE]));
     }
     return false;
   }
 
-  switchCalendarEditMode() {
-    this.calendarEditMode = !this.calendarEditMode;
+  private hasMeetingStatus(meeting: MeetingDto, date: Date, statuses: MeetingStatus[]) {
+    return this.isDateEqual(new Date(meeting.date), date) && statuses.some(status => status === meeting.status);
   }
 
   async openModal() {
     return await this.modalComponent.open()
   }
 
-  async addMeeting(pickedDate: Date | null) {
-    const transform = this.datePipe.transform(pickedDate, 'EEEE, d MMMM y', undefined, 'pl-PL');
-    if (transform) {
-      this.modalConfig.modalTitle = transform;
+  async selectDateOnCalendar(pickedDate: Date | null) {
+    const title = this.datePipe.transform(pickedDate, 'EEEE, d MMMM y', undefined, 'pl-PL');
+    const {ACCEPTED, NEW, ARCHIVAL, CANCELED, FREE} = MeetingStatus;
+    if (title && pickedDate) {
+      this.modalConfig.modalTitle = title;
+      this.timePicker.reset();
+      this.hoursSelected = this.getDtoHoursForDate(pickedDate, [FREE]);
+      this.timePicker.removeValues(this.getDtoHoursForDate(pickedDate, [ACCEPTED, NEW, ARCHIVAL, CANCELED]));
+      this.dateSelected = pickedDate;
       await this.openModal();
     }
   }
 
   onScheduleHourSave(): boolean {
+    let meetings: MeetingDto[] = this.createMeetings();
+    this.savedSchedule.emit({meetings: meetings, saveDate: this.datePipe.transform(this.dateSelected, 'yyyy-MM-dd')});
     return true;
   }
 
-  onScheduleHourCancel(): boolean {
-    return true;
+  OnHourSelected(hours: any) {
+    this.hoursSelected = hours;
+  }
+
+  private getDtoHoursForDate(pickedDate: Date, statuses: MeetingStatus[]): string[] {
+    const result: string[] = [];
+    this.schedule.meetings.forEach(meeting => {
+      if (this.hasMeetingStatus(meeting, pickedDate, statuses)) {
+        result.push(meeting.timeStart.slice(0, -3));
+      }
+    });
+    return result;
+  }
+
+  private createMeetings() {
+    const result: MeetingDto[] = [];
+    const date = this.datePipe.transform(this.dateSelected, 'yyyy-MM-dd');
+    if (date) {
+      this.hoursSelected.forEach(hour => {
+        result.push({
+          date: date,
+          status: MeetingStatus.FREE,
+          timeStart: hour
+        })
+      })
+    }
+    return result;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.calendar) {
+      this.calendar.updateTodaysDate();
+    }
   }
 }

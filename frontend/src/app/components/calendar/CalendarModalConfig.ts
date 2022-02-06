@@ -24,7 +24,4 @@ export class CalendarModalConfig implements ModalConfig{
     return false;
   }
 
-
-
-
 }

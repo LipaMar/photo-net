@@ -38,10 +38,9 @@ export enum MeetingStatus {
 }
 
 export interface MeetingDto {
-  id: number,
+  id?: number,
   date: string,
   timeStart: string,
-  hours: number,
   status: MeetingStatus,
   userBooked?: string,
 }
@@ -50,4 +49,5 @@ export interface ScheduleDto {
   owner: string,
   disabled: boolean,
   meetings: MeetingDto[],
+  saveDate?: string;
 }

@@ -63,4 +63,9 @@ export class ProfileService {
   getSchedule(userName: string): Observable<ScheduleDto> {
     return this.http.get<ScheduleDto>(endpoints.schedule, {params:{userName: userName}});
   }
+
+  updateSchedule(schedule: ScheduleDto): Observable<ScheduleDto> {
+    return this.http.post<ScheduleDto>(endpoints.schedule, schedule);
+  }
+
 }

@@ -3,6 +3,7 @@ package photonet.server.domain.meetings.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import photonet.server.core.enums.MeetingStatus;
 import photonet.server.core.exception.ForbiddenRestException;
 import photonet.server.core.exception.NotFoundRestException;
 import photonet.server.core.utils.SecurityUtils;
@@ -50,9 +51,10 @@ public class ScheduleService {
                                             .collect(Collectors.toList());
         final var schedule = scheduleRepository.findByOwnerUserName(owner)
                                          .orElse(getNewSchedule(owner));
-        schedule.setMeetings(meetings);
-        meetingRepository.saveAll(meetings);
         scheduleRepository.save(schedule);
+        meetings.forEach(meeting -> meeting.setSchedule(schedule));
+        meetingRepository.removeAllByScheduleAndDateAndStatus(schedule, scheduleDto.getSaveDate(), MeetingStatus.FREE);
+        meetingRepository.saveAll(meetings);
     }
 
     private Schedule getNewSchedule(String owner) {
