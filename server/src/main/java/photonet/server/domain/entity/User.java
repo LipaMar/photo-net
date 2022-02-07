@@ -7,6 +7,7 @@ import photonet.server.config.Roles;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,15 +28,14 @@ public class User {
     @Column(columnDefinition = "LONGTEXT")
     private String bio;
     @Column(nullable = false)
-    private Boolean active = true;
+    private Boolean active;
     private String password;
-    private String role = Roles.USER;
+    private String role;
     private BigDecimal price;
     private String city;
     @OneToMany(mappedBy = "author")
     private List<Post> posts;
     @ManyToMany
-    @NotEmpty
     private List<Category> categories;
     @OneToMany(orphanRemoval = true, mappedBy = "target")
     private List<Comment> comments;

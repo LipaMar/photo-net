@@ -60,7 +60,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   computeClass(cellDate: Date, view: "month" | "year" | "multi-year") {
     let dateClass = '';
-    if (view === 'month') {
+    if (view === 'month' && this.schedule.meetings) {
       this.schedule.meetings.forEach(meeting => {
         if (this.isDateEqual(new Date(meeting.date), cellDate)) {
           switch (meeting.status) {
@@ -127,7 +127,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   private getDtoHoursForDate(pickedDate: Date, statuses: MeetingStatus[]): string[] {
     const result: string[] = [];
-    this.schedule.meetings.forEach(meeting => {
+    this.schedule.meetings?.forEach(meeting => {
       if (this.hasMeetingStatus(meeting, pickedDate, statuses)) {
         result.push(meeting.timeStart.slice(0, -3));
       }

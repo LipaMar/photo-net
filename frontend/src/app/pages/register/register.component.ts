@@ -12,7 +12,7 @@ import {AppToastrService} from "../../core/toastr.service";
 })
 export class RegisterComponent implements OnInit {
 
-  registerDto = new RegisterDto('', '', '');
+  registerDto = new RegisterDto('', '', true,'');
   pass = '';
   repeatPass = '';
 

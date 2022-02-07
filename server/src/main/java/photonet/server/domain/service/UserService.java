@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import photonet.server.config.Roles;
 import photonet.server.core.exception.AlreadyExistRestException;
 import photonet.server.core.exception.NotFoundRestException;
 import photonet.server.core.utils.SecurityUtils;
@@ -44,6 +45,7 @@ public class UserService {
             throw new AlreadyExistRestException("Użytkownik o podanym loginie już istnieje",HttpStatus.CONFLICT);
         }
         User toSave = userMapper.mapUserDtoToUser(user);
+        toSave.setRole(Roles.USER);
         userRepository.save(toSave);
     }
 
