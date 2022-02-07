@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, SecurityContext, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProfileService} from "./profile.service";
 import {CommentDto, MeetingDto, ProfileDto, ProfileUpdateDto, ScheduleDto} from "../../core/models/profile.models";
@@ -23,7 +23,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   backupCategories: string[] = [];
   @ViewChild('followBtn') followBtn: ElementRef;
   @ViewChild('categorySelect') categorySelect: ChipsSelectComponent;
-  userName = this.route.snapshot.paramMap.get('username');
+  pathUserName = this.route.snapshot.paramMap.get('username');
+  loggedUserName = '';
   subscriptions = new SubscriptionContainer();
   profileUpdateForm = new FormGroup({
     bio: new FormControl({disabled: true}),
@@ -44,33 +45,36 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.userName) {
-      this.getProfileDetails();
-    } else {
-      this.getMyProfileDetails();
-    }
+    this.subscriptions.add = this.loginService.doGetIsLogged().subscribe(data => {
+      this.loggedUserName = data.userName;
+      if (this.pathUserName && this.pathUserName !== this.loggedUserName) {
+        this.getProfileDetails();
+      } else {
+        this.getMyProfileDetails();
+      }
+    });
     this.subscriptions.add = this.categoryService.getCategories().subscribe(categories => {
       this.allCategories = categories;
     });
   }
 
   private getProfileDetails() {
-    this.subscriptions.add = this.profileService.getProfileDetails(this.userName).subscribe(data => this.profile = data);
-    this.subscriptions.add = this.profileService.isFollowed(this.userName).subscribe(bool => this.doIsFollowing(bool));
-    this.getSchedule(this.userName);
+    this.subscriptions.add = this.profileService.getProfileDetails(this.pathUserName).subscribe(data => this.profile = data);
+    this.subscriptions.add = this.profileService.isFollowed(this.pathUserName).subscribe(bool => this.doIsFollowing(bool));
+    this.getSchedule(this.pathUserName);
   }
 
   private getMyProfileDetails() {
     this.subscriptions.add = this.loginService.doGetIsLogged().subscribe(data => {
       if (data && data.active) {
-        this.userName = data.userName;
+        this.pathUserName = data.userName;
         this.isMyProfile = true;
-        this.subscriptions.add = this.profileService.getProfileDetails(this.userName).subscribe(data => {
+        this.subscriptions.add = this.profileService.getProfileDetails(this.pathUserName).subscribe(data => {
           this.profile = data;
           this.setFormFieldsFromProfile();
           this.profileUpdateForm.disable();
         });
-        this.getSchedule(this.userName);
+        this.getSchedule(this.pathUserName);
       }
     })
   }
@@ -105,24 +109,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   followOnClick() {
-    if (!this.userName) {
+    if (!this.pathUserName) {
       return;
     }
     if (this.isFollowing) {
       this.doIsFollowing(!this.isFollowing);
-      this.profileService.unfollow(this.userName).subscribe();
+      this.profileService.unfollow(this.pathUserName).subscribe();
     } else {
       this.doIsFollowing(!this.isFollowing);
-      this.profileService.follow(this.userName).subscribe();
+      this.profileService.follow(this.pathUserName).subscribe();
     }
   }
 
   addComment(comment: CommentDto) {
-    if (this.userName) {
-      comment.target = this.userName;
+    if (this.pathUserName) {
+      comment.target = this.pathUserName;
       this.subscriptions.add = this.profileService.addComment(comment).subscribe(() => {
           this.toastr.success('message.addComment.success');
-          this.subscriptions.add = this.profileService.getProfileDetails(this.userName).subscribe(data => this.profile = data);
+          this.subscriptions.add = this.profileService.getProfileDetails(this.pathUserName).subscribe(data => this.profile = data);
 
         },
         () => this.toastr.error("message.addComment.failure"));
@@ -182,14 +186,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onSaveSchedule(event: { meetings: MeetingDto[], saveDate: any }) {
-    if (this.userName) {
+    if (this.pathUserName) {
       const dto: ScheduleDto = {
-        owner: this.userName,
+        owner: this.pathUserName,
         disabled: false,
         meetings: event.meetings,
         saveDate: event.saveDate
       };
-      this.subscriptions.add = this.profileService.updateSchedule(dto).subscribe(() => this.getSchedule(this.userName));
+      this.subscriptions.add = this.profileService.updateSchedule(dto).subscribe(() => this.getSchedule(this.pathUserName));
     }
   }
 }
