@@ -12,7 +12,7 @@ import {
 import {MeetingDto, MeetingStatus, ScheduleDto} from "../../core/models/profile.models";
 import {MatCalendarCellClassFunction} from "@angular/material/datepicker/calendar-body";
 import {ModalComponent} from "../modal/modal.component";
-import {ModalConfig} from "../modal/modal.config";
+import {CleanModalConfig, ModalConfig} from "../modal/modal.config";
 import {CalendarModalConfig} from "./CalendarModalConfig";
 import {DatePipe} from "@angular/common";
 import {MatCalendar} from "@angular/material/datepicker";
@@ -29,7 +29,9 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Input() schedule: ScheduleDto;
   @Input() isMyProfile: boolean;
   @Output() savedSchedule = new EventEmitter<{ meetings: MeetingDto[], saveDate: any }>();
+  @Output() clientBooking = new EventEmitter<{ date: Date, hour: string }>();
   @ViewChild('modal') private modalComponent: ModalComponent;
+  @ViewChild('otherProfileModal') private otherProfileModalComponent: ModalComponent;
   @ViewChild(MatCalendar) calendar: MatCalendar<Date>;
   @ViewChild(TimePickerComponent) timePicker: TimePickerComponent;
 
@@ -40,6 +42,8 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   hoursSelected: string[] = [];
   dateSelected: Date;
+  cleanConfig = new CleanModalConfig();
+  otherProfileMeetingHours: string[] = [];
 
   constructor(private datePipe: DatePipe) {
     this.modalConfig.onClose = () => this.onScheduleHourSave();
@@ -98,12 +102,16 @@ export class CalendarComponent implements OnInit, OnChanges {
     return this.isDateEqual(new Date(meeting.date), date) && statuses.some(status => status === meeting.status);
   }
 
-  async openModal() {
-    return await this.modalComponent.open()
+  async selectDateOnCalendar(pickedDate: Date | null) {
+    if (this.isMyProfile) {
+      await this.editTimeSchedule(pickedDate);
+    } else {
+      await this.selectAvailableHour(pickedDate);
+    }
   }
 
-  async selectDateOnCalendar(pickedDate: Date | null) {
-    const title = this.datePipe.transform(pickedDate, 'EEEE, d MMMM y', undefined, 'pl-PL');
+  async editTimeSchedule(pickedDate: Date | null) {
+    const title = this.getTitle(pickedDate);
     const {ACCEPTED, NEW, ARCHIVAL, CANCELED, FREE} = MeetingStatus;
     if (title && pickedDate) {
       this.modalConfig.modalTitle = title;
@@ -111,8 +119,13 @@ export class CalendarComponent implements OnInit, OnChanges {
       this.hoursSelected = this.getDtoHoursForDate(pickedDate, [FREE]);
       this.timePicker.removeValues(this.getDtoHoursForDate(pickedDate, [ACCEPTED, NEW, ARCHIVAL, CANCELED]));
       this.dateSelected = pickedDate;
-      await this.openModal();
+      await this.modalComponent.open();
+
     }
+  }
+
+  private getTitle(pickedDate: Date | null) {
+    return this.datePipe.transform(pickedDate, 'EEEE, d MMMM y', undefined, 'pl-PL');
   }
 
   onScheduleHourSave(): boolean {
@@ -154,5 +167,21 @@ export class CalendarComponent implements OnInit, OnChanges {
     if (this.calendar) {
       this.calendar.updateTodaysDate();
     }
+  }
+
+  private async selectAvailableHour(pickedDate: Date | null) {
+    const title = this.getTitle(pickedDate);
+    if (title && pickedDate) {
+      this.cleanConfig.modalTitle = title;
+      this.dateSelected = pickedDate;
+      this.otherProfileMeetingHours = this.getDtoHoursForDate(pickedDate, [MeetingStatus.FREE]);
+      this.otherProfileMeetingHours = this.otherProfileMeetingHours.sort((a, b) => parseInt(a) >= parseInt(b) ? 1 : -1);
+      await this.otherProfileModalComponent.open();
+    }
+  }
+
+  onClientSelectedHour(hour: string) {
+    this.otherProfileModalComponent.close();
+    this.clientBooking.emit({date: this.dateSelected, hour: hour});
   }
 }

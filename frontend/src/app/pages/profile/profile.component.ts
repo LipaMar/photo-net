@@ -1,5 +1,5 @@
-import {Component, ElementRef, OnDestroy, OnInit, SecurityContext, ViewChild} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProfileService} from "./profile.service";
 import {CommentDto, MeetingDto, ProfileDto, ProfileUpdateDto, ScheduleDto} from "../../core/models/profile.models";
 import {DatePipe} from "@angular/common";
@@ -9,6 +9,7 @@ import {LoginService} from "../../login/login.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {CategoryService} from "../../dictionaries/category.service";
 import {ChipsSelectComponent} from "../../components/chips-select/chips-select.component";
+import {OrderService} from "../order/order.service";
 
 @Component({
   selector: 'app-profile',
@@ -39,6 +40,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private profileService: ProfileService,
+              private router: Router,
+              private orderService: OrderService,
               private loginService: LoginService,
               private categoryService: CategoryService,
               private toastr: AppToastrService) {
@@ -194,6 +197,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
         saveDate: event.saveDate
       };
       this.subscriptions.add = this.profileService.updateSchedule(dto).subscribe(() => this.getSchedule(this.pathUserName));
+    }
+  }
+
+  goToOrderConfirm(meetingInfo: { date: Date; hour: string }) {
+    if (this.pathUserName) {
+      this.orderService.setOrderData(meetingInfo.date, meetingInfo.hour, this.loggedUserName, this.pathUserName);
+      this.router.navigate(['confirm-meeting']);
     }
   }
 }

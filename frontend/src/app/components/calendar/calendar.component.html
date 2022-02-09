@@ -13,4 +13,13 @@
   </time-picker>
 
 </app-modal>
-
+<app-modal #otherProfileModal
+           [modalConfig]="cleanConfig">
+  <h3 class="mb-4">Wybierz godzinę sesji</h3>
+  <button class="btn btn-blue"
+          *ngFor="let hour of otherProfileMeetingHours"
+          (click)="onClientSelectedHour(hour)"
+  >
+    {{hour}}
+  </button>
+</app-modal>

@@ -11,3 +11,6 @@ export interface ModalConfig {
   hideCloseButton?(): boolean
   hideDismissButton?(): boolean
 }
+export class CleanModalConfig implements ModalConfig{
+  modalTitle = "";
+}

@@ -31,6 +31,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import {MAT_DATE_LOCALE} from "@angular/material/core";
 import '@angular/common/locales/global/pl';
 import { TimePickerComponent } from './components/time-picker/time-picker.component';
+import { OrderComponent } from './pages/order/order.component';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     ChipsSelectComponent,
     CalendarComponent,
     TimePickerComponent,
+    OrderComponent,
   ],
     imports: [
         BrowserModule,
@@ -81,7 +84,8 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
       provide: MAT_DATE_LOCALE, useValue: 'pl-PL'
     },
     { provide: LOCALE_ID, useValue: 'pl-PL' },
-    IsLoggedGuard
+    IsLoggedGuard,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

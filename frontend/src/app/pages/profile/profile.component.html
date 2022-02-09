@@ -93,6 +93,7 @@
         <calendar *ngIf="schedule"
                   [schedule]="schedule"
                   [isMyProfile]="isMyProfile"
+                  (clientBooking)="goToOrderConfirm($event)"
                   (savedSchedule)="onSaveSchedule($event)" >
         </calendar>
       </div>

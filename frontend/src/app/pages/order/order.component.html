@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row bg-opacity-50 bg-light rounded-3 p-2">
+    <div class="col-md-6">
+      <h1 class="text-center">Zatwierdź prośbę o sesję</h1>
+      <h4>Szczegóły sesji</h4>
+      <p class="offset-1">
+        Data: <b>{{dateToDisplay}}</b><br>
+        Godzina: <b>{{hour}}</b><br>
+        Miejsce: <b>{{place}}</b><br>
+        Cena: <b>{{price}} zł</b>
+      </p>
+      <mat-divider></mat-divider>
+      <h4>Dane fotografa</h4>
+      <p class="offset-1">
+        Nazwa użytkownika: <b>{{photographer}}</b><br>
+      </p>
+      <div class="p-4 d-flex justify-content-center ">
+        <button class="me-4 btn btn-brown">Anuluj</button>
+        <button class="btn btn-brown">Potwierdź spotkanie</button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img src="assets/images/photographer3.svg">
+    </div>
+  </div>
+</div>
