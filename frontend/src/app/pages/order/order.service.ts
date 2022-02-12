@@ -1,27 +1,33 @@
 import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {BookMeetingDto} from "../../core/models/profile.models";
+import {Observable} from "rxjs";
+import {endpoints} from "../../core/const/consts";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  date: Date;
-  hour: string;
+  meetingId: number;
   client: string;
   photographer: string;
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
-  setOrderData(date: Date, hour: string, client: string, photographer: string) {
-    this.date = date;
-    this.hour = hour;
+  setOrderData(meetingId: number, client: string, photographer: string) {
+    this.meetingId = meetingId;
     this.client = client;
     this.photographer = photographer;
   }
 
   isPopulated() {
-    return this.date && this.hour && this.client && this.photographer;
+    return this.meetingId && this.client && this.photographer;
+  }
+
+  bookAMeeting(meeting: BookMeetingDto): Observable<any> {
+    return this.http.post(endpoints.book, meeting);
   }
 
 }

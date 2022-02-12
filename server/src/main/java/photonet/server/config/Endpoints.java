@@ -13,4 +13,7 @@ public class Endpoints {
     public static final String FOLLOW = "/follow";
     public static final String COMMENT = PROFILES + "/comment";
     public static final String SCHEDULE = "/schedule";
+    public static final String MEETING = "/meeting";
+    public static final String MEETING_BY_HOUR = "/meetingByHour";
+    public static final String BOOK = "/book";
 }

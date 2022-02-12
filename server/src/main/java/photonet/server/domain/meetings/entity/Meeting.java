@@ -5,6 +5,7 @@ import photonet.server.core.enums.MeetingStatus;
 import photonet.server.domain.entity.User;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -22,6 +23,7 @@ public class Meeting {
     private LocalDate date;
     private LocalTime timeStart;
     private MeetingStatus status;
+    private BigDecimal price;
     @ManyToOne
     private Schedule schedule;
     @ManyToOne

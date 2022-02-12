@@ -13,8 +13,12 @@ import photonet.server.domain.meetings.entity.Schedule;
 import photonet.server.domain.meetings.repository.MeetingRepository;
 import photonet.server.domain.meetings.repository.ScheduleRepository;
 import photonet.server.domain.repository.UserRepository;
+import photonet.server.webui.dto.BookMeetingDto;
+import photonet.server.webui.dto.MeetingDto;
 import photonet.server.webui.dto.ScheduleDto;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,7 +54,7 @@ public class ScheduleService {
                                             .map(scheduleMapper::MeetingDtoToEntity)
                                             .collect(Collectors.toList());
         final var schedule = scheduleRepository.findByOwnerUserName(owner)
-                                         .orElse(getNewSchedule(owner));
+                                               .orElse(getNewSchedule(owner));
         scheduleRepository.save(schedule);
         meetings.forEach(meeting -> meeting.setSchedule(schedule));
         meetingRepository.removeAllByScheduleAndDateAndStatus(schedule, scheduleDto.getSaveDate(), MeetingStatus.FREE);
@@ -59,10 +63,49 @@ public class ScheduleService {
 
     private Schedule getNewSchedule(String owner) {
         final var user = userRepository.findByUserName(owner)
-                                 .orElseThrow(NotFoundRestException::new);
+                                       .orElseThrow(NotFoundRestException::new);
         return Schedule.builder()
                        .owner(user)
                        .isDisabled(false)
                        .build();
+    }
+
+    @Transactional
+    public void bookMeeting(BookMeetingDto dto) {
+        final var schedule = scheduleRepository.findByOwnerUserName(dto.getPhotographer())
+                                               .orElseThrow(NotFoundRestException::new);
+        final var client = userRepository.findByUserName(SecurityUtils.loggedUserName())
+                                         .orElseThrow(NotFoundRestException::new);
+        final var meeting = meetingRepository.findById(dto.getId())
+                                             .orElseThrow(NotFoundRestException::new);
+        meeting.setSchedule(schedule);
+        meeting.setUserBooked(client);
+        meeting.setTimeStart(dto.getTimeStart());
+        meeting.setDate(dto.getDate());
+        meeting.setPrice(dto.getPrice());
+        meeting.setStatus(MeetingStatus.NEW);
+        meetingRepository.save(meeting);
+    }
+
+    public MeetingDto getMeetingById(Long id) {
+        return meetingRepository.findById(id)
+                                .map(scheduleMapper::meetingToDto)
+                                .orElseThrow(NotFoundRestException::new);
+    }
+
+    public MeetingDto getMeetingByDateAndHour(String owner, String dateAsString, LocalTime hour) {
+        final var date = LocalDate.parse(dateAsString);
+        final var schedule = scheduleRepository.findByOwnerUserName(owner)
+                                               .orElseThrow(NotFoundRestException::new);
+        final var meeting = schedule.getMeetings()
+                                    .stream()
+                                    .filter(m -> isEqual(m, date, hour))
+                                    .findFirst()
+                                    .orElseThrow(NotFoundRestException::new);
+        return scheduleMapper.meetingToDto(meeting);
+    }
+
+    private boolean isEqual(Meeting meeting, LocalDate date, LocalTime hour) {
+        return meeting.getDate().isEqual(date) && meeting.getTimeStart().equals(hour);
     }
 }

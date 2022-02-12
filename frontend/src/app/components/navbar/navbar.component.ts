@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   discoverRef = routes.discover;
   profileRef = routes.myProfile;
   registerRef = routes.register;
+  myMeetingsRef = routes.myMeetings;
   homeRef = routes.home;
 
   @ViewChild('modal') private modalComponent: ModalComponent;

@@ -51,3 +51,13 @@ export interface ScheduleDto {
   meetings: MeetingDto[],
   saveDate?: string;
 }
+
+export interface BookMeetingDto {
+  id: number;
+  date: string;
+  timeStart: string;
+  price: number;
+  photographer: string;
+}
+
+

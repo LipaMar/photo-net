@@ -7,6 +7,7 @@ export const routes = {
   followed: "/followed",
   profile: "/profile",
   myProfile: "/my-profile",
+  myMeetings: "/my-meetings",
   instagram: "#",
   facebook: "#",
   twitter: "#"
@@ -22,4 +23,8 @@ export const endpoints = {
   follow: `${environment.apiUrl}/follow`,
   comment: `${environment.apiUrl}/profiles/comment`,
   schedule: `${environment.apiUrl}/schedule`,
+  meeting: `${environment.apiUrl}/schedule/meeting`,
+  meetingByHour: `${environment.apiUrl}/schedule/meetingByHour`,
+  book: `${environment.apiUrl}/schedule/book`
+
 };

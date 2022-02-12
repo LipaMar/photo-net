@@ -8,7 +8,6 @@ import photonet.server.domain.meetings.entity.Schedule;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface MeetingRepository extends JpaRepository<Meeting, Long> {

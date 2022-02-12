@@ -29,7 +29,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Input() schedule: ScheduleDto;
   @Input() isMyProfile: boolean;
   @Output() savedSchedule = new EventEmitter<{ meetings: MeetingDto[], saveDate: any }>();
-  @Output() clientBooking = new EventEmitter<{ date: Date, hour: string }>();
+  @Output() clientBooking = new EventEmitter<{ date: string, hour: string }>();
   @ViewChild('modal') private modalComponent: ModalComponent;
   @ViewChild('otherProfileModal') private otherProfileModalComponent: ModalComponent;
   @ViewChild(MatCalendar) calendar: MatCalendar<Date>;
@@ -182,6 +182,9 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   onClientSelectedHour(hour: string) {
     this.otherProfileModalComponent.close();
-    this.clientBooking.emit({date: this.dateSelected, hour: hour});
+    const date = this.datePipe.transform(this.dateSelected, 'yyyy-MM-dd');
+    if (date) {
+      this.clientBooking.emit({date: date, hour: hour});
+    }
   }
 }

@@ -10,6 +10,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {CategoryService} from "../../dictionaries/category.service";
 import {ChipsSelectComponent} from "../../components/chips-select/chips-select.component";
 import {OrderService} from "../order/order.service";
+import {ScheduleService} from "../../additional_services/schedule.service";
 
 @Component({
   selector: 'app-profile',
@@ -42,6 +43,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
               private profileService: ProfileService,
               private router: Router,
               private orderService: OrderService,
+              private scheduleService: ScheduleService,
               private loginService: LoginService,
               private categoryService: CategoryService,
               private toastr: AppToastrService) {
@@ -200,10 +202,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  goToOrderConfirm(meetingInfo: { date: Date; hour: string }) {
+  goToOrderConfirm(meetingInfo: { date: string; hour: string }) {
     if (this.pathUserName) {
-      this.orderService.setOrderData(meetingInfo.date, meetingInfo.hour, this.loggedUserName, this.pathUserName);
-      this.router.navigate(['confirm-meeting']);
+      this.scheduleService.findMeetingByHour(this.pathUserName, meetingInfo.date, meetingInfo.hour).subscribe(meeting => {
+        if (meeting.id && this.pathUserName) {
+          this.orderService.setOrderData(meeting.id, this.loggedUserName, this.pathUserName);
+          this.router.navigate(['confirm-meeting']);
+        }
+      });
     }
   }
 }
