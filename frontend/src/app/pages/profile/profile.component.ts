@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   private getSchedule(userName: string | any) {
-    this.subscriptions.add = this.profileService.getSchedule(userName).subscribe(schedule => {
+    this.subscriptions.add = this.scheduleService.getSchedule(userName).subscribe(schedule => {
       this.schedule = schedule;
     });
   }
@@ -198,7 +198,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         meetings: event.meetings,
         saveDate: event.saveDate
       };
-      this.subscriptions.add = this.profileService.updateSchedule(dto).subscribe(() => this.getSchedule(this.pathUserName));
+      this.subscriptions.add = this.scheduleService.updateSchedule(dto).subscribe(() => this.getSchedule(this.pathUserName));
     }
   }
 

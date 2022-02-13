@@ -26,13 +26,15 @@ import {FilterComponent} from './components/filter/filter.component';
 import {StarRatingComponent} from './components/star-rating/star-rating.component';
 import {CommentSectionComponent} from './components/comment-section/comment-section.component';
 import {IsLoggedGuard} from "./guards/is-logged.guard";
-import { ChipsSelectComponent } from './components/chips-select/chips-select.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
+import {ChipsSelectComponent} from './components/chips-select/chips-select.component';
+import {CalendarComponent} from './components/calendar/calendar.component';
 import {MAT_DATE_LOCALE} from "@angular/material/core";
 import '@angular/common/locales/global/pl';
-import { TimePickerComponent } from './components/time-picker/time-picker.component';
-import { OrderComponent } from './pages/order/order.component';
+import {TimePickerComponent} from './components/time-picker/time-picker.component';
+import {OrderComponent} from './pages/order/order.component';
 import {DatePipe} from "@angular/common";
+import {MyMeetingsComponent} from './pages/my-meetings/my-meetings.component';
+import { MeetingListFilterComponent } from './components/list-filter/meeting-list-filter.component';
 
 @NgModule({
   declarations: [
@@ -54,26 +56,28 @@ import {DatePipe} from "@angular/common";
     CalendarComponent,
     TimePickerComponent,
     OrderComponent,
+    MyMeetingsComponent,
+    MeetingListFilterComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        }),
-        ToastrModule.forRoot(),
-        NgbCollapseModule,
-        MaterialModule,
-        NgbModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    ToastrModule.forRoot(),
+    NgbCollapseModule,
+    MaterialModule,
+    NgbModule
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -83,7 +87,7 @@ import {DatePipe} from "@angular/common";
     {
       provide: MAT_DATE_LOCALE, useValue: 'pl-PL'
     },
-    { provide: LOCALE_ID, useValue: 'pl-PL' },
+    {provide: LOCALE_ID, useValue: 'pl-PL'},
     IsLoggedGuard,
     DatePipe
   ],

@@ -108,4 +108,14 @@ public class ScheduleService {
     private boolean isEqual(Meeting meeting, LocalDate date, LocalTime hour) {
         return meeting.getDate().isEqual(date) && meeting.getTimeStart().equals(hour);
     }
+
+    public List<MeetingDto> getLoggedUSerMeetings() {
+        final var loggedUser = userRepository.findByUserName(SecurityUtils.loggedUserName())
+                                             .orElseThrow(NotFoundRestException::new);
+        return meetingRepository.findAllByUserBooked(loggedUser)
+                                .stream()
+                                .map(scheduleMapper::meetingToDto)
+                                .collect(Collectors.toList());
+    }
+
 }

@@ -3,6 +3,7 @@ package photonet.server.domain.meetings.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import photonet.server.core.enums.MeetingStatus;
+import photonet.server.domain.entity.User;
 import photonet.server.domain.meetings.entity.Meeting;
 import photonet.server.domain.meetings.entity.Schedule;
 
@@ -13,5 +14,7 @@ import java.util.List;
 public interface MeetingRepository extends JpaRepository<Meeting, Long> {
 
     List<Meeting> removeAllByScheduleAndDateAndStatus(Schedule schedule, LocalDate date, MeetingStatus status);
+
+    List<Meeting> findAllByUserBooked(User user);
 
 }

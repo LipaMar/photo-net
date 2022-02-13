@@ -1,0 +1,32 @@
+<form>
+  <h4>{{ 'filters.header' | translate}}</h4>
+  <div class="form-group">
+
+
+    <div *ngIf="listToFilter">
+      <mat-form-field>
+        <mat-label>Sesja jako:</mat-label>
+        <mat-select (selectionChange)="onTypeSelected($event)">
+          <mat-option *ngFor="let type of meetingTypes | keyvalue" [value]="type.value">
+            {{type.key}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="mt-2">
+        <label>Status:</label>
+        <p *ngFor="let status of statuses | keyvalue">
+          <mat-checkbox color="primary" [ngModelOptions]="{standalone: true}" [(ngModel)]="status.value.selected" [value]="status.value.type">
+            {{status.key}}
+          </mat-checkbox>
+        </p>
+      </div>
+
+
+    </div>
+
+
+    <button class="mt-3" mat-raised-button (click)="filter()">
+      Filtruj
+    </button>
+  </div>
+</form>

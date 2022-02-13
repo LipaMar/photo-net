@@ -8,12 +8,14 @@ import {routes} from "./core/const/consts";
 import {ProfileComponent} from "./pages/profile/profile.component";
 import {IsLoggedGuard} from "./guards/is-logged.guard";
 import {OrderComponent} from "./pages/order/order.component";
+import {MyMeetingsComponent} from "./pages/my-meetings/my-meetings.component";
 
 const appRoutes: Routes = [
   {path: "home", component: HomeComponent},
   {path: "", redirectTo: routes.home, pathMatch: "full"},
   {path: "register", component: RegisterComponent},
   {path: "discover", canActivate: [IsLoggedGuard], component: DiscoverComponent},
+  {path: "my-meetings", canActivate: [IsLoggedGuard], component: MyMeetingsComponent},
   {path: "profile/:username", canActivate: [IsLoggedGuard], component: ProfileComponent},
   {path: "my-profile", canActivate: [IsLoggedGuard], component: ProfileComponent},
   {path: "confirm-meeting", canActivate: [IsLoggedGuard], component: OrderComponent},

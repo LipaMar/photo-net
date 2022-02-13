@@ -11,6 +11,7 @@ export class FilterComponent implements OnInit {
 
   @Input() categories: string[];
   @Output() filters = new EventEmitter<DiscoverFilters>();
+  @Input() ratingFilter: boolean = false;
   filtersParam = new DiscoverFilters();
 
   constructor() {

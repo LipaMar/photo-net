@@ -7,6 +7,7 @@
       <ul *ngIf="isLogged" class="navbar-nav mr-auto">
         <li><a href="{{followedRef}}">{{ 'nav.followed' | translate}}</a></li>
         <li><a href="{{discoverRef}}">{{ 'nav.discover' | translate}}</a></li>
+        <li><a href="{{myMeetingsRef}}">{{ 'nav.myMeetings' | translate}}</a></li>
         <li><a href="{{profileRef}}">{{ 'nav.profile' | translate}}</a></li>
         <li><a href="{{homeRef}}" (click)="logout()">{{ 'nav.logout' | translate}}</a></li>
       </ul>

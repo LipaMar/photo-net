@@ -25,6 +25,7 @@ export const endpoints = {
   schedule: `${environment.apiUrl}/schedule`,
   meeting: `${environment.apiUrl}/schedule/meeting`,
   meetingByHour: `${environment.apiUrl}/schedule/meetingByHour`,
-  book: `${environment.apiUrl}/schedule/book`
+  book: `${environment.apiUrl}/schedule/book`,
+  myMeetings: `${environment.apiUrl}/schedule/myMeetings`
 
 };

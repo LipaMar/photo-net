@@ -8,8 +8,8 @@ import photonet.server.webui.dto.BookMeetingDto;
 import photonet.server.webui.dto.MeetingDto;
 import photonet.server.webui.dto.ScheduleDto;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @RestController
 @RequestMapping(Endpoints.SCHEDULE)
@@ -31,6 +31,11 @@ public class ScheduleController {
     @GetMapping(Endpoints.MEETING_BY_HOUR)
     public MeetingDto getUserMeetingByHour(@RequestParam String owner, @RequestParam String date, @RequestParam LocalTime hour) {
         return scheduleService.getMeetingByDateAndHour(owner, date, hour);
+    }
+
+    @GetMapping(Endpoints.MY_MEETINGS)
+    public List<MeetingDto> getLoggedUSerMeetings() {
+        return scheduleService.getLoggedUSerMeetings();
     }
 
     @PostMapping
