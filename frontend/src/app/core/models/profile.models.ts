@@ -43,6 +43,7 @@ export interface MeetingDto {
   timeStart: string,
   status: MeetingStatus,
   userBooked?: string,
+  price?: number;
 }
 
 export interface ScheduleDto {

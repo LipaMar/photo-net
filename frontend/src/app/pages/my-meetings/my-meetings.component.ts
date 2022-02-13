@@ -4,6 +4,7 @@ import {LoginService} from "../../login/login.service";
 import {SubscriptionContainer} from "../../core/utils/subscription-container";
 import {MeetingDto, ScheduleDto} from "../../core/models/profile.models";
 import {forkJoin} from "rxjs";
+import {SortOption} from "../../core/models/discover.models";
 
 @Component({
   selector: 'app-my-meetings',
@@ -18,6 +19,10 @@ export class MyMeetingsComponent implements OnInit, OnDestroy {
   myMeetings: MeetingDto[];
   allMeetings: MeetingDto[] = [];
   meetingsToDisplay: MeetingDto[] = [];
+  fields: SortOption[] = [
+    {display: "dacie", value: "date", comparator: (a, b) => new Date(a.date) >= new Date(b.date) ? 1 : -1},
+    {display: "cenie", value: "price", comparator: (a, b) => a.price > b.price? 1 : -1}
+  ];
 
   constructor(private scheduleService: ScheduleService,
               private loginService: LoginService) {
@@ -40,10 +45,5 @@ export class MyMeetingsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.dispose();
-  }
-
-  print(event: MeetingDto[]) {
-    console.log(this.meetingsToDisplay);
-    console.log(event);
   }
 }

@@ -24,4 +24,5 @@ export class DiscoverFilters {
 export interface SortOption {
   value: any;
   display: string;
+  comparator?: (a: any, b: any) => number;
 }
