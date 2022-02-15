@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {endpoints} from "../core/const/consts";
-import {MeetingDto, ScheduleDto} from "../core/models/profile.models";
+import {MeetingDto, MeetingStatus, ScheduleDto} from "../core/models/profile.models";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -13,7 +13,11 @@ export class ScheduleService {
   }
 
   getMeetingInfo(id: number): Observable<MeetingDto> {
-    return this.http.get<MeetingDto>(endpoints.meeting, {params: new HttpParams().append("id", id)});
+    return this.http.get<MeetingDto>(`${endpoints.meeting}/${id}`);
+  }
+
+  updateMeetingStatus(id: number, status: MeetingStatus): Observable<MeetingDto> {
+    return this.http.put<MeetingDto>(`${endpoints.meeting}/${id}`, null,{params: new HttpParams().append("status", status)});
   }
 
   findMeetingByHour(owner: string, date: string, hour: string) {
@@ -25,14 +29,14 @@ export class ScheduleService {
   }
 
   getSchedule(userName: string): Observable<ScheduleDto> {
-    return this.http.get<ScheduleDto>(endpoints.schedule, {params:{userName: userName}});
+    return this.http.get<ScheduleDto>(endpoints.schedule, {params: {userName: userName}});
   }
 
   updateSchedule(schedule: ScheduleDto): Observable<ScheduleDto> {
     return this.http.post<ScheduleDto>(endpoints.schedule, schedule);
   }
 
-  getMyMeetings():Observable<MeetingDto[]> {
+  getMyMeetings(): Observable<MeetingDto[]> {
     return this.http.get<MeetingDto[]>(endpoints.myMeetings);
   }
 }

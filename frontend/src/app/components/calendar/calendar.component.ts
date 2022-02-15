@@ -156,7 +156,8 @@ export class CalendarComponent implements OnInit, OnChanges {
         result.push({
           date: date,
           status: MeetingStatus.FREE,
-          timeStart: hour
+          timeStart: hour,
+          owner: this.schedule.owner
         })
       })
     }

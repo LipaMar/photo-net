@@ -118,4 +118,8 @@ public class ScheduleService {
                                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public void updateMeetingStatus(Long meetingId, MeetingStatus status) {
+        meetingRepository.updateMeetingStatus(meetingId, status);
+    }
 }

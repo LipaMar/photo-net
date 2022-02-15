@@ -41,9 +41,10 @@ export interface MeetingDto {
   id?: number,
   date: string,
   timeStart: string,
-  status: MeetingStatus,
+  status: MeetingStatus | string,
   userBooked?: string,
-  price?: number;
+  owner: string;
+  price?: number | string;
 }
 
 export interface ScheduleDto {

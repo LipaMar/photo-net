@@ -3,11 +3,13 @@ package photonet.server.webui.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import photonet.server.config.Endpoints;
+import photonet.server.core.enums.MeetingStatus;
 import photonet.server.domain.meetings.service.ScheduleService;
 import photonet.server.webui.dto.BookMeetingDto;
 import photonet.server.webui.dto.MeetingDto;
 import photonet.server.webui.dto.ScheduleDto;
 
+import javax.websocket.server.PathParam;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -23,9 +25,14 @@ public class ScheduleController {
         return scheduleService.getScheduleForUser(userName);
     }
 
-    @GetMapping(Endpoints.MEETING)
-    public MeetingDto getUserMeeting(@RequestParam Long id) {
-        return scheduleService.getMeetingById(id);
+    @GetMapping(Endpoints.MEETING+"/{meetingId}")
+    public MeetingDto getUserMeeting(@PathVariable Long meetingId) {
+        return scheduleService.getMeetingById(meetingId);
+    }
+
+    @PutMapping(Endpoints.MEETING+"/{meetingId}")
+    public void getUserMeeting(@PathVariable Long meetingId, @RequestParam MeetingStatus status) {
+        scheduleService.updateMeetingStatus(meetingId, status);
     }
 
     @GetMapping(Endpoints.MEETING_BY_HOUR)

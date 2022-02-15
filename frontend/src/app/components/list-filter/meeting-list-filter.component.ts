@@ -2,8 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MeetingDto, MeetingStatus} from "../../core/models/profile.models";
 import {MatSelectChange} from "@angular/material/select";
 
-const {ARCHIVAL, ACCEPTED, NEW, CANCELED} = MeetingStatus;
-
 enum MeetingTypes {
   ALL,
   PHOTOGRAPHER,
@@ -25,10 +23,10 @@ export class MeetingListFilterComponent implements OnInit {
 
   meetingTypes = new Map([["-", ALL], ["Fotograf", PHOTOGRAPHER], ["Klient", CLIENT]]);
   statuses = new Map([
-    ["Do akceptacji", {type: NEW, selected: false}],
-    ["Zaakceptowane", {type: ACCEPTED, selected: false}],
-    ["Odwołane", {type: CANCELED, selected: false}],
-    ["Archiwalne", {type: ARCHIVAL, selected: false}]
+    ["Do akceptacji", {type: "Do akceptacji", selected: false}],
+    ["Zaakceptowane", {type: "Zaakceptowane", selected: false}],
+    ["Odwołane", {type: "Odwołane", selected: false}],
+    ["Archiwalne", {type: "Archiwalne", selected: false}]
   ]);
 
   selectedType: MeetingTypes = ALL;
@@ -51,7 +49,7 @@ export class MeetingListFilterComponent implements OnInit {
   }
 
   private getSelectedStatuses(): MeetingStatus[] {
-    const result: MeetingStatus[] = [];
+    const result: any[] = [];
     this.statuses.forEach(value => {
       if (value.selected) {
         result.push(value.type);

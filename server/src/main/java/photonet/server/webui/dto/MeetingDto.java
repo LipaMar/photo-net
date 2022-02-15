@@ -16,5 +16,6 @@ public class MeetingDto {
     private BigDecimal price;
     private MeetingStatus status;
     private String userBooked;
+    private String owner;
 
 }
