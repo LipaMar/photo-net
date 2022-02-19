@@ -38,7 +38,8 @@
       <i class="fas fa-bars"></i>
     </button>
   </div>
-  <div class="me-3 d-xl-flex d-none text-nowrap" *ngIf="isLogged">
-    <a href="{{profileRef}}">{{userName}} <i class="fas fa-user"></i></a>
+  <div class="me-3 text-nowrap" *ngIf="isLogged">
+    <a class="pe-2" href="{{profileRef}}">{{userName}} <i class="fas fa-user"></i></a>
+    <a class="logout" href="{{homeRef}}" (click)="logout()">{{ 'nav.logout' | translate}}</a>
   </div>
 </nav>
