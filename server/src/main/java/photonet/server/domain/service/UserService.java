@@ -21,9 +21,9 @@ import photonet.server.domain.repository.PhotoRepository;
 import photonet.server.domain.repository.UserRepository;
 import photonet.server.domain.service.upload.FileService;
 import photonet.server.webui.dto.LoginDto;
+import photonet.server.webui.dto.UserDto;
 import photonet.server.webui.profile.dto.ProfileBasicDto;
 import photonet.server.webui.profile.dto.ProfileDto;
-import photonet.server.webui.dto.UserDto;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +32,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final PhotoRepository photoRepository;
     private final UserMapper userMapper;
-    @Qualifier("CloudService") private final FileService fileService;
+    @Qualifier("CloudService")
+    private final FileService fileService;
 
     public Page<ProfileBasicDto> getBasicProfileList(Pageable pageable) {
         var users = userRepository.findAll(pageable);
@@ -42,7 +43,7 @@ public class UserService {
     @Transactional
     public void register(UserDto user) {
         if (userRepository.existsByUserNameOrEmail(user.getUserName(), user.getEmail())) {
-            throw new AlreadyExistRestException("Użytkownik o podanym loginie już istnieje",HttpStatus.CONFLICT);
+            throw new AlreadyExistRestException("Użytkownik o podanym loginie już istnieje", HttpStatus.CONFLICT);
         }
         User toSave = userMapper.mapUserDtoToUser(user);
         toSave.setRole(Roles.USER);
@@ -51,26 +52,26 @@ public class UserService {
 
     public ProfileDto getProfile(String userName) {
         return userRepository.findByUserName(userName)
-                .map(userMapper::mapUserToProfileDto)
-                .orElseThrow(NotFoundRestException::new);
+                             .map(userMapper::mapUserToProfileDto)
+                             .orElseThrow(NotFoundRestException::new);
     }
 
     public ProfileDto getLoggedUserProfile() {
         return userRepository.findByUserName(SecurityUtils.loggedUserName())
-                .map(userMapper::mapUserToProfileDto)
-                .orElseThrow(NotFoundRestException::new);
+                             .map(userMapper::mapUserToProfileDto)
+                             .orElseThrow(NotFoundRestException::new);
     }
 
     public UserDetails getSecurityDetails(String username) {
         return userRepository.findByUserName(username)
-                .map(userMapper::mapUserToUserDetails)
-                .orElseThrow(NotFoundRestException::new);
+                             .map(userMapper::mapUserToUserDetails)
+                             .orElseThrow(NotFoundRestException::new);
     }
 
     @Transactional
     public void uploadPicture(MultipartFile file) {
         var user = userRepository.findByUserName(SecurityUtils.loggedUserName())
-                .orElseThrow(NotFoundRestException::new);
+                                 .orElseThrow(NotFoundRestException::new);
         var filePath = fileService.saveFile(file);
         var photo = photoRepository.save(buildPhoto(filePath));
         user.setProfilePicture(photo);
@@ -80,16 +81,20 @@ public class UserService {
     public LoginDto isLogged() {
         var auth = SecurityUtils.getAuthentication();
         return userRepository.findByUserName(SecurityUtils.loggedUserName())
-                .filter((x)->auth.isAuthenticated())
-                .filter((x)->!(auth instanceof AnonymousAuthenticationToken))
-                .map(userMapper::mapToLoginDto)
-                .orElse(null);
+                             .filter((x) -> auth.isAuthenticated())
+                             .filter((x) -> !(auth instanceof AnonymousAuthenticationToken))
+                             .map(userMapper::mapToLoginDto)
+                             .orElse(null);
     }
 
     private Photo buildPhoto(String filePath) {
         var photo = new Photo();
         photo.setPath(filePath);
         return photo;
+    }
+
+    public User findByUserName(String userName) {
+        return userRepository.findByUserName(userName).orElseThrow(NotFoundRestException::new);
     }
 
 }

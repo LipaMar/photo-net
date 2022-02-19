@@ -17,4 +17,5 @@ public class Endpoints {
     public static final String MEETING_BY_HOUR = "/meetingByHour";
     public static final String BOOK = "/book";
     public static final String MY_MEETINGS = "/myMeetings";
+    public static final String CHAT = "/chat";
 }
