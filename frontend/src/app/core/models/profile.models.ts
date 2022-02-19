@@ -47,6 +47,27 @@ export interface MeetingDto {
   price?: number | string;
 }
 
+export class MeetingDisplay implements MeetingDto {
+  id?: number | undefined;
+  date: string;
+  timeStart: string;
+  status: string;
+  userBooked?: string | undefined;
+  owner: string;
+  price?: string | number | undefined;
+
+  constructor(meetingDto: MeetingDto, public statusDisplay: string) {
+    this.id = meetingDto.id;
+    this.date = meetingDto.date;
+    this.timeStart = meetingDto.timeStart;
+    this.status = meetingDto.status;
+    this.userBooked = meetingDto.userBooked;
+    this.owner = meetingDto.owner;
+    this.price = meetingDto.price;
+  }
+
+}
+
 export interface ScheduleDto {
   owner: string,
   disabled: boolean,

@@ -1,3 +1,5 @@
+@import "src/styles";
+
 table {
   width: 100%;
 }
@@ -6,8 +8,16 @@ tr.detail-row {
   height: 0;
 }
 
-tr.element-row:not(.example-expanded-row):hover {
-  background: whitesmoke;
+tr.element-row:not(.expanded-row):not(.bg-darken){
+  &:hover {
+    filter: brightness(95%);
+  }
+}
+.bg-brown{
+  background: $light-red;
+}
+.bg-darken{
+  filter: brightness(85%);
 }
 
 .element-row td {
@@ -19,6 +29,6 @@ tr.element-row:not(.example-expanded-row):hover {
   display: flex;
 }
 
-.element-description-attribution {
-  opacity: 0.5;
-}
+  .element-description-attribution {
+      opacity: 0.5;
+    }
