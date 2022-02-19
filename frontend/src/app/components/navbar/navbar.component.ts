@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   followedRef = routes.followed;
   discoverRef = routes.discover;
   profileRef = routes.myProfile;
+  messagesRef = routes.messages;
   registerRef = routes.register;
   myMeetingsRef = routes.myMeetings;
   homeRef = routes.home;

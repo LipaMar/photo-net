@@ -35,6 +35,7 @@ import {OrderComponent} from './pages/order/order.component';
 import {DatePipe} from "@angular/common";
 import {MyMeetingsComponent} from './pages/my-meetings/my-meetings.component';
 import { MeetingListFilterComponent } from './components/list-filter/meeting-list-filter.component';
+import { MessagesComponent } from './pages/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { MeetingListFilterComponent } from './components/list-filter/meeting-lis
     OrderComponent,
     MyMeetingsComponent,
     MeetingListFilterComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,
