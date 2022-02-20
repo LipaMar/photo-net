@@ -1,9 +1,6 @@
 package photonet.server.webui.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import photonet.server.config.Endpoints;
 import photonet.server.domain.meetings.dto.ChatRoomDto;
@@ -24,12 +21,12 @@ public class MessageController {
     }
 
     @PostMapping
-    public void startNeConversation(@RequestBody String userName){
+    public void startNeConversation(@RequestBody String userName) {
         messageService.startNewChat(userName);
 
     }
 
-    @PostMapping("/message")
+    @PostMapping(Endpoints.MESSAGE)
     public void newMessage(@RequestBody MessageDto message) {
         messageService.processMessage(message);
     }

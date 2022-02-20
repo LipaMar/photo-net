@@ -1,7 +1,6 @@
 package photonet.server.domain.messages.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import photonet.server.core.exception.ForbiddenRestException;
@@ -28,7 +27,6 @@ public class MessageService {
     private final MessageRepository messageRepository;
     private final UserService userService;
     private final ChatMapper chatMapper;
-    private final SimpMessagingTemplate messagingTemplate;
 
 
     public List<ChatRoomDto> getChatRooms(String userName) {
