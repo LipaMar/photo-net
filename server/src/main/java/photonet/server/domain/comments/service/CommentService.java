@@ -1,11 +1,11 @@
-package photonet.server.domain.profile.service;
+package photonet.server.domain.comments.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import photonet.server.core.exception.NotFoundRestException;
 import photonet.server.core.utils.SecurityUtils;
 import photonet.server.domain.mapper.CommentMapper;
-import photonet.server.domain.profile.repository.CommentRepository;
+import photonet.server.domain.comments.repository.CommentRepository;
 import photonet.server.domain.repository.UserRepository;
 import photonet.server.webui.dto.CommentDto;
 

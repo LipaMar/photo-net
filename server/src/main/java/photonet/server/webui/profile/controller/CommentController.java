@@ -3,7 +3,7 @@ package photonet.server.webui.profile.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import photonet.server.config.Endpoints;
-import photonet.server.domain.profile.service.CommentService;
+import photonet.server.domain.comments.service.CommentService;
 import photonet.server.webui.dto.CommentDto;
 
 @RequiredArgsConstructor

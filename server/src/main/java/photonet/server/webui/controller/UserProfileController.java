@@ -26,9 +26,9 @@ public class UserProfileController {
     public void uploadProfilePic(MultipartFile file){
         userService.uploadPicture(file);
     }
+
     @PutMapping
     public ProfileDto editProfile(@RequestBody ProfileUpdateDto dto){
         return profileService.editProfile(dto);
     }
-
 }
