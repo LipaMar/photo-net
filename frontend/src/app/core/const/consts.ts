@@ -30,4 +30,6 @@ export const endpoints = {
   myMeetings: `${environment.apiUrl}/schedule/myMeetings`,
   chat: `${environment.apiUrl}/chat`,
   message: `${environment.apiUrl}/chat/message`,
+  post: `${environment.apiUrl}/post`,
+
 };

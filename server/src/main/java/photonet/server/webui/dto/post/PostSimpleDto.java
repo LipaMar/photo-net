@@ -1,14 +1,16 @@
-package photonet.server.webui.dto;
+package photonet.server.webui.dto.post;
 
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 public class PostSimpleDto {
 
     private Long id;
     private String photo;
-    private Long comments;
     private Long likes;
     private String author;
+    private LocalDateTime timestamp;
 
 }

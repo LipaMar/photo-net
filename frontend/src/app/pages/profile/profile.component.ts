@@ -1,7 +1,14 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProfileService} from "./profile.service";
-import {CommentDto, MeetingDto, ProfileDto, ProfileUpdateDto, ScheduleDto} from "../../core/models/profile.models";
+import {
+  CommentDto,
+  MeetingDto,
+  PostDto,
+  ProfileDto,
+  ProfileUpdateDto,
+  ScheduleDto
+} from "../../core/models/profile.models";
 import {DatePipe} from "@angular/common";
 import {AppToastrService} from "../../core/toastr.service";
 import {SubscriptionContainer} from "../../core/utils/subscription-container";
@@ -10,7 +17,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {CategoryService} from "../../dictionaries/category.service";
 import {ChipsSelectComponent} from "../../components/chips-select/chips-select.component";
 import {OrderService} from "../order/order.service";
-import {ScheduleService} from "../../additional_services/schedule.service";
+import {ScheduleService} from "../../services/schedule.service";
+import {PostService} from "../../services/post.service";
 
 @Component({
   selector: 'app-profile',
@@ -33,11 +41,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     city: new FormControl({disabled: true}),
     price: new FormControl({disabled: true})
   });
-
   isFollowing: boolean = false;
+
   isMyProfile: boolean = false;
   inEditMode: boolean = false;
   schedule: ScheduleDto;
+
+  @ViewChild('modal') modal: ElementRef;
+  modalPhoto: string;
 
   constructor(private route: ActivatedRoute,
               private profileService: ProfileService,
@@ -45,6 +56,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
               private orderService: OrderService,
               private scheduleService: ScheduleService,
               private loginService: LoginService,
+              private postService: PostService,
               private categoryService: CategoryService,
               private toastr: AppToastrService) {
   }
@@ -52,19 +64,26 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.add = this.loginService.doGetIsLogged().subscribe(data => {
       this.loggedUserName = data.userName;
-      if (this.pathUserName && this.pathUserName !== this.loggedUserName) {
-        this.getProfileDetails();
-      } else {
-        this.getMyProfileDetails();
-      }
+      this.getUserDetails();
     });
     this.subscriptions.add = this.categoryService.getCategories().subscribe(categories => {
       this.allCategories = categories;
     });
   }
 
+  private getUserDetails() {
+    if (!(this.pathUserName && this.pathUserName !== this.loggedUserName)) {
+      this.getMyProfileDetails();
+    } else {
+      this.getProfileDetails();
+    }
+  }
+
   private getProfileDetails() {
-    this.subscriptions.add = this.profileService.getProfileDetails(this.pathUserName).subscribe(data => this.profile = data);
+    this.subscriptions.add = this.profileService.getProfileDetails(this.pathUserName).subscribe(data => {
+      this.profile = data;
+      this.sortPosts();
+    });
     this.subscriptions.add = this.profileService.isFollowed(this.pathUserName).subscribe(bool => this.doIsFollowing(bool));
     this.getSchedule(this.pathUserName);
   }
@@ -78,10 +97,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.profile = data;
           this.setFormFieldsFromProfile();
           this.profileUpdateForm.disable();
+          this.sortPosts();
         });
         this.getSchedule(this.pathUserName);
       }
     })
+  }
+
+  private sortPosts() {
+    if (this.profile && this.profile.posts) {
+      this.profile.posts = this.profile.posts.sort((a, b) => new Date(a.timestamp) < new Date(b.timestamp) ? 1 : -1);
+    }
   }
 
   private getSchedule(userName: string | any) {
@@ -211,5 +237,29 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+  onPostFileSelected(input: any) {
+    if (input.target.files && input.target.files[0]) {
+      let reader = new FileReader();
+
+      reader.readAsDataURL(input.target.files[0]);
+
+      this.subscriptions.add = this.postService.createNewPost(input.target.files[0]).subscribe(()=>this.getUserDetails());
+    }
+  }
+
+  onPicClicked(photo: any) {
+    this.modal.nativeElement.style.display = 'block';
+    this.modalPhoto = photo;
+  }
+
+  closeModal() {
+    this.modal.nativeElement.style.display = 'none';
+
+  }
+
+  deletePost(post: PostDto) {
+    this.subscriptions.add = this.postService.deletePost(post.id).subscribe(()=>this.getUserDetails());
   }
 }

@@ -3,7 +3,7 @@ package photonet.server.webui.profile.dto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import photonet.server.webui.dto.CommentDto;
-import photonet.server.webui.dto.PostSimpleDto;
+import photonet.server.webui.dto.post.PostSimpleDto;
 import photonet.server.webui.dto.discover.PhotographerBasicDto;
 
 import java.util.List;

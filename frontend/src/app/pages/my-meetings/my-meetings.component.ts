@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ScheduleService} from "../../additional_services/schedule.service";
+import {ScheduleService} from "../../services/schedule.service";
 import {LoginService} from "../../login/login.service";
 import {SubscriptionContainer} from "../../core/utils/subscription-container";
 import {MeetingDisplay, MeetingDto, MeetingStatus, ScheduleDto} from "../../core/models/profile.models";

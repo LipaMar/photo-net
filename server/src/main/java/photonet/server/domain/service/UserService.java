@@ -73,7 +73,7 @@ public class UserService {
         var user = userRepository.findByUserName(SecurityUtils.loggedUserName())
                                  .orElseThrow(NotFoundRestException::new);
         var filePath = fileService.saveFile(file);
-        var photo = photoRepository.save(buildPhoto(filePath));
+        var photo = savePhoto(filePath);
         user.setProfilePicture(photo);
         userRepository.save(user);
     }
@@ -87,10 +87,11 @@ public class UserService {
                              .orElse(null);
     }
 
-    private Photo buildPhoto(String filePath) {
+    @Transactional
+    public Photo savePhoto(String filePath) {
         var photo = new Photo();
         photo.setPath(filePath);
-        return photo;
+        return photoRepository.save(photo);
     }
 
     public User findByUserName(String userName) {

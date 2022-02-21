@@ -6,7 +6,7 @@ import {DatePipe} from "@angular/common";
 import {ProfileService} from "../profile/profile.service";
 import {SubscriptionContainer} from "../../core/utils/subscription-container";
 import {BookMeetingDto} from "../../core/models/profile.models";
-import {ScheduleService} from "../../additional_services/schedule.service";
+import {ScheduleService} from "../../services/schedule.service";
 
 @Component({
   selector: 'app-order',

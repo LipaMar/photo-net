@@ -2,12 +2,9 @@ package photonet.server.domain.entity;
 
 import lombok.*;
 import org.hibernate.annotations.Formula;
-import photonet.server.config.Roles;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

@@ -10,6 +10,8 @@ import photonet.server.domain.entity.Post;
 import photonet.server.domain.repository.OpinionRepository;
 import photonet.server.domain.repository.UserRepository;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class FollowService {
@@ -61,5 +63,9 @@ public class FollowService {
             var follow = followRepository.findByAuthorUserNameAndTargetUserName(SecurityUtils.loggedUserName(), followedUser);
             followRepository.delete(follow);
         }
+    }
+
+    public List<Follow> getAllFollowed(String userName){
+        return followRepository.findAllFollowingByUserName(userName);
     }
 }

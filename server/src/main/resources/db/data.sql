@@ -116,6 +116,7 @@ insert into meeting (date, status, time_start, schedule_id, user_booked_id, pric
 insert into chat_room (id, recipient_id, sender_id) values (1, 1, 2 );
 insert into chat_room (id, recipient_id, sender_id) values (2, 1, 3 );
 insert into chat_room (id, recipient_id, sender_id) values (3, 3, 2 );
+
 insert into message (id, content, timestamp, author_id, chat_room_id) values (1, 'test', '2022-01-01 11:11:12', 1, 1);
 insert into message (id, content, timestamp, author_id, chat_room_id) values (2, 'test', '2022-01-01 11:11:13', 1, 2);
 insert into message (id, content, timestamp, author_id, chat_room_id) values (3, 'test', '2022-01-01 11:11:14', 2, 3);

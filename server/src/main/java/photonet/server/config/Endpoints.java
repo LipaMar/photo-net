@@ -19,4 +19,5 @@ public class Endpoints {
     public static final String MY_MEETINGS = "/myMeetings";
     public static final String CHAT = "/chat";
     public static final String MESSAGE = "/message";
+    public static final String POST = "/post";
 }

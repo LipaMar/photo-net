@@ -1,15 +1,18 @@
 import {DiscoverDto} from "./discover.models";
 
 
+export interface PostDto {
+  id: number,
+  photo: any,
+  comments: number,
+  likes: number,
+  author: string
+  timestamp: string
+}
+
 export interface ProfileDto extends DiscoverDto {
   bio: string,
-  posts: {
-    id: number,
-    photo: any,
-    comments: number,
-    likes: number,
-    author: string
-  }[],
+  posts: PostDto[],
   comments: CommentDto[] | any
 }
 
