@@ -7,6 +7,7 @@ import {ProfileService} from "../profile/profile.service";
 import {SubscriptionContainer} from "../../core/utils/subscription-container";
 import {BookMeetingDto} from "../../core/models/profile.models";
 import {ScheduleService} from "../../services/schedule.service";
+import {DatePattern} from "../../core/enums/datePattern";
 
 @Component({
   selector: 'app-order',
@@ -52,7 +53,7 @@ export class OrderComponent implements OnInit {
   }
 
   onClickAccept(){
-    const date = this.datePipe.transform(this.date, 'yyyy-MM-dd');
+    const date = this.datePipe.transform(this.date, DatePattern.DATE_WITH_DASH);
     if(date){
       const meeting: BookMeetingDto = {id: this.meetingId,
         date: date,

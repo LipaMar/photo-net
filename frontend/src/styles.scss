@@ -28,7 +28,7 @@ html {
   font-size: 16px;
 }
 
-.btn {
+.btn:not(.btn-outline-dark-brown){
   box-shadow: none !important;
   border: none !important;
 }
@@ -46,6 +46,12 @@ html {
 .btn-dark-brown {
   background-color: $deep-taupe !important;
   color: $white !important;
+}
+.btn-outline-dark-brown {
+  box-shadow: none !important;
+  padding: 5px 11px;
+  color: $deep-taupe !important;
+  border-color: $deep-taupe;
 }
 
 .toastr-position {

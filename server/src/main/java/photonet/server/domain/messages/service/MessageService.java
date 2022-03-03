@@ -57,7 +57,7 @@ public class MessageService {
 
     @Transactional
     public void startNewChat(String userName) {
-        final var loggedUser = userService.findByUserName(SecurityUtils.loggedUserName());
+        final var loggedUser = userService.getLoggedUser();
         final var recipient = userService.findByUserName(userName);
         final var chatRoom = chatRoomRepository.findBySenderAndRecipient(loggedUser, recipient)
                                                .orElse(buildChatRoom(loggedUser, recipient));

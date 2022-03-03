@@ -31,5 +31,6 @@ export const endpoints = {
   chat: `${environment.apiUrl}/chat`,
   message: `${environment.apiUrl}/chat/message`,
   post: `${environment.apiUrl}/post`,
+  like: `${environment.apiUrl}/post/like`,
 
 };

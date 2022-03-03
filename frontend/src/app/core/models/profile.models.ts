@@ -1,4 +1,5 @@
 import {DiscoverDto} from "./discover.models";
+import {IMasonryGalleryImage} from "ngx-masonry-gallery";
 
 
 export interface PostDto {
@@ -8,6 +9,10 @@ export interface PostDto {
   likes: number,
   author: string
   timestamp: string
+}
+
+export interface PostDisplay extends PostDto{
+  liked?: boolean;
 }
 
 export interface ProfileDto extends DiscoverDto {
@@ -85,5 +90,11 @@ export interface BookMeetingDto {
   price: number;
   photographer: string;
 }
+export class PostImage extends IMasonryGalleryImage{
 
+  constructor(imageUrl:string, public postId?: number ){
+    super();
+    this.imageUrl = imageUrl;
+  }
+}
 

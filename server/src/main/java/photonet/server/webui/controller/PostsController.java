@@ -32,4 +32,16 @@ public class PostsController {
         return postService.getPostsOfFollowedUsers();
     }
 
+    @PostMapping(Endpoints.LIKE)
+    public void like(@RequestParam Long id) {
+        postService.likePost(id);
+    }
+
+    @GetMapping(Endpoints.LIKE)
+    public List<Long> getLiked() {
+        return postService.getLikedPosts();
+    }
+
+
+
 }

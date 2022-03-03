@@ -77,11 +77,11 @@ insert into user_categories (user_id, categories_id) values (19, 7);
 insert into user_categories (user_id, categories_id) values (20, 7);
 
 
-insert into post (author_id, photo_id) values (1, 1);
-insert into post (author_id, photo_id) values (2, 2);
-insert into post (author_id, photo_id) values (3, 3);
-insert into post (author_id, photo_id) values (3, 1);
-insert into post (author_id, photo_id) values (1, 2);
+insert into post (author_id, photo_id, timestamp) values (1, 1, '2022-01-01 11:11:12');
+insert into post (author_id, photo_id, timestamp) values (2, 2, '2022-01-01 11:11:13');
+insert into post (author_id, photo_id, timestamp) values (3, 3, '2022-01-01 11:11:14');
+insert into post (author_id, photo_id, timestamp) values (3, 1, '2022-01-01 11:11:15');
+insert into post (author_id, photo_id, timestamp) values (1, 2, '2022-01-01 11:11:16');
 
 insert into comment (author_id, target_id, content, added, anonymous) values (1, 3, 'testowy komentarz', CURRENT_DATE, false);
 insert into comment (author_id, target_id, content, added, anonymous) values (2, 1, 'testowy komentarz', CURRENT_DATE, false);

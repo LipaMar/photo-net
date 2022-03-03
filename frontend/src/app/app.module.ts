@@ -36,6 +36,10 @@ import {DatePipe} from "@angular/common";
 import {MyMeetingsComponent} from './pages/my-meetings/my-meetings.component';
 import { MeetingListFilterComponent } from './components/list-filter/meeting-list-filter.component';
 import { MessagesComponent } from './pages/messages/messages.component';
+import { FollowedComponent } from './pages/followed/followed.component';
+import {NgxMasonryModule} from "ngx-masonry";
+import {MasonryGalleryModule} from "ngx-masonry-gallery";
+import { FullScreenModalComponent } from './components/full-screen-modal/full-screen-modal.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +64,8 @@ import { MessagesComponent } from './pages/messages/messages.component';
     MyMeetingsComponent,
     MeetingListFilterComponent,
     MessagesComponent,
+    FollowedComponent,
+    FullScreenModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +84,9 @@ import { MessagesComponent } from './pages/messages/messages.component';
     ToastrModule.forRoot(),
     NgbCollapseModule,
     MaterialModule,
-    NgbModule
+    NgbModule,
+    NgxMasonryModule,
+    MasonryGalleryModule
   ],
   providers: [
     {

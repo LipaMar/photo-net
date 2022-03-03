@@ -1,6 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {CommentDto} from "../../core/models/profile.models";
+import {DatePattern} from "../../core/enums/datePattern";
 
 @Component({
   selector: 'comment-section',
@@ -23,7 +24,7 @@ export class CommentSectionComponent implements OnInit {
   }
 
   formatDate(date: Date) {
-    return this.datePipe.transform(date, 'dd.MM.yyyy HH:mm');
+    return this.datePipe.transform(date, DatePattern.DATE_HOUR_MIN);
   }
 
   sendComment() {

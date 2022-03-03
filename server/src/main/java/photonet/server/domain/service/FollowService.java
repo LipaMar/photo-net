@@ -7,7 +7,7 @@ import photonet.server.core.exception.NotFoundRestException;
 import photonet.server.core.utils.SecurityUtils;
 import photonet.server.domain.entity.Follow;
 import photonet.server.domain.entity.Post;
-import photonet.server.domain.repository.OpinionRepository;
+import photonet.server.domain.repository.FollowRepository;
 import photonet.server.domain.repository.UserRepository;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class FollowService {
 
-    private final OpinionRepository<Follow> followRepository;
+    private final FollowRepository followRepository;
     private final UserRepository userRepository;
 
     public boolean isFollowedByLoggedUser(String userName) {
@@ -25,7 +25,7 @@ public class FollowService {
 
     @Transactional
     public void notifyAllObservers(Post post) {
-        followRepository.findAllFollowersByUserName(SecurityUtils.loggedUserName())
+        followRepository.findAllByTargetUserName(SecurityUtils.loggedUserName())
                 .forEach(follower -> {
                     follower.getNewPosts().add(post);
                     followRepository.save(follower);
@@ -34,7 +34,7 @@ public class FollowService {
 
     @Transactional
     public void markAsSeen(Post post) {
-        followRepository.findAllFollowingByUserName(SecurityUtils.loggedUserName())
+        followRepository.findAllByAuthorUserName(SecurityUtils.loggedUserName())
                 .forEach(followed -> {
                     followed.getNewPosts().remove(post);
                     followRepository.save(followed);
@@ -66,6 +66,6 @@ public class FollowService {
     }
 
     public List<Follow> getAllFollowed(String userName){
-        return followRepository.findAllFollowingByUserName(userName);
+        return followRepository.findAllByAuthorUserName(userName);
     }
 }

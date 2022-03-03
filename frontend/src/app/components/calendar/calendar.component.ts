@@ -17,6 +17,7 @@ import {CalendarModalConfig} from "./CalendarModalConfig";
 import {DatePipe} from "@angular/common";
 import {MatCalendar} from "@angular/material/datepicker";
 import {TimePickerComponent} from "../time-picker/time-picker.component";
+import {DatePattern} from "../../core/enums/datePattern";
 
 @Component({
   selector: 'calendar',
@@ -125,12 +126,12 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   private getTitle(pickedDate: Date | null) {
-    return this.datePipe.transform(pickedDate, 'EEEE, d MMMM y', undefined, 'pl-PL');
+    return this.datePipe.transform(pickedDate, DatePattern.DAY_OF_WEEK_DATE, undefined, 'pl-PL');
   }
 
   onScheduleHourSave(): boolean {
     let meetings: MeetingDto[] = this.createMeetings();
-    this.savedSchedule.emit({meetings: meetings, saveDate: this.datePipe.transform(this.dateSelected, 'yyyy-MM-dd')});
+    this.savedSchedule.emit({meetings: meetings, saveDate: this.datePipe.transform(this.dateSelected, )});
     return true;
   }
 
@@ -150,7 +151,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   private createMeetings() {
     const result: MeetingDto[] = [];
-    const date = this.datePipe.transform(this.dateSelected, 'yyyy-MM-dd');
+    const date = this.datePipe.transform(this.dateSelected, DatePattern.DATE_WITH_DASH);
     if (date) {
       this.hoursSelected.forEach(hour => {
         result.push({
@@ -183,7 +184,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   onClientSelectedHour(hour: string) {
     this.otherProfileModalComponent.close();
-    const date = this.datePipe.transform(this.dateSelected, 'yyyy-MM-dd');
+    const date = this.datePipe.transform(this.dateSelected, DatePattern.DATE_WITH_DASH);
     if (date) {
       this.clientBooking.emit({date: date, hour: hour});
     }

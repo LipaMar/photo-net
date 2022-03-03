@@ -5,6 +5,7 @@ import {LoginService} from "../../login/login.service";
 import {SubscriptionContainer} from "../../core/utils/subscription-container";
 import {FormControl, FormGroup} from "@angular/forms";
 import {DatePipe} from "@angular/common";
+import {DatePattern} from "../../core/enums/datePattern";
 
 @Component({
   selector: 'messages',
@@ -39,7 +40,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   populateMessages(chat: ChatDto) {
     this.messages = chat.messages;
     this.messages.map(message => {
-      const timestamp = this.datePipe.transform(message.timestamp, "HH:mm yyyy-MM-dd");
+      const timestamp = this.datePipe.transform(message.timestamp, DatePattern.TIME_DATE);
       message.timestamp = timestamp ? timestamp : message.timestamp;
     })
     this.selectedChat = chat;

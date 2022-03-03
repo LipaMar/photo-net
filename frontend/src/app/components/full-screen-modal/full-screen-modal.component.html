@@ -1,0 +1,6 @@
+<div #modal class="modal">
+  <span class="close" (click)="closeModal()">&times;</span>
+  <ng-content></ng-content>
+  <img class="modal-content" [src]="image">
+  <div id="caption"></div>
+</div>

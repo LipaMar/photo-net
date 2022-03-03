@@ -2,8 +2,6 @@ package photonet.server.domain.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +20,6 @@ import photonet.server.domain.repository.UserRepository;
 import photonet.server.domain.service.upload.FileService;
 import photonet.server.webui.dto.LoginDto;
 import photonet.server.webui.dto.UserDto;
-import photonet.server.webui.profile.dto.ProfileBasicDto;
 import photonet.server.webui.profile.dto.ProfileDto;
 
 @Service
@@ -34,11 +31,6 @@ public class UserService {
     private final UserMapper userMapper;
     @Qualifier("CloudService")
     private final FileService fileService;
-
-    public Page<ProfileBasicDto> getBasicProfileList(Pageable pageable) {
-        var users = userRepository.findAll(pageable);
-        return users.map(userMapper::mapUserToBasicProfile);
-    }
 
     @Transactional
     public void register(UserDto user) {
@@ -96,6 +88,10 @@ public class UserService {
 
     public User findByUserName(String userName) {
         return userRepository.findByUserName(userName).orElseThrow(NotFoundRestException::new);
+    }
+
+    public User getLoggedUser() {
+        return userRepository.findByUserName(SecurityUtils.loggedUserName()).orElseThrow(NotFoundRestException::new);
     }
 
 }

@@ -18,6 +18,10 @@ export class ProfileService {
     return this.http.get<ProfileDto>(`${endpoints.profile}/${username}`);
   }
 
+  getProfileSimple(username: any): Observable<ProfileDto> {
+    return this.http.get<ProfileDto>(`${endpoints.profile}/${username}`, {params: new HttpParams().append("simple",true)});
+  }
+
   isFollowed(userName: string | any): Observable<boolean> {
     return this.http.get<boolean>(endpoints.follow, {params: this.buildParams(userName)});
   }

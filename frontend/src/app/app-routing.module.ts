@@ -10,6 +10,7 @@ import {IsLoggedGuard} from "./guards/is-logged.guard";
 import {OrderComponent} from "./pages/order/order.component";
 import {MyMeetingsComponent} from "./pages/my-meetings/my-meetings.component";
 import {MessagesComponent} from "./pages/messages/messages.component";
+import {FollowedComponent} from "./pages/followed/followed.component";
 
 const appRoutes: Routes = [
   {path: "home", component: HomeComponent},
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
   {path: "my-profile", canActivate: [IsLoggedGuard], component: ProfileComponent},
   {path: "confirm-meeting", canActivate: [IsLoggedGuard], component: OrderComponent},
   {path: "messages", canActivate: [IsLoggedGuard], component: MessagesComponent},
+  {path: "followed", canActivate: [IsLoggedGuard], component: FollowedComponent},
   {path: "**", component: NotFoundComponent},
 ];
 

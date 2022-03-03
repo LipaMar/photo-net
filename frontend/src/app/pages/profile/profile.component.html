@@ -4,10 +4,10 @@
       <div class="col-md-4 bg-light">
         <img class="img-fluid rounded-3" width="516px" [src]="showPic(profile?.profilePicture)"
              alt="Zdjęcie profilowe"/>
-        <button *ngIf="isMyProfile" class="my-1 float-end" type="button" mat-raised-button (click)="fileInput.click()">
-          Dodaj zdjęcie
+        <button *ngIf="isMyProfile" class="my-1 float-end" mat-raised-button (click)="fileInput.click()">
+          Ustaw zdjęcie profilowe
+          <input hidden #fileInput (click)="fileInput.value =''" (change)="onFileSelected($event)" type="file">
         </button>
-        <input hidden #fileInput (click)="fileInput.value =''" (change)="onFileSelected($event)" type="file">
         <div class="rate bg-light rounded-end d-inline">
           <span class="align-baseline">Ocena ogólna: </span>
           <span class="align-baseline"><b>{{profile?.rating}}</b></span>
@@ -77,21 +77,17 @@
       <div class="col-md-8 bg-light  p-2">
         <mat-tab-group>
           <mat-tab label="Zdjęcia({{profile?.postsCount}})">
-            <div class="container-fluid p-0 row bg-light">
-              <div class="col-md-4 d-flex justify-content-center" *ngIf="isMyProfile">
-                <button class="plus-button btn btn-blue" *ngIf="isMyProfile" (click)="postFileInput.click()">
-                  <i class="fas fa-plus fa-3x plus-icon"></i>
-                  <input hidden #postFileInput  (click)="postFileInput.value =''" (change)="onPostFileSelected($event)"
-                         type="file">
-                </button>
-              </div>
-              <div class="col-md-4 p-2 position-relative d-flex flex-row-reverse" *ngFor="let post of profile?.posts">
-                <button *ngIf="isMyProfile" class="btn btn-danger delete-button" (click)="deletePost(post)">
-                  <i class="fas fa-trash"></i>
-                </button>
-                <img (click)="onPicClicked(post.photo)" class="img-fluid postImg" [src]="showPic(post.photo)">
-              </div>
+            <div class="add-pic">
+              <button mat-raised-button *ngIf="isMyProfile" (click)="postFileInput.click()">
+                Dodaj zdjęcie
+                <input hidden #postFileInput (click)="postFileInput.value =''" (change)="onPostFileSelected($event)"
+                       type="file">
+              </button>
             </div>
+            <ngx-masonry-gallery [width]='270'
+                                 [images]='images'
+                                 (clickImage)="onPicClicked($event)">
+            </ngx-masonry-gallery>
           </mat-tab>
           <mat-tab label="Komentarze({{profile?.comments?.length}})">
             <comment-section [addCommentsEnabled]="!isMyProfile" [comments]="profile?.comments"
@@ -111,8 +107,10 @@
   </div>
 </div>
 
-<div #modal class="modal">
-  <span class="close" (click)="closeModal()">&times;</span>
-  <img class="modal-content" [src]="modalPhoto">
-  <div id="caption"></div>
-</div>
+<full-screen-modal #modal>
+  <span *ngIf="isMyProfile"
+        class="trash"
+        (click)="deletePost(modalPhoto.postId)">
+    <i class="fas fa-trash"></i>
+  </span>
+</full-screen-modal>

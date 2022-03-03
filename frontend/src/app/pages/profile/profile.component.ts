@@ -1,10 +1,10 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProfileService} from "./profile.service";
 import {
   CommentDto,
   MeetingDto,
-  PostDto,
+  PostImage,
   ProfileDto,
   ProfileUpdateDto,
   ScheduleDto
@@ -19,12 +19,15 @@ import {ChipsSelectComponent} from "../../components/chips-select/chips-select.c
 import {OrderService} from "../order/order.service";
 import {ScheduleService} from "../../services/schedule.service";
 import {PostService} from "../../services/post.service";
+import {ImageUtils} from "../../core/utils/ImageUtils";
+import {FullScreenModalComponent} from "../../components/full-screen-modal/full-screen-modal.component";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  providers: [DatePipe]
+  providers: [DatePipe],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 
@@ -47,8 +50,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   inEditMode: boolean = false;
   schedule: ScheduleDto;
 
-  @ViewChild('modal') modal: ElementRef;
-  modalPhoto: string;
+  @ViewChild('modal') modal: FullScreenModalComponent;
+  modalPhoto: PostImage;
+
+  images: PostImage[];
 
   constructor(private route: ActivatedRoute,
               private profileService: ProfileService,
@@ -82,6 +87,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private getProfileDetails() {
     this.subscriptions.add = this.profileService.getProfileDetails(this.pathUserName).subscribe(data => {
       this.profile = data;
+      this.images = ImageUtils.postsToPostImage(this.profile.posts);
       this.sortPosts();
     });
     this.subscriptions.add = this.profileService.isFollowed(this.pathUserName).subscribe(bool => this.doIsFollowing(bool));
@@ -95,6 +101,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.isMyProfile = true;
         this.subscriptions.add = this.profileService.getProfileDetails(this.pathUserName).subscribe(data => {
           this.profile = data;
+          this.images = ImageUtils.postsToPostImage(this.profile.posts);
           this.setFormFieldsFromProfile();
           this.profileUpdateForm.disable();
           this.sortPosts();
@@ -245,21 +252,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
       reader.readAsDataURL(input.target.files[0]);
 
-      this.subscriptions.add = this.postService.createNewPost(input.target.files[0]).subscribe(()=>this.getUserDetails());
+      this.subscriptions.add = this.postService.createNewPost(input.target.files[0]).subscribe(() => this.getUserDetails());
     }
   }
 
-  onPicClicked(photo: any) {
-    this.modal.nativeElement.style.display = 'block';
+  onPicClicked(photo: PostImage) {
+    this.modal.openModal(photo.imageUrl);
     this.modalPhoto = photo;
   }
 
-  closeModal() {
-    this.modal.nativeElement.style.display = 'none';
-
+  deletePost(postId: any) {
+    this.subscriptions.add = this.postService.deletePost(postId).subscribe(() => this.getUserDetails());
+    this.modal.closeModal();
   }
 
-  deletePost(post: PostDto) {
-    this.subscriptions.add = this.postService.deletePost(post.id).subscribe(()=>this.getUserDetails());
-  }
 }
