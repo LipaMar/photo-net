@@ -10,7 +10,7 @@ export class ImageUtils {
 
   public static postsToPostImage(posts: PostDto[]): PostImage[] {
     return posts.map(post => {
-      return new PostImage(post.photo, post.id);
+      return new PostImage(post.photo, post);
     });
   }
 

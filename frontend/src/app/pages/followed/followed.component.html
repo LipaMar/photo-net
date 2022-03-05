@@ -20,4 +20,10 @@
 
 </div>
 
-<full-screen-modal #modal></full-screen-modal>
+<full-screen-modal #modal>
+  <div class="image-info d-flex flex-column">
+    <span>{{clickedPost?.author}}</span>
+    <span>{{clickedPost?.timestamp}}</span>
+    <span>{{clickedPost?.likes}}</span>
+  </div>
+</full-screen-modal>

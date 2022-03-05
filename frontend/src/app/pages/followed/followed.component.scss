@@ -52,3 +52,9 @@
 ngx-masonry-gallery img {
   cursor: pointer;
 }
+
+.image-info {
+  background-color: whitesmoke;
+  position: absolute;
+  top: calc(50% - 200px);
+}

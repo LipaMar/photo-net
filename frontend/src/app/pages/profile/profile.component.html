@@ -110,7 +110,7 @@
 <full-screen-modal #modal>
   <span *ngIf="isMyProfile"
         class="trash"
-        (click)="deletePost(modalPhoto.postId)">
+        (click)="deletePost(modalPhoto?.post?.id)">
     <i class="fas fa-trash"></i>
   </span>
 </full-screen-modal>

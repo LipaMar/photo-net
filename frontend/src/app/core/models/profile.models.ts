@@ -92,7 +92,7 @@ export interface BookMeetingDto {
 }
 export class PostImage extends IMasonryGalleryImage{
 
-  constructor(imageUrl:string, public postId?: number ){
+  constructor(imageUrl:string, public post?: PostDto ){
     super();
     this.imageUrl = imageUrl;
   }

@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation} from '@angular/core';
 import {routes} from "../../core/const/consts";
-import {PostDisplay, PostImage} from "../../core/models/profile.models";
+import {PostDisplay, PostDto, PostImage} from "../../core/models/profile.models";
 import {PostService} from "../../services/post.service";
 import {SubscriptionContainer} from "../../core/utils/subscription-container";
 import {DatePipe} from "@angular/common";
@@ -17,7 +17,7 @@ import {FullScreenModalComponent} from "../../components/full-screen-modal/full-
   styleUrls: ['./followed.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class FollowedComponent implements OnInit, OnDestroy {
+export class FollowedComponent implements OnInit, OnDestroy, AfterViewInit {
   routeToDiscover = routes.discover;
   routeToProfile = routes.profile + '/';
   posts: PostDisplay[];
@@ -26,16 +26,18 @@ export class FollowedComponent implements OnInit, OnDestroy {
   profilePics = new Map<string, any>();
   galleryOptions: NgxMasonryOptions = {columnWidth: 2};
   @ViewChild("modal") modal: FullScreenModalComponent;
+  clickedPost?: PostDto;
 
   constructor(private postService: PostService,
               private profileService: ProfileService,
+              private renderer: Renderer2,
               private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
     this.subscriptions.add = this.postService.getPostsOfFollowedUsers().subscribe(posts => {
       this.posts = posts;
-      this.images = ImageUtils.urlsToIMasonryGalleryImage(this.posts.map(post=>post.photo));
+      this.images = ImageUtils.postsToPostImage(this.posts);
       this.posts.map(post => post.timestamp = this.transform(post.timestamp));
       this.posts.map(post => post.author).filter((value, index, self) => self.indexOf(value) === index).forEach(author => {
         this.profilePics.set(author, null);
@@ -45,6 +47,10 @@ export class FollowedComponent implements OnInit, OnDestroy {
       });
       this.subscriptions.add = this.postService.getLiked().subscribe(liked => this.setLikedPropertyForAllPosts(liked));
     });
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   private setLikedPropertyForAllPosts(ids: number[]) {
@@ -81,12 +87,16 @@ export class FollowedComponent implements OnInit, OnDestroy {
     return "btn btn-light";
   }
 
-  photoClicked(post:PostImage){
-    this.modal.openModal(post.imageUrl);
+  photoClicked(postImage:PostImage){
+    this.clickedPost = postImage.post;
+    console.log(this.clickedPost);
+    console.log(postImage);
+    this.modal.openModal(postImage.imageUrl);
   }
 
   likeClicked(post: PostDisplay) {
     post.liked = !post.liked;
     this.subscriptions.add = this.postService.like(post.id).subscribe();
   }
+
 }
