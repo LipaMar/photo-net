@@ -8,6 +8,13 @@
   }
 }
 
+.profile-pic{
+  object-fit: cover;
+  object-position: center center;
+  width: 516px;
+  height: 516px;
+}
+
 .mat-tab-group {
   height: 600px;
 }

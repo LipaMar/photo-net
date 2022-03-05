@@ -1,60 +1,29 @@
 @import "src/styles";
 
 .profile-pic {
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+  width: 30px;
   height: 30px;
 }
 
-.card > a {
+a {
   color: inherit;
   text-decoration: none;
+
 }
 
-.card-header, {
+.card {
+  padding: 0;
+  margin: 10px 0;
+}
+
+.card-header {
   background-color: $middle-red;
   color: $white;
 }
 
-
-.list-attributes {
-  list-style: none;
-  padding: 0;
-
-  .price, .gallery, .city {
-    &:before {
-      width: 1.5em;
-      display: inline-block;
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-    }
-  }
-
-  .price:before {
-    content: "\f155";
-  }
-
-  .price:after {
-    content: "zł";
-  }
-
-  .gallery:before {
-    content: "\f302";
-  }
-
-  .city:before {
-    content: "\f3c5";
-  }
-}
-
-.masonry-item {
-  width: 33%;
-}
-
-ngx-masonry-gallery img {
-  cursor: pointer;
-}
-
-.image-info {
-  background-color: whitesmoke;
-  position: absolute;
-  top: calc(50% - 200px);
+.card-body > img {
+  max-height: 700px;
 }

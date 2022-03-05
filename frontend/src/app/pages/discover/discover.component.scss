@@ -1,9 +1,13 @@
 @import "src/styles";
 
 .profile-pic {
-  height: 150px;
   float: right;
   overflow: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+  width: 150px;
+  height: 150px;
 
   &:after {
     content: "";
@@ -11,10 +15,12 @@
     display: table;
   }
 }
-a{
+
+a {
   color: inherit;
   text-decoration: none;
 }
+
 .card-header, {
   background-color: $middle-red;
   color: $white;
