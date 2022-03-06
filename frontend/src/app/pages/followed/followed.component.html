@@ -10,9 +10,12 @@
       <div class="row" *ngFor="let post of posts">
         <div class="card">
           <a href="{{routeToProfile+post.author}}">
-            <h5 class="card-header">
-              <img [src]=showProfilePic(post.author) class="profile-pic"> {{post.author}}
-            </h5>
+            <div class="card-header">
+              <h5>
+                <img [src]=showProfilePic(post.author) class="profile-pic"> {{post.author}}
+              </h5>
+              <h6>{{post.timestamp}}</h6>
+            </div>
           </a>
           <div class="card-body d-flex justify-content-center">
             <img class="img-fluid" [src]="post.photo">
@@ -23,6 +26,7 @@
                     (click)="likeClicked(post)">
               <i class="fal fa-thumbs-up"></i> Lubię to!
             </button>
+            <span><i class="fas fa-thumbs-up"></i> {{post.likes}} osób lubi to</span>
           </div>
         </div>
       </div>

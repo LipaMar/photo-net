@@ -22,6 +22,17 @@ a {
 .card-header {
   background-color: $middle-red;
   color: $white;
+  padding: 7px 10px;
+
+  h5, h6 {
+    margin: 0;
+  }
+}
+
+.card-header, .card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card-body > img {
