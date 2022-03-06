@@ -2,7 +2,6 @@ import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild
 import {SortOption} from "../../core/models/discover.models";
 import {MatSelect} from "@angular/material/select";
 import {SortParams} from "../../core/models/basic.models";
-import {MeetingDto} from "../../core/models/profile.models";
 
 @Component({
   selector: 'app-sort',
@@ -12,12 +11,12 @@ import {MeetingDto} from "../../core/models/profile.models";
 export class SortComponent implements OnInit, AfterViewInit {
 
   @Input() fields: SortOption[];
-  @Input() listToSort: MeetingDto[];
+  @Input() listToSort: any[];
   @Input() order: SortOption[] = [
     {value: "asc", display: "rosnąca"}, {value: "desc", display: "malejąca"}
   ];
   @Output() sortParams = new EventEmitter<SortParams>();
-  @Output() sortedList = new EventEmitter<MeetingDto[]>();
+  @Output() sortedList = new EventEmitter<any[]>();
   @ViewChild('fieldMatSelect') fieldMatSelect: MatSelect;
   @ViewChild('orderMatSelect') orderMatSelect: MatSelect;
   sortData: SortParams = {field: "", order: ""};
@@ -34,8 +33,8 @@ export class SortComponent implements OnInit, AfterViewInit {
       const field = this.fields.filter(value => value.value === this.sortData.field).shift();
       const order = this.sortData.order === "asc" ? 1 : -1;
       this.listToSort.sort((a, b) => {
-        if(field && field.comparator){
-          return order * field.comparator(a,b);
+        if (field && field.comparator && field.extractor) {
+          return order * field.comparator(field.extractor(a), field.extractor(b));
         }
         return 1;
       });

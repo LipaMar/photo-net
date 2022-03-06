@@ -11,8 +11,9 @@ export interface PostDto {
   timestamp: string
 }
 
-export interface PostDisplay extends PostDto{
+export interface PostDisplay extends PostDto {
   liked?: boolean;
+  timestampToDisplay?: any;
 }
 
 export interface ProfileDto extends DiscoverDto {
@@ -90,9 +91,10 @@ export interface BookMeetingDto {
   price: number;
   photographer: string;
 }
-export class PostImage extends IMasonryGalleryImage{
 
-  constructor(imageUrl:string, public post?: PostDto ){
+export class PostImage extends IMasonryGalleryImage {
+
+  constructor(imageUrl: string, public post?: PostDto) {
     super();
     this.imageUrl = imageUrl;
   }

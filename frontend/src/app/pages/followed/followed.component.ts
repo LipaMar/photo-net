@@ -8,6 +8,8 @@ import {DatePattern} from "../../core/enums/datePattern";
 import {ProfileService} from "../profile/profile.service";
 import {IMasonryGalleryImage} from "ngx-masonry-gallery";
 import {ImageUtils} from "../../core/utils/ImageUtils";
+import {SortOption} from "../../core/models/discover.models";
+import {Comparator} from "../../core/comparator";
 
 @Component({
   selector: 'app-followed',
@@ -22,6 +24,27 @@ export class FollowedComponent implements OnInit, OnDestroy {
   images: IMasonryGalleryImage[];
   subscriptions = new SubscriptionContainer();
   profilePics = new Map<string, any>();
+  sortingFields: SortOption[] = [
+    {
+      value: "likes",
+      display: "Polubieniach",
+      comparator: Comparator.NUMBER_COMPARATOR,
+      extractor: (a: PostDisplay) => a.likes
+    },
+    {
+      value: "author",
+      display: "Nazwie autora",
+      comparator: Comparator.STRING_COMPARATOR,
+      extractor: (a: PostDisplay) => a.author
+    },
+    {
+      value: "date",
+      display: "Dacie",
+      comparator: Comparator.NUMBER_COMPARATOR,
+      extractor: (a: PostDisplay) => new Date(a.timestamp).getTime()
+    },
+  ];
+
 
   constructor(private postService: PostService,
               private profileService: ProfileService,
@@ -32,7 +55,7 @@ export class FollowedComponent implements OnInit, OnDestroy {
     this.subscriptions.add = this.postService.getPostsOfFollowedUsers().subscribe(posts => {
       this.posts = posts;
       this.images = ImageUtils.postsToPostImage(this.posts);
-      this.posts.map(post => post.timestamp = this.transform(post.timestamp));
+      this.posts.map(post => post.timestampToDisplay = this.transform(post.timestamp));
       this.posts.map(post => post.author).filter((value, index, self) => self.indexOf(value) === index).forEach(author => {
         this.profilePics.set(author, null);
         this.subscriptions.add = this.profileService.getProfileSimple(author).subscribe(profile => {

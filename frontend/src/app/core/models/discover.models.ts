@@ -25,4 +25,5 @@ export interface SortOption {
   value: any;
   display: string;
   comparator?: (a: any, b: any) => number;
+  extractor?: (a: any) => any;
 }
