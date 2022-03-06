@@ -21,6 +21,8 @@ import {ScheduleService} from "../../services/schedule.service";
 import {PostService} from "../../services/post.service";
 import {ImageUtils} from "../../core/utils/ImageUtils";
 import {FullScreenModalComponent} from "../../components/full-screen-modal/full-screen-modal.component";
+import {routes} from "../../core/const/consts";
+import {MessagesService} from "../messages/messages.service";
 
 @Component({
   selector: 'app-profile',
@@ -62,6 +64,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
               private scheduleService: ScheduleService,
               private loginService: LoginService,
               private postService: PostService,
+              private messageService: MessagesService,
               private categoryService: CategoryService,
               private toastr: AppToastrService) {
   }
@@ -266,4 +269,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.modal.closeModal();
   }
 
+  messageToClicked() {
+    if (this.pathUserName) {
+      this.subscriptions.add = this.messageService.startNewChat(this.pathUserName).subscribe(() => this.router.navigateByUrl(routes.messages));
+    }
+  }
 }

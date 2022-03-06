@@ -20,6 +20,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   subscriptions = new SubscriptionContainer();
   selectedChat: ChatDto | null;
   form = new FormGroup({content: new FormControl()});
+  defaultUser: string | null;
 
   constructor(private messagesService: MessagesService,
               private loginService: LoginService,
@@ -27,10 +28,25 @@ export class MessagesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.defaultUser = this.messagesService.defaultUser;
     this.subscriptions.add = this.loginService.doGetIsLogged().subscribe(info => {
       this.loggedUser = info.userName;
-      this.subscriptions.add = this.messagesService.getAllChats(this.loggedUser).subscribe(response => this.chats = response);
+      this.subscriptions.add = this.messagesService.getAllChats(this.loggedUser).subscribe(response => {
+        this.filterChats(response);
+        this.selectDefaultUserChat();
+      });
     });
+  }
+
+  private filterChats(response: ChatDto[]) {
+    this.chats = response.filter(dto => dto.messages.length > 0 || dto.sender === this.defaultUser || dto.recipient === this.defaultUser);
+  }
+
+  private selectDefaultUserChat() {
+    this.selectedChat = this.chats.find(dto => dto.sender === this.defaultUser || dto.recipient === this.defaultUser) ?? null;
+    if(this.selectedChat){
+      this.populateMessages(this.selectedChat);
+    }
   }
 
   ngOnDestroy(): void {
@@ -62,8 +78,8 @@ export class MessagesComponent implements OnInit, OnDestroy {
     } as NewMessageDto;
     this.subscriptions.add = this.messagesService.sendMessage(message).subscribe(() => {
       this.subscriptions.add = this.messagesService.getAllChats(this.loggedUser).subscribe(response => {
-        this.chats = response;
-        const chat = response.find(value => value.id === this.selectedChat?.id);
+        this.filterChats(response);
+        const chat = this.chats.find(value => value.id === this.selectedChat?.id);
         if (chat) {
           this.populateMessages(chat);
         }
@@ -72,7 +88,17 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.form.get("content")?.reset();
   }
 
-  nameBasedOnSender(chat: ChatDto) {
-    return chat.sender === this.loggedUser ? chat.recipient : chat.sender;
+  nameBasedOnSender(chat: ChatDto | null) {
+    if (chat) {
+      return chat.sender === this.loggedUser ? chat.recipient : chat.sender;
+    }
+    return "";
+  }
+
+  classBySelection(chat: ChatDto) {
+    if(chat===this.selectedChat){
+      return "d-flex p-3 flex-nowrap contact contact-selected";
+    }
+    return "d-flex p-3 flex-nowrap contact";
   }
 }

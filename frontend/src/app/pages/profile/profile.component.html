@@ -22,7 +22,7 @@
           <div>
             <ng-container *ngIf="!isMyProfile">
               <button #followBtn class="mx-2 btn btn-brown" (click)="followOnClick()">Obserwuj</button>
-              <button class="btn btn-brown mx-2">Wiadomość</button>
+              <button class="btn btn-brown mx-2" (click)="messageToClicked()">Wiadomość</button>
             </ng-container>
             <ng-container *ngIf="isMyProfile">
               <button *ngIf="!inEditMode" (click)="onEditClicked()" class="mx-2 btn btn-brown"><i

@@ -20,6 +20,11 @@
 .contact:hover{
   backdrop-filter: brightness(1.2);
 }
+
+.contact-selected{
+  backdrop-filter: brightness(0.8);
+}
+
 .message-input{
   display: flex;
   justify-content: center;

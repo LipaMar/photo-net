@@ -33,7 +33,6 @@ public class MessageService {
         return chatRoomRepository.findAllChatRoomsForUserId(userName)
                                  .stream()
                                  .map(chatMapper::mapChatRoomToDto)
-                                 .filter(dto -> !dto.getMessages().isEmpty())
                                  .collect(Collectors.toList());
     }
 
