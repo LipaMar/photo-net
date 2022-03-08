@@ -11,9 +11,12 @@ public interface RateMapper extends OpinionMapper<Rate> {
 
     default double mapRatingsToAvg(List<Rate> ratings) {
         return ratings.stream()
-                .mapToInt(Rate::getRating)
-                .average()
-                .orElse(0);
+                      .mapToInt(Rate::getRating)
+                      .average()
+                      .stream()
+                      .map(rate -> Math.round(rate * 100d) / 100d)
+                      .findFirst()
+                      .orElse(0);
     }
 
 }
