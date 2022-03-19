@@ -19,8 +19,11 @@ import photonet.server.webui.dto.ScheduleDto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static photonet.server.core.enums.MeetingStatus.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,15 +34,39 @@ public class ScheduleService {
     private final MeetingRepository meetingRepository;
     private final ScheduleMapper scheduleMapper;
 
+
     public ScheduleDto getScheduleForUser(String userName) {
         var schedule = scheduleRepository.findByOwnerUserName(userName)
                                          .orElse(mockSchedule());
         return scheduleMapper.scheduleToDto(schedule);
     }
 
+    @Transactional
+    public void updateMeetings(String userName) {
+        var schedule = scheduleRepository.findByOwnerUserName(userName)
+                                         .orElse(mockSchedule());
+        final var meetings = schedule.getMeetings();
+        meetings.forEach(this::ifPastDateThenUpdateStatus);
+        meetingRepository.saveAll(meetings);
+        meetingRepository.deleteAllByStatus(DELETED);
+    }
+
+    private void ifPastDateThenUpdateStatus(Meeting meeting) {
+        final var date = meeting.getDate();
+        final var time = meeting.getTimeStart();
+        if (date.isBefore(LocalDate.now()) || (date.isEqual(LocalDate.now()) && time.isBefore(LocalTime.now()))) {
+            if (meeting.getStatus() == FREE) {
+                meeting.setStatus(DELETED);
+            } else if (meeting.getStatus() != DELETED) {
+                meeting.setStatus(ARCHIVAL);
+            }
+        }
+    }
+
     private Schedule mockSchedule() {
         var schedule = new Schedule();
         schedule.setDisabled(true);
+        schedule.setMeetings(Collections.emptyList());
         return schedule;
     }
 
@@ -57,7 +84,7 @@ public class ScheduleService {
                                                .orElse(getNewSchedule(owner));
         scheduleRepository.save(schedule);
         meetings.forEach(meeting -> meeting.setSchedule(schedule));
-        meetingRepository.removeAllByScheduleAndDateAndStatus(schedule, scheduleDto.getSaveDate(), MeetingStatus.FREE);
+        meetingRepository.removeAllByScheduleAndDateAndStatus(schedule, scheduleDto.getSaveDate(), FREE);
         meetingRepository.saveAll(meetings);
     }
 
@@ -78,12 +105,15 @@ public class ScheduleService {
                                          .orElseThrow(NotFoundRestException::new);
         final var meeting = meetingRepository.findById(dto.getId())
                                              .orElseThrow(NotFoundRestException::new);
+        if (meeting.getStatus() != FREE) {
+            throw new ForbiddenRestException();
+        }
         meeting.setSchedule(schedule);
         meeting.setUserBooked(client);
         meeting.setTimeStart(dto.getTimeStart());
         meeting.setDate(dto.getDate());
         meeting.setPrice(dto.getPrice());
-        meeting.setStatus(MeetingStatus.NEW);
+        meeting.setStatus(NEW);
         meetingRepository.save(meeting);
     }
 
@@ -109,7 +139,7 @@ public class ScheduleService {
         return meeting.getDate().isEqual(date) && meeting.getTimeStart().equals(hour);
     }
 
-    public List<MeetingDto> getLoggedUSerMeetings() {
+    public List<MeetingDto> getLoggedUserMeetings() {
         final var loggedUser = userRepository.findByUserName(SecurityUtils.loggedUserName())
                                              .orElseThrow(NotFoundRestException::new);
         return meetingRepository.findAllByUserBooked(loggedUser)
@@ -120,6 +150,25 @@ public class ScheduleService {
 
     @Transactional
     public void updateMeetingStatus(Long meetingId, MeetingStatus status) {
-        meetingRepository.updateMeetingStatus(meetingId, status);
+        final var meeting = meetingRepository.getMeetingById(meetingId);
+        ifPastDateThenUpdateStatus(meeting);
+        if (meeting.getStatus() == ARCHIVAL || meeting.getStatus() == DELETED) {
+            return;
+        }
+        switch (status) {
+            case CANCELED -> cancelMeeting(meeting);
+            case ACCEPTED -> meetingRepository.updateMeetingStatus(meetingId, status);
+        }
+
+    }
+
+    private void cancelMeeting(Meeting meeting) {
+        if (SecurityUtils.isLoggedUser(meeting.getUserBooked().getUserName())) {
+            meeting.setUserBooked(null);
+            meeting.setStatus(FREE);
+            meetingRepository.save(meeting);
+        } else {
+            meetingRepository.delete(meeting);
+        }
     }
 }

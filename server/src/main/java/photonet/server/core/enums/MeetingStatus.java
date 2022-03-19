@@ -6,6 +6,7 @@ public enum MeetingStatus {
     NEW,
     ACCEPTED,
     ARCHIVAL,
+    DELETED,
     CANCELED
 
 }

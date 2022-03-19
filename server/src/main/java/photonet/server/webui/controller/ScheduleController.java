@@ -9,7 +9,6 @@ import photonet.server.webui.dto.BookMeetingDto;
 import photonet.server.webui.dto.MeetingDto;
 import photonet.server.webui.dto.ScheduleDto;
 
-import javax.websocket.server.PathParam;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -22,6 +21,7 @@ public class ScheduleController {
 
     @GetMapping
     public ScheduleDto getUserSchedule(@RequestParam String userName) {
+        scheduleService.updateMeetings(userName);
         return scheduleService.getScheduleForUser(userName);
     }
 
@@ -31,7 +31,7 @@ public class ScheduleController {
     }
 
     @PutMapping(Endpoints.MEETING+"/{meetingId}")
-    public void getUserMeeting(@PathVariable Long meetingId, @RequestParam MeetingStatus status) {
+    public void updateMeetingStatus(@PathVariable Long meetingId, @RequestParam MeetingStatus status) {
         scheduleService.updateMeetingStatus(meetingId, status);
     }
 
@@ -42,7 +42,7 @@ public class ScheduleController {
 
     @GetMapping(Endpoints.MY_MEETINGS)
     public List<MeetingDto> getLoggedUSerMeetings() {
-        return scheduleService.getLoggedUSerMeetings();
+        return scheduleService.getLoggedUserMeetings();
     }
 
     @PostMapping

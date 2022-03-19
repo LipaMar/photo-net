@@ -24,4 +24,7 @@ public interface MeetingRepository extends JpaRepository<Meeting, Long> {
     @Query("UPDATE Meeting m SET m.status = :newStatus WHERE m.id = :meetingId")
     void updateMeetingStatus(Long meetingId, MeetingStatus newStatus);
 
+    void deleteAllByStatus(MeetingStatus status);
+
+    Meeting getMeetingById(Long id);
 }

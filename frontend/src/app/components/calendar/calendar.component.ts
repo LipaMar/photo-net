@@ -131,7 +131,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   onScheduleHourSave(): boolean {
     let meetings: MeetingDto[] = this.createMeetings();
-    this.savedSchedule.emit({meetings: meetings, saveDate: this.datePipe.transform(this.dateSelected, )});
+    this.savedSchedule.emit({meetings: meetings, saveDate: this.datePipe.transform(this.dateSelected, DatePattern.DATE_WITH_DASH)});
     return true;
   }
 
