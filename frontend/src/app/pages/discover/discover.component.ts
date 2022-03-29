@@ -28,7 +28,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
     {value: "ratingCount", display: "Ilości ocen"},
   ]
   categories: string[] = [];
-  filters: DiscoverFilters;
+  filters: DiscoverFilters = new DiscoverFilters();
   sorting: SortParams;
 
   constructor(private service: DiscoverService,
@@ -37,10 +37,14 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(this.service.getList().subscribe(data => {
-      this.profiles = data.content;
-      this.profiles.forEach(x => x.city = this.firstLetterUpper(x.city))
-    }));
+    this.service.searchReq.subscribe(value => {
+      this.filters.userName = value;
+      this.subscriptions.push(this.service.getList(this.filters).subscribe(data => {
+        this.profiles = data.content;
+        this.profiles.forEach(x => x.city = this.firstLetterUpper(x.city))
+      }));
+    });
+
     this.subscriptions.push(this.categoryService.getCategories().subscribe(value => this.categories = value));
   }
 

@@ -24,8 +24,8 @@
       <form class="form-inline my-2 my-lg-0">
         <div class="search-box" *ngIf="isLogged">
           <div class="input-group">
-            <input class="form-control mr-sm-2" type="text" placeholder="Szukaj">
-            <div class="input-group-append my-2 my-sm-0">
+            <input #searchInput class="form-control mr-sm-2" type="text" placeholder="Szukaj">
+            <div class="input-group-append my-2 my-sm-0" (click)="searchDiscover(searchInput)">
               <span class="btn"><i class="fas fa-search"></i></span>
             </div>
           </div>

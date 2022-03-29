@@ -6,6 +6,8 @@ import {LoginComponent} from "../../login/login.component";
 import {routes} from "../../core/const/consts";
 import {SubscriptionContainer} from "../../core/utils/subscription-container";
 import {LoggedDto} from "../../core/models/login.models";
+import {Router} from "@angular/router";
+import {DiscoverService} from "../../pages/discover/discover.service";
 
 @Component({
   selector: 'app-navbar',
@@ -31,6 +33,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @ViewChild('modal') private modalComponent: ModalComponent;
 
   constructor(private service: LoginService,
+              private router: Router,
+              private discoverService: DiscoverService,
               private login: LoginComponent) { //TODO: i tak też nie
     this.isLogged = localStorage.getItem("isLogged") === 'true';
   }
@@ -71,4 +75,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.subscriptions.dispose();
   }
 
+  searchDiscover(searchInput: HTMLInputElement) {
+    this.discoverService.searchReq.next(searchInput.value);
+    searchInput.value="";
+    this.router.navigateByUrl(routes.discover);
+  }
 }

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {DiscoverFilters} from "../../core/models/discover.models";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ChipsSelectComponent} from "../chips-select/chips-select.component";
+import {DiscoverService} from "../../pages/discover/discover.service";
 
 @Component({
   selector: 'filter',
@@ -23,14 +24,15 @@ export class FilterComponent implements OnInit {
     category: new FormControl()
   });
 
-  constructor() {
+  constructor(private service: DiscoverService) {
   }
 
   ngOnInit(): void {
+    this.service.searchReq.subscribe(value => this.filterForm.controls.name.setValue(value));
   }
 
   filter() {
-    const name = this.filterForm.get("name")?.value;
+    const name = this.filterForm.controls.name?.value;
     this.filtersParam.userName = name ? name : "";
     this.filters.emit(this.filtersParam);
   }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {DiscoverDto, DiscoverFilters} from "../../core/models/discover.models";
 import {endpoints} from "../../core/const/consts";
 import {Pageable} from "../../core/models/pageable";
@@ -11,6 +11,9 @@ import {SortParams} from "../../core/models/basic.models";
 })
 export class DiscoverService {
 
+
+  searchReq: BehaviorSubject<any> = new BehaviorSubject<any>("");
+
   constructor(private http: HttpClient) {
   }
 
@@ -19,7 +22,7 @@ export class DiscoverService {
   };
 
   private buildParams(filters: DiscoverFilters | undefined, sort: SortParams | undefined) {
-    if(filters && filters.ratingMoreThan<=0){
+    if (filters && filters.ratingMoreThan <= 0) {
       filters.ratingMoreThan = "";
     }
     if (filters && sort) {
@@ -31,4 +34,5 @@ export class DiscoverService {
     }
     return new HttpParams().append("sort", `userName`);
   }
+
 }
