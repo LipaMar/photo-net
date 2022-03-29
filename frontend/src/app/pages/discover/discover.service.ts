@@ -19,6 +19,9 @@ export class DiscoverService {
   };
 
   private buildParams(filters: DiscoverFilters | undefined, sort: SortParams | undefined) {
+    if(filters && filters.ratingMoreThan<=0){
+      filters.ratingMoreThan = "";
+    }
     if (filters && sort) {
       return new HttpParams().appendAll(<any>filters).append("sort", `${sort?.field},${sort?.order}`);
     } else if (filters) {

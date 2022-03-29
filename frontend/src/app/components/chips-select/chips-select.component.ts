@@ -46,6 +46,7 @@ export class ChipsSelectComponent implements OnInit, OnChanges {
     this.checked = [];
     selected.forEach(value => this.checked.push(value))
     this.populateChips();
+    return this.values;
   }
 
   refresh() {

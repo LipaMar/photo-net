@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DiscoverFilters} from "../../core/models/discover.models";
-import {MatChip} from "@angular/material/chips";
+import {FormControl, FormGroup} from "@angular/forms";
+import {ChipsSelectComponent} from "../chips-select/chips-select.component";
 
 @Component({
   selector: 'filter',
@@ -12,7 +13,15 @@ export class FilterComponent implements OnInit {
   @Input() categories: string[];
   @Output() filters = new EventEmitter<DiscoverFilters>();
   @Input() ratingFilter: boolean = false;
+  @ViewChild("category") categoryFilter: ChipsSelectComponent;
+
   filtersParam = new DiscoverFilters();
+
+  filterForm = new FormGroup({
+    name: new FormControl(),
+    rate: new FormControl(),
+    category: new FormControl()
+  });
 
   constructor() {
   }
@@ -21,6 +30,14 @@ export class FilterComponent implements OnInit {
   }
 
   filter() {
+    const name = this.filterForm.get("name")?.value;
+    this.filtersParam.userName = name ? name : "";
     this.filters.emit(this.filtersParam);
+  }
+
+  resetFilters() {
+    this.filtersParam.categories = this.categoryFilter.resetTo([]);
+    this.filtersParam.ratingMoreThan = -1;
+    this.filterForm.reset();
   }
 }

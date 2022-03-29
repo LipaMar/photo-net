@@ -1,7 +1,14 @@
-<form>
+<form [formGroup]="filterForm">
   <div class="form-group">
 
-    <h4>{{ 'filters.header' | translate}}</h4>
+    <h4>{{ 'filters.header' | translate}} </h4>
+
+    <div class="my-3">
+      <mat-form-field appearance="legacy">
+        <mat-label>{{ 'filters.name' | translate}}</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+    </div>
 
     <ng-container *ngIf="ratingFilter">
       <label for="rating-filter">{{ 'filters.rating' | translate}}</label>
@@ -13,12 +20,18 @@
     <ng-container *ngIf="categories">
       <label for="category-filter">{{ 'filters.categories' | translate}}</label>
       <div id="category-filter">
-        <chips-select [labels]="categories" (selected)="filtersParam.categories = $event"></chips-select>
+        <chips-select #category
+                      [labels]="categories"
+                      (selected)="filtersParam.categories = $event">
+        </chips-select>
       </div>
     </ng-container>
 
     <button class="mt-3" mat-raised-button (click)="filter()">
       Filtruj
+    </button>
+    <button type="reset" class="mt-3 ms-2" mat-raised-button (click)="resetFilters()">
+      Wyczyść
     </button>
   </div>
 </form>
