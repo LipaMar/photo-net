@@ -59,6 +59,7 @@
     "header": "Filtry",
     "rating": "Średnia ocen od",
     "ratingCount": "Liczba ocen",
-    "categories": "Kategorie"
+    "categories": "Kategorie",
+    "name": "Nazwa użytkownika"
   }
 }

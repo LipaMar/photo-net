@@ -81,7 +81,7 @@ export class MyMeetingsComponent implements OnInit, OnDestroy {
 
   mapMeetingDtoListToDisplayable(meetings: MeetingDto[]) {
     const result: MeetingDisplay[] = [];
-    meetings.forEach(dto => {
+    meetings.filter(meeting=>meeting.status!=MeetingStatus.DELETED).forEach(dto => {
       const meetingDisplay = new MeetingDisplay(dto, this.translateStatus(dto.status));
       result.push(meetingDisplay);
     });

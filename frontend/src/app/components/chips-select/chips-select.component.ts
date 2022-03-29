@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {MatChip} from "@angular/material/chips";
+import {MatChipList} from "@angular/material/chips/chip-list";
 
 @Component({
   selector: 'chips-select',
@@ -12,12 +13,14 @@ export class ChipsSelectComponent implements OnInit, OnChanges {
   @Input() labels: any[] = [];
   @Input() checked: string[] = [];
   @Input() disabled: boolean = false;
+  @ViewChild("chipList") chipList: MatChipList;
 
   values: string[] = [];
 
   chips = new Map();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.populateChips();
@@ -29,25 +32,29 @@ export class ChipsSelectComponent implements OnInit, OnChanges {
       this.chips.set(label, this.checked.indexOf(label) > -1);
     })
     this.chips.forEach((value, key) => {
+      const chip = this.chipList.chips.find(item => item.value == key);
       if (value) {
-        this.values.push(key)
+        this.values.push(key);
+        chip?.select();
+      } else {
+        chip?.deselect();
       }
     });
   }
 
-  resetTo(selected: string[]){
+  resetTo(selected: string[]) {
     this.checked = [];
     selected.forEach(value => this.checked.push(value))
     this.populateChips();
   }
 
-  refresh(){
+  refresh() {
     this.chips = new Map();
     this.populateChips();
   }
 
   toggleSelection(chip: MatChip) {
-    if(this.disabled){
+    if (this.disabled) {
       return;
     }
     chip.toggleSelected();

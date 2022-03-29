@@ -43,7 +43,8 @@ export enum MeetingStatus {
   NEW = 'NEW',
   ACCEPTED = 'ACCEPTED',
   ARCHIVAL = 'ARCHIVAL',
-  CANCELED = 'CANCELED'
+  CANCELED = 'CANCELED',
+  DELETED = 'DELETED',
 }
 
 export interface MeetingDto {
