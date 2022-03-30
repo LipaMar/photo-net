@@ -7,6 +7,8 @@ import {ProfileService} from "../profile/profile.service";
 import {SortComponent} from "../../components/sort/sort.component";
 import {SortParams} from "../../core/models/basic.models";
 import {CategoryService} from "../../dictionaries/category.service";
+import {Comparator} from "../../core/comparator";
+import {PostDisplay} from "../../core/models/profile.models";
 
 @Component({
   selector: 'app-discover',
@@ -20,16 +22,42 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   routeToProfile = routes.profile + '/';
   @ViewChild("sortProfiles") sortComponent: SortComponent;
 
-  sortOptions: SortOption[] = [
-    {value: "userName", display: "Nazwie użytkownika"},
-    {value: "rating", display: "Średniej ocen"},
-    {value: "posts", display: "Liczbie zdjęć"},
-    {value: "price", display: "Cenie"},
-    {value: "ratingCount", display: "Ilości ocen"},
-  ]
   categories: string[] = [];
   filters: DiscoverFilters = new DiscoverFilters();
   sorting: SortParams;
+
+  sortingFields: SortOption[] = [
+    {
+      value: "userName",
+      display: "Nazwie użytkownika",
+      comparator: Comparator.STRING_COMPARATOR,
+      extractor: (a: DiscoverDto) => a.userName
+    },
+    {
+      value: "rating",
+      display: "Średniej ocen",
+      comparator: Comparator.NUMBER_COMPARATOR,
+      extractor: (a: DiscoverDto) => a.rating
+    },
+    {
+      value: "postsCount",
+      display: "Liczbie zdjęć",
+      comparator: Comparator.NUMBER_COMPARATOR,
+      extractor: (a: DiscoverDto) => a.postsCount
+    },
+    {
+      value: "price",
+      display: "Cenie",
+      comparator: Comparator.NUMBER_COMPARATOR,
+      extractor: (a: DiscoverDto) => a.price
+    },
+    {
+      value: "rateCount",
+      display: "Ilości ocen",
+      comparator: Comparator.NUMBER_COMPARATOR,
+      extractor: (a: DiscoverDto) => a.rateCount
+    },
+  ];
 
   constructor(private service: DiscoverService,
               private categoryService: CategoryService,
