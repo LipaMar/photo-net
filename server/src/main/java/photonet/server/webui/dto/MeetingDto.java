@@ -17,5 +17,6 @@ public class MeetingDto {
     private MeetingStatus status;
     private String userBooked;
     private String owner;
+    private Integer rate;
 
 }

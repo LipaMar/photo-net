@@ -1,4 +1,4 @@
-<ngb-rating [readonly]="readonly" [rate]="rate" (rateChange)="rateChange.emit($event)" [max]="5">
+<ngb-rating [readonly]="readonly" [rate]="rate" (rateChange)="onChange($event)" [max]="5">
   <ng-template #t let-fill="fill">
       <span class="star" [class.full]="fill === 100">
         <span class="half" [style.width.%]="fill">&#9733;</span>

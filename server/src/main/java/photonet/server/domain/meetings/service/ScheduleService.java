@@ -12,7 +12,10 @@ import photonet.server.domain.meetings.entity.Meeting;
 import photonet.server.domain.meetings.entity.Schedule;
 import photonet.server.domain.meetings.repository.MeetingRepository;
 import photonet.server.domain.meetings.repository.ScheduleRepository;
+import photonet.server.domain.rating.Rate;
+import photonet.server.domain.rating.RateRepository;
 import photonet.server.domain.repository.UserRepository;
+import photonet.server.domain.service.UserService;
 import photonet.server.webui.dto.BookMeetingDto;
 import photonet.server.webui.dto.MeetingDto;
 import photonet.server.webui.dto.ScheduleDto;
@@ -22,6 +25,7 @@ import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static photonet.server.core.enums.MeetingStatus.*;
 
@@ -33,7 +37,8 @@ public class ScheduleService {
     private final UserRepository userRepository;
     private final MeetingRepository meetingRepository;
     private final ScheduleMapper scheduleMapper;
-
+    private final UserService userService;
+    private final RateRepository rateRepository;
 
     public ScheduleDto getScheduleForUser(String userName) {
         var schedule = scheduleRepository.findByOwnerUserName(userName)
@@ -45,8 +50,11 @@ public class ScheduleService {
     public void updateMeetings(String userName) {
         var schedule = scheduleRepository.findByOwnerUserName(userName)
                                          .orElse(mockSchedule());
+        final var meetingsAsClient = meetingRepository.findAllByUserBookedUserName(userName);
         final var meetings = schedule.getMeetings();
-        meetings.forEach(this::ifPastDateThenUpdateStatus);
+        Stream.concat(meetingsAsClient.stream(), meetings.stream())
+              .collect(Collectors.toList())
+              .forEach(this::ifPastDateThenUpdateStatus);
         meetingRepository.saveAll(meetings);
         meetingRepository.deleteAllByStatus(DELETED);
     }
@@ -150,7 +158,7 @@ public class ScheduleService {
 
     @Transactional
     public void updateMeetingStatus(Long meetingId, MeetingStatus status) {
-        final var meeting = meetingRepository.getMeetingById(meetingId);
+        final var meeting = meetingRepository.findById(meetingId).orElseThrow();
         ifPastDateThenUpdateStatus(meeting);
         if (meeting.getStatus() == ARCHIVAL || meeting.getStatus() == DELETED) {
             return;
@@ -159,7 +167,29 @@ public class ScheduleService {
             case CANCELED -> cancelMeeting(meeting);
             case ACCEPTED -> meetingRepository.updateMeetingStatus(meetingId, status);
         }
+    }
 
+    @Transactional
+    public void rateMeeting(Long meetingId, int rating) {
+        if (rating <= 5 && rating > 0) {
+            meetingRepository.findById(meetingId)
+                             .filter(meeting -> meeting.getRate() == null)
+                             .filter(meeting -> meeting.getStatus() == ARCHIVAL)
+                             .ifPresent(meeting -> {
+                                 meeting.setRate(rating);
+                                 meetingRepository.save(meeting);
+                                 addRatingToUser(meeting, rating);
+                             });
+        }
+    }
+
+    private void addRatingToUser(Meeting meeting, int rating) {
+        final var owner = meeting.getSchedule().getOwner();
+        final var rate = new Rate();
+        rate.setRating(rating);
+        rate.setAuthor(userRepository.findByUserName(SecurityUtils.loggedUserName()).orElseThrow());
+        rate.setTarget(owner);
+        rateRepository.save(rate);
     }
 
     private void cancelMeeting(Meeting meeting) {

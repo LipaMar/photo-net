@@ -24,6 +24,7 @@ public class Meeting {
     private LocalTime timeStart;
     private MeetingStatus status;
     private BigDecimal price;
+    private Integer rate;
     @ManyToOne
     private Schedule schedule;
     @ManyToOne

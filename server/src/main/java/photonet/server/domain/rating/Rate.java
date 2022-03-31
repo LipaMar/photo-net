@@ -1,8 +1,9 @@
-package photonet.server.domain.entity;
+package photonet.server.domain.rating;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import photonet.server.domain.entity.Opinion;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

@@ -14,10 +14,10 @@ tr.element-row:not(.expanded-row):not(.bg-darken){
   }
 }
 .bg-brown{
-  background: $light-red;
+  background-color: $light-red;
 }
 .bg-darken{
-  filter: brightness(85%);
+  background-color: $light-gray;
 }
 
 .element-row td {

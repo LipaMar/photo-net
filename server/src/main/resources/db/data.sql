@@ -128,16 +128,16 @@ insert into comment (author_id, target_id, content, added, anonymous) values (15
 insert into schedule (is_disabled, owner_id) values (false, 1);
 insert into schedule (is_disabled, owner_id) values (false, 14);
 
-insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-03-27', 0, '19:00', 1, null, null );
-insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-03-12', 0, '18:00', 1, null, null );
-insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-03-13', 0, '7:00', 1, null, null );
-insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-03-12', 0, '1:00', 1, null, null );
-insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-03-12', 1, '23:00', 1, null, 50.00 );
-insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-03-14', 0, '15:00', 1, null, null );
-insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-03-16', 0, '19:00', 1, null, null );
-insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-03-29', 0, '19:00', 2, null, null );
-insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-03-30', 0, '19:00', 2, 1, null );
-insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-03-01', 0, '19:00', 2, null, null );
+insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-04-27', 0, '19:00', 1, null, null );
+insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-04-12', 0, '18:00', 1, null, null );
+insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-04-13', 0, '7:00', 1, null, null );
+insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-04-12', 0, '1:00', 1, null, null );
+insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2021-04-12', 2, '23:00', 1, 2, 50.00 );
+insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-04-14', 0, '15:00', 1, null, null );
+insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-04-16', 0, '19:00', 1, null, null );
+insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-04-29', 0, '19:00', 2, null, null );
+insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-04-30', 0, '19:00', 2, 1, 500 );
+insert into meeting (date, status, time_start, schedule_id, user_booked_id, price ) values ('2022-04-01', 0, '19:00', 2, null, null );
 
 insert into chat_room (id, recipient_id, sender_id) values (1, 1, 2 );
 insert into chat_room (id, recipient_id, sender_id) values (2, 1, 3 );

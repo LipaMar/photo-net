@@ -2,7 +2,7 @@ package photonet.server.domain.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingInheritanceStrategy;
-import photonet.server.domain.entity.Rate;
+import photonet.server.domain.rating.Rate;
 
 import java.util.List;
 

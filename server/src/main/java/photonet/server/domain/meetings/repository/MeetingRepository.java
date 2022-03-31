@@ -1,6 +1,5 @@
 package photonet.server.domain.meetings.repository;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,11 +19,12 @@ public interface MeetingRepository extends JpaRepository<Meeting, Long> {
 
     List<Meeting> findAllByUserBooked(User user);
 
+    List<Meeting> findAllByUserBookedUserName(String user);
+
     @Modifying
     @Query("UPDATE Meeting m SET m.status = :newStatus WHERE m.id = :meetingId")
     void updateMeetingStatus(Long meetingId, MeetingStatus newStatus);
 
     void deleteAllByStatus(MeetingStatus status);
 
-    Meeting getMeetingById(Long id);
 }

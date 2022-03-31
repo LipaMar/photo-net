@@ -39,4 +39,8 @@ export class ScheduleService {
   getMyMeetings(): Observable<MeetingDto[]> {
     return this.http.get<MeetingDto[]>(endpoints.myMeetings);
   }
+
+  rateMeeting(id: number, rating: number) {
+    return this.http.post(`${endpoints.meeting}/${id}`,rating);
+  }
 }

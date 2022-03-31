@@ -5,6 +5,7 @@ import {SubscriptionContainer} from "../../core/utils/subscription-container";
 import {MeetingDisplay, MeetingDto, MeetingStatus, ScheduleDto} from "../../core/models/profile.models";
 import {forkJoin} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {StarRatingComponent} from "../../components/star-rating/star-rating.component";
 
 const {FREE, CANCELED, NEW, ARCHIVAL, ACCEPTED} = MeetingStatus;
 
@@ -29,11 +30,12 @@ export class MyMeetingsComponent implements OnInit, OnDestroy {
   allMeetings: MeetingDto[] = [];
   meetingsToDisplay: MeetingDisplay[] = [];
   displayColumns = [{display: "Fotograf", val: 'owner'},
+    {display: "Klient", val: 'userBooked'},
     {display: "Data", val: 'date'},
     {display: "Cena", val: 'price'},
     {display: "Godzina", val: 'timeStart'},
     {display: "Status", val: 'statusDisplay'}];
-  columns = ['owner', 'date', 'timeStart', 'price', 'statusDisplay'];
+  columns = ['owner', 'userBooked', 'date', 'timeStart', 'price', 'statusDisplay'];
   expandedElement: MeetingDto | null;
 
   constructor(private scheduleService: ScheduleService,
@@ -132,6 +134,13 @@ export class MyMeetingsComponent implements OnInit, OnDestroy {
   isExpendable(element: MeetingDisplay, expandedElement: any) {
     return element == expandedElement &&
     element.status !== CANCELED &&
-    element.status !== ARCHIVAL ? 'expanded' : 'collapsed';
+    element.status !== ACCEPTED &&
+    !(element.status === ARCHIVAL && element.rate) ? 'expanded' : 'collapsed';
+  }
+
+  rateMeeting(id: number, rate: StarRatingComponent) {
+    if (rate.rateVal) {
+      this.subscriptions.add = this.scheduleService.rateMeeting(id, rate.rateVal).subscribe(() => this.updateMeetings());
+    }
   }
 }

@@ -2,6 +2,7 @@ package photonet.server.domain.entity;
 
 import lombok.*;
 import org.hibernate.annotations.Formula;
+import photonet.server.domain.rating.Rate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

@@ -54,6 +54,7 @@ export interface MeetingDto {
   status: MeetingStatus | string,
   userBooked?: string,
   owner: string;
+  rate?: number;
   price?: number | string;
 }
 
@@ -64,6 +65,7 @@ export class MeetingDisplay implements MeetingDto {
   status: string;
   userBooked?: string | undefined;
   owner: string;
+  rate?: number;
   price?: string | number | undefined;
 
   constructor(meetingDto: MeetingDto, public statusDisplay: string) {
@@ -74,6 +76,7 @@ export class MeetingDisplay implements MeetingDto {
     this.userBooked = meetingDto.userBooked;
     this.owner = meetingDto.owner;
     this.price = meetingDto.price;
+    this.rate = meetingDto.rate;
   }
 
 }

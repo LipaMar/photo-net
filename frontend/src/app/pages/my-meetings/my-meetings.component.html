@@ -17,13 +17,17 @@
             <td mat-cell *matCellDef="let element" [attr.colspan]="columns.length" [ngClass]="rowColor(element)">
               <div class="element-detail d-flex justify-content-end"
                    [@detailExpand]="isExpendable(element, expandedElement)">
-                <div class="p-2">
+                <div class="p-2 d-flex">
                   <ng-container *ngIf="loggedUser===element.owner && element.status === statuses.NEW">
                     <button class="me-3 btn btn-danger" (click)="rejectMeeting(element.id)">Odrzuć</button>
                     <button class="btn btn-success" (click)="acceptMeeting(element.id)">Zaakceptuj</button>
                   </ng-container>
                   <ng-container *ngIf="loggedUser!==element.owner && element.status === statuses.NEW">
                     <button class="btn btn-dark" (click)="cancelMeeting(element.id)">Anuluj</button>
+                  </ng-container>
+                  <ng-container *ngIf="loggedUser!==element.owner && element.status === statuses.ARCHIVAL && element.rate === null">
+                    <star-rating #rate [readonly]="false"></star-rating>
+                    <button class="ms-3 btn btn-dark" (click)="rateMeeting(element.id, rate)">Oceń spotkanie</button>
                   </ng-container>
                 </div>
               </div>
