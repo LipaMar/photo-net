@@ -44,11 +44,11 @@
      "username": "Nazwa użytkownika",
      "provideUsername":  "Podaj nazwę użytkownika",
      "email": "Adres e-mail",
-     "provideEmail":  "Podaj adres e-mail",
+     "provideEmail":  "Podaj prawidłowy adres e-mail",
      "password": "Hasło",
-     "providePass":  "Podaj hasło",
-     "repeat_password": "Powtórz hasło",
-     "providePass":  "",
+     "providePass":  "Hasło musi się składać z conajmniej 6 znaków",
+     "repeatPassword": "Powtórz hasło",
+     "repeatPasswordError": "Hasła muszą być identyczne",
      "registerButton": "Zarejestruj się"
     },
     "discover":{

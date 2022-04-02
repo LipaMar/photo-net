@@ -4,6 +4,7 @@ import {RegisterDto} from "../../core/models/register.models";
 import {Router} from "@angular/router";
 import * as bcrypt from "bcryptjs";
 import {AppToastrService} from "../../core/toastr.service";
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-register',
@@ -12,9 +13,20 @@ import {AppToastrService} from "../../core/toastr.service";
 })
 export class RegisterComponent implements OnInit {
 
-  registerDto = new RegisterDto('', '', true,'');
-  pass = '';
-  repeatPass = '';
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+
+  checkPasswords: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    let pass = group.get("password")?.value;
+    let confirmPass = group.get("passwordConfirm")?.value;
+    return pass === confirmPass ? null : {notSame: true}
+  }
+
+  form = new FormGroup({
+    username: new FormControl("", [Validators.required]),
+    email: new FormControl("", [Validators.required, Validators.email]),
+    password: new FormControl("", [Validators.required, Validators.minLength(6)]),
+    passwordConfirm: new FormControl("", [Validators.required, Validators.minLength(6)]),
+  }, {validators: this.checkPasswords});
 
   constructor(private service: RegisterService,
               private toastr: AppToastrService,
@@ -25,9 +37,16 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    const errors = this.form.errors;
+    if (errors && errors["notSame"]) {
+      this.toastr.error("Podane hasła nie są identyczne");
+      return;
+    }
+    const {username, email, password} = this.form.controls;
     const salt = bcrypt.genSaltSync(10);
-    this.registerDto.password = bcrypt.hashSync(this.pass, salt);
-    this.service.register(this.registerDto).subscribe(response => {
+    const pass = bcrypt.hashSync(password.value, salt);
+    const registerDto = new RegisterDto(username.value, email.value, true, pass);
+    this.service.register(registerDto).subscribe(response => {
         this.toastr.success('message.register.success');
         this.router.navigateByUrl("/home");
       },

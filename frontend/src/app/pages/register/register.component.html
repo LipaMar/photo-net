@@ -5,49 +5,43 @@
     </div>
     <div class="col-md-6">
       <h1>{{'page.register.header' | translate}}</h1>
-      <form #registerForm="ngForm" (ngSubmit)="register()">
+      <form (ngSubmit)="register()" [formGroup]="form">
         <div class="form-group">
-          <label for="name">{{'page.register.username' | translate}}</label>
-          <input type="text" class="form-control" id="name"
-                 required
+          <label>{{'page.register.username' | translate}}</label>
+          <input type="text" class="form-control" id="username"
                  placeholder="JKowalski"
-                 [(ngModel)]="registerDto.userName" name="name"
-                 #name="ngModel">
-          <div [hidden]="name.valid || name.pristine"
-               class="alert alert-danger">
+                 formControlName="username">
+          <div *ngIf="form.controls.username.errors && form.controls.username.touched" class="alert alert-danger">
             {{'page.register.provideUsername' | translate}}
           </div>
-          <label for="email">{{'page.register.email' | translate}}</label>
-          <input type="email" class="form-control" id="email"
-                 required
+          <label>{{'page.register.email' | translate}}</label>
+          <input type="email" [pattern]="emailPattern" class="form-control"
                  placeholder="Jan.Kowalski@email.com"
-                 [(ngModel)]="registerDto.email" name="email"
-                 #email="ngModel">
-          <div [hidden]="email.valid || email.pristine"
+                 formControlName="email">
+          <div *ngIf="form.controls.email.errors && form.controls.email.touched"
                class="alert alert-danger">
             {{'page.register.provideEmail' | translate}}
           </div>
 
-          <label for="password">{{'page.register.password' | translate}}</label>
-          <input required type="password" class="form-control" id="password"
-                 [(ngModel)]="pass" name="password" #password="ngModel">
-          <div class="form-control" [hidden]="password.valid || password.pristine"
+          <label>{{'page.register.password' | translate}}</label>
+          <input type="password" class="form-control" formControlName="password">
+
+          <div *ngIf="form.controls.password.errors && form.controls.password.touched"
                class="alert alert-danger">
             {{'page.register.providePass' | translate}}
           </div>
 
-          <label for="repeat_password">{{'page.register.repeat_password' | translate}}</label>
-          <input required type="password" class="form-control" id="repeat_password"
-                 [(ngModel)]="repeatPass" name="repeat_password" #repeat_password="ngModel">
-          <div class="form-control" [hidden]="repeat_password.valid || repeat_password.pristine"
+          <label>{{'page.register.repeatPassword' | translate}}</label>
+          <input type="password" class="form-control" formControlName="passwordConfirm">
+
+          <div *ngIf="form.controls.passwordConfirm.errors && form.controls.passwordConfirm.touched"
                class="alert alert-danger">
-            {{'page.register.providePass' | translate}}
+            {{'page.register.repeatPasswordError' | translate}}
           </div>
 
         </div>
 
-        <button type="submit" class="btn btn-brown"
-                [disabled]="!registerForm.form.valid">{{'page.register.registerButton' | translate}}</button>
+        <button type="submit" class="btn btn-brown">{{'page.register.registerButton' | translate}}</button>
 
       </form>
     </div>
