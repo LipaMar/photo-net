@@ -9,7 +9,7 @@ export interface DiscoverDto {
   categories: string[];
   price: number;
   city: string;
-
+  observers: number;
 }
 
 export class DiscoverFilters {

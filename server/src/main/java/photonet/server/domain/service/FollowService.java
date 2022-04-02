@@ -68,4 +68,12 @@ public class FollowService {
     public List<Follow> getAllFollowed(String userName){
         return followRepository.findAllByAuthorUserName(userName);
     }
+
+    public List<Follow> getAllFollowing(String userName){
+        return followRepository.findAllByTargetUserName(userName);
+    }
+
+    public long countFollowers(String userName){
+        return followRepository.countAllByTargetUserName(userName);
+    }
 }

@@ -56,10 +56,11 @@
               </mat-form-field>
             </form>
             <ng-container *ngIf="!isMyProfile">
-              <p>{{profile?.bio}}</p>
-              <p>{{profile?.city}}</p>
-              <p>{{profile?.price}}</p>
-              <p>{{profile?.rateCount}}</p>
+              <p><b>Opis: </b>{{profile?.bio}}</p>
+              <p><b>Miasto: </b>{{profile?.city}}</p>
+              <p><b>Cena: </b>{{profile?.price}} zł</p>
+              <p><b>Liczba ocen: </b>{{profile?.rateCount}}</p>
+              <p><b>Obserwujących: </b>{{profile?.observers}}</p>
             </ng-container>
           </div>
           <div class="mb-3" *ngIf="profile && profile.categories">

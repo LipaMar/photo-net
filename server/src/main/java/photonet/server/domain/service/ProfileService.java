@@ -20,13 +20,20 @@ public class ProfileService {
     private final UserService userService;
     private final UserMapper userMapper;
     private final CategoryService categoryService;
+    private final FollowService followService;
 
     public ProfileDto findProfile(String userName) {
-        return userMapper.mapToDto(userService.findByUserName(userName));
+        return setObserversCount(userName, userMapper.mapToDto(userService.findByUserName(userName)));
     }
 
     public ProfileBasicDto getBasicProfile(String userName) {
-        return userMapper.mapUserToBasicProfile(userService.findByUserName(userName));
+        final var dto = userMapper.mapUserToBasicProfile(userService.findByUserName(userName));
+        return setObserversCount(userName, dto);
+    }
+
+    private <T extends ProfileBasicDto> T setObserversCount(String userName, T dto) {
+        dto.setObservers(followService.countFollowers(userName));
+        return dto;
     }
 
     @Transactional

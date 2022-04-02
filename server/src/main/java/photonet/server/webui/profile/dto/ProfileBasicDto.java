@@ -10,5 +10,6 @@ public class ProfileBasicDto {
     private String profilePicture;
     private Double rating;
     private Long rateCount;
+    private Long observers;
 
 }

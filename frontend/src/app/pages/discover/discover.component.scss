@@ -42,7 +42,7 @@ a {
   list-style: none;
   padding: 0;
 
-  .price, .gallery, .city {
+  .price, .gallery, .city, .eye {
     &:before {
       width: 1.5em;
       display: inline-block;
@@ -53,6 +53,10 @@ a {
 
   .price:before {
     content: "\f155";
+  }
+
+  .eye:before {
+    content: "\f06e";
   }
 
   .price:after {

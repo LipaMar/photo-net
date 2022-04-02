@@ -156,9 +156,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.isFollowing) {
       this.doIsFollowing(!this.isFollowing);
       this.profileService.unfollow(this.pathUserName).subscribe();
+      this.profile.observers--;
     } else {
       this.doIsFollowing(!this.isFollowing);
       this.profileService.follow(this.pathUserName).subscribe();
+      this.profile.observers++;
     }
   }
 

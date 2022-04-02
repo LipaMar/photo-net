@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import photonet.server.domain.entity.User;
 import photonet.server.domain.mapper.UserMapper;
+import photonet.server.domain.repository.FollowRepository;
 import photonet.server.domain.repository.UserRepository;
 import photonet.server.webui.dto.discover.PhotographerBasicDto;
 
@@ -22,6 +23,7 @@ public class DiscoverService {
 
     private final UserRepository photographerRepository;
     private final UserMapper photographerMapper;
+    private final FollowRepository followRepository;
 
     public Page<PhotographerBasicDto> findAll(Specification<User> specification, Pageable pageable,
                                               List<String> categories) {
@@ -30,17 +32,24 @@ public class DiscoverService {
             return filterByCategories(specification, pageable, categories);
         }
         return photographerRepository.findAll(specification, pageable)
-                .map(photographerMapper::mapToBasicProfile);
+                                     .map(photographerMapper::mapToBasicProfile)
+                                     .map(this::setObserversCount);
+    }
+
+    private PhotographerBasicDto setObserversCount(PhotographerBasicDto photographerBasicDto) {
+        final var observers = followRepository.countAllByTargetUserName(photographerBasicDto.getUserName());
+        photographerBasicDto.setObservers(observers);
+        return photographerBasicDto;
     }
 
     private Page<PhotographerBasicDto> filterByCategories(Specification<User> specification,
                                                           Pageable pageable,
                                                           List<String> categories) {
         var list = photographerRepository.findAll(specification, pageable.getSort())
-                .stream()
-                .map(photographerMapper::mapToBasicProfile)
-                .filter(dto -> dto.getCategories().containsAll(categories))
-                .collect(Collectors.toList());
+                                         .stream()
+                                         .map(photographerMapper::mapToBasicProfile)
+                                         .filter(dto -> dto.getCategories().containsAll(categories))
+                                         .collect(Collectors.toList());
         return new PageImpl<>(list, pageable, list.size());
     }
 

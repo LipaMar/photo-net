@@ -20,6 +20,7 @@ public interface UserMapper {
 
     @Mapping(source = "rating", target = "rating")
     @Mapping(source = "rating", target = "rateCount")
+    @Mapping(target = "observers", ignore = true)
     ProfileBasicDto mapUserToBasicProfile(User user);
 
     @Mapping(source = "rating", target = "rating")

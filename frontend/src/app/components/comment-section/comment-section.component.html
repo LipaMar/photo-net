@@ -4,7 +4,7 @@
     <b [className]="getColor(comment.anonymous)">{{comment.author}}: </b>
     {{comment.content}}
   </p>
-  <p>{{formatDate(comment.added)}}</p>
+  <p class="text-muted small">{{formatDate(comment.added)}}</p>
   <hr>
 </div>
 <form *ngIf="addCommentsEnabled" #form class="py-1 px-2" (ngSubmit)="sendComment(); form.reset()">
