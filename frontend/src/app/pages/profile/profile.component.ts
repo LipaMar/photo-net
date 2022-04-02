@@ -44,8 +44,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profileUpdateForm = new FormGroup({
     bio: new FormControl({disabled: true}),
     city: new FormControl({disabled: true}),
-    price: new FormControl({disabled: true})
+    price: new FormControl({disabled: true}),
+    isPublic: new FormControl({disabled: true})
   });
+
   isFollowing: boolean = false;
 
   isMyProfile: boolean = false;
@@ -206,6 +208,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.inEditMode = !this.inEditMode;
     let updated = {
       userName: this.profile.userName,
+      isPublic: this.profileUpdateForm.controls.isPublic.value,
       bio: this.profileUpdateForm.get("bio")?.value,
       city: this.profileUpdateForm.get("city")?.value,
       price: this.profileUpdateForm.get("price")?.value,
@@ -220,7 +223,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.profileUpdateForm.setValue({
       bio: this.profile.bio,
       city: this.profile.city,
-      price: this.profile.price
+      price: this.profile.price,
+      isPublic: this.profile.isPublic
     });
   }
 

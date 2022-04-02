@@ -6,6 +6,7 @@ import lombok.Data;
 public class ProfileBasicDto {
 
     private Boolean active;
+    private Boolean isPublic;
     private String userName;
     private String profilePicture;
     private Double rating;

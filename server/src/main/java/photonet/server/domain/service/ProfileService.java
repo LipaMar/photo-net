@@ -54,6 +54,7 @@ public class ProfileService {
                            .city(dto.getCity())
                            .price(dto.getPrice())
                            .categories(categories)
+                           .isPublic(dto.getIsPublic())
                            .build();
     }
 

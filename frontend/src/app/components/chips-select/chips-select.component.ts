@@ -32,7 +32,7 @@ export class ChipsSelectComponent implements OnInit, OnChanges {
       this.chips.set(label, this.checked.indexOf(label) > -1);
     })
     this.chips.forEach((value, key) => {
-      const chip = this.chipList.chips.find(item => item.value == key);
+      const chip = this.chipList?.chips?.find(item => item.value == key);
       if (value) {
         this.values.push(key);
         chip?.select();

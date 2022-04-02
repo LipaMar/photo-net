@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {CommentDto, ProfileDto, ProfileUpdateDto, ScheduleDto} from "../../core/models/profile.models";
+import {CommentDto, ProfileDto, ProfileUpdateDto} from "../../core/models/profile.models";
 import {endpoints} from "../../core/const/consts";
 import {DomSanitizer} from "@angular/platform-browser";
 
@@ -19,7 +19,7 @@ export class ProfileService {
   }
 
   getProfileSimple(username: any): Observable<ProfileDto> {
-    return this.http.get<ProfileDto>(`${endpoints.profile}/${username}`, {params: new HttpParams().append("simple",true)});
+    return this.http.get<ProfileDto>(`${endpoints.profile}/${username}`, {params: new HttpParams().append("simple", true)});
   }
 
   isFollowed(userName: string | any): Observable<boolean> {

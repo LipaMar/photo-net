@@ -27,6 +27,8 @@ public class User {
     private String bio;
     @Column(nullable = false)
     private Boolean active;
+    @Column(nullable = false)
+    private Boolean isPublic;
     private String password;
     private String role;
     private BigDecimal price;

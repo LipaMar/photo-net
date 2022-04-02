@@ -25,7 +25,7 @@
                 <ul class="list-attributes">
                   <li class="city mb-1">{{profile.city}}</li>
                   <li class="gallery mb-1">{{profile.postsCount}}</li>
-                  <li class="price mb-1">{{profile.price}}</li>
+                  <li class="price mb-1">{{profile.price ?? '- '}}</li>
                   <li class="eye mb-1">{{profile.observers}}</li>
                   <li>
                     <star-rating [(rate)]="profile.rating"></star-rating>

@@ -1,6 +1,7 @@
 export interface DiscoverDto {
 
   active: boolean;
+  isPublic: boolean;
   userName: string;
   profilePicture: any;
   rating: number;

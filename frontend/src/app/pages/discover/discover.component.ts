@@ -8,7 +8,6 @@ import {SortComponent} from "../../components/sort/sort.component";
 import {SortParams} from "../../core/models/basic.models";
 import {CategoryService} from "../../dictionaries/category.service";
 import {Comparator} from "../../core/comparator";
-import {PostDisplay} from "../../core/models/profile.models";
 
 @Component({
   selector: 'app-discover',
@@ -77,7 +76,7 @@ export class DiscoverComponent implements OnInit, OnDestroy {
   }
 
   firstLetterUpper(str: string) {
-    return this.profileService.firstLetterUpper(str);
+    return str ? this.profileService.firstLetterUpper(str) : "-";
   }
 
   showPic(url: string) {

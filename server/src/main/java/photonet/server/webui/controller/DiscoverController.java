@@ -29,6 +29,7 @@ public class DiscoverController {
     public Page<PhotographerBasicDto> getProfiles(
             @And({
                     @Spec(path = "active", defaultVal = "true", spec = Equal.class),
+                    @Spec(path = "isPublic", defaultVal = "true", spec = Equal.class),
                     @Spec(path = "userName", params = "userName", spec = LikeIgnoreCase.class),
                     @Spec(path = "rating", params = "ratingMoreThan", spec = GreaterThanOrEqual.class),
                     @Spec(path = "rating", params = "ratingLessThan", spec = LessThanOrEqual.class),

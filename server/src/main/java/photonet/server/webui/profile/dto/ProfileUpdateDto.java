@@ -9,6 +9,7 @@ import java.util.List;
 public class ProfileUpdateDto {
 
     private String userName;
+    private Boolean isPublic;
     private String bio;
     private String city;
     private BigDecimal price;

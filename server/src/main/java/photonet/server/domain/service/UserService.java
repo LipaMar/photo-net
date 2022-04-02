@@ -39,6 +39,7 @@ public class UserService {
         }
         User toSave = userMapper.mapUserDtoToUser(user);
         toSave.setRole(Roles.USER);
+        toSave.setIsPublic(false);
         userRepository.save(toSave);
     }
 
