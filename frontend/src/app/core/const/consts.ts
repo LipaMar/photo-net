@@ -9,6 +9,7 @@ export const routes = {
   myProfile: "/my-profile",
   myMeetings: "/my-meetings",
   messages: "/messages",
+  admin_panel: "/admin-panel",
   instagram: "#",
   facebook: "#",
   twitter: "#"
@@ -32,5 +33,6 @@ export const endpoints = {
   message: `${environment.apiUrl}/chat/message`,
   post: `${environment.apiUrl}/post`,
   like: `${environment.apiUrl}/post/like`,
+  users_info: `${environment.apiUrl}/users`,
 
 };

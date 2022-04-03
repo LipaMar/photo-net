@@ -9,8 +9,8 @@ import photonet.server.core.exception.ForbiddenRestException;
 import photonet.server.core.utils.SecurityUtils;
 import photonet.server.domain.entity.AppLike;
 import photonet.server.domain.entity.Follow;
-import photonet.server.domain.entity.Opinion;
 import photonet.server.domain.entity.Post;
+import photonet.server.domain.entity.User;
 import photonet.server.domain.mapper.PostMapper;
 import photonet.server.domain.posts.repository.LikeRepository;
 import photonet.server.domain.posts.repository.PostRepository;
@@ -42,6 +42,7 @@ public class PostService {
         List<Post> posts = new ArrayList<>();
         allFollowed.stream()
                    .map(Follow::getTarget)
+                   .filter(User::getActive)
                    .forEach(author -> posts.addAll(postRepository.findAllByAuthor(author)));
         return posts.stream().map(postMapper::mapToSimpleDto).collect(Collectors.toList());
     }

@@ -4,6 +4,7 @@
     "followed": "Obserwowani",
     "discover": "Odkryj",
     "myMeetings": "Moje sesje",
+    "panel": "Panel administratora",
     "profile": "Profil",
     "login": "Zaloguj się",
     "logout": "Wyloguj się",
@@ -15,8 +16,9 @@
   },
   "message": {
     "login": {
-     "success": "Pomyślnie zalogowano",
-     "failure": "Błędny login lub hasło"
+      "success": "Pomyślnie zalogowano",
+      "failure": "Błędny login lub hasło",
+      "bannedAccount": "Twoje konto zostało zawieszone"
     },
     "register": {
       "alreadyExist": "Użytkownik już istnieje",
@@ -40,19 +42,18 @@
       "register": "Zarejestruj się!"
     },
     "register": {
-     "header":  "Rejestracja",
-     "username": "Nazwa użytkownika",
-     "provideUsername":  "Podaj nazwę użytkownika",
-     "email": "Adres e-mail",
-     "provideEmail":  "Podaj prawidłowy adres e-mail",
-     "password": "Hasło",
-     "providePass":  "Hasło musi się składać z conajmniej 6 znaków",
-     "repeatPassword": "Powtórz hasło",
-     "repeatPasswordError": "Hasła muszą być identyczne",
-     "registerButton": "Zarejestruj się"
+      "header": "Rejestracja",
+      "username": "Nazwa użytkownika",
+      "provideUsername": "Podaj nazwę użytkownika",
+      "email": "Adres e-mail",
+      "provideEmail": "Podaj prawidłowy adres e-mail",
+      "password": "Hasło",
+      "providePass": "Hasło musi się składać z conajmniej 6 znaków",
+      "repeatPassword": "Powtórz hasło",
+      "repeatPasswordError": "Hasła muszą być identyczne",
+      "registerButton": "Zarejestruj się"
     },
-    "discover":{
-
+    "discover": {
     }
   },
   "filters": {

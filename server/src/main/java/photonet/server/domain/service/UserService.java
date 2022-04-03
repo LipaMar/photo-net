@@ -20,7 +20,12 @@ import photonet.server.domain.repository.UserRepository;
 import photonet.server.domain.service.upload.FileService;
 import photonet.server.webui.dto.LoginDto;
 import photonet.server.webui.dto.UserDto;
+import photonet.server.webui.dto.UserInfoDto;
 import photonet.server.webui.profile.dto.ProfileDto;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -95,4 +100,17 @@ public class UserService {
         return userRepository.findByUserName(SecurityUtils.loggedUserName()).orElseThrow(NotFoundRestException::new);
     }
 
+    public List<UserInfoDto> getUsersInfo() {
+        return userRepository.findAll().stream().map(userMapper::userToUserInfo).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void unban(String userName) {
+        userRepository.updateActiveStatus(userName, true);
+    }
+
+    @Transactional
+    public void ban(String userName) {
+        userRepository.updateActiveStatus(userName, false);
+    }
 }

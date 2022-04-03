@@ -1,10 +1,11 @@
 <nav class="navbar navbar-expand-xl">
-  <div class="container">
+  <div class="container-fluid nav-options">
     <a class="logo" href="{{homeRef}}">
       <img src="assets/images/logo.svg" alt="logo"/>
     </a>
     <div [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse" id="navbarSupportedContent">
       <ul *ngIf="isLogged" class="navbar-nav mr-auto">
+        <li *ngIf="isAdmin"><a href="{{panelRef}}">{{ 'nav.panel' | translate}}</a></li>
         <li><a href="{{followedRef}}">{{ 'nav.followed' | translate}}</a></li>
         <li><a href="{{discoverRef}}">{{ 'nav.discover' | translate}}</a></li>
         <li><a href="{{myMeetingsRef}}">{{ 'nav.myMeetings' | translate}}</a></li>

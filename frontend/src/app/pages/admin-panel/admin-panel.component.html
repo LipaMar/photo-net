@@ -1,0 +1,51 @@
+<div class="container">
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No.</th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef> Nazwa użytkownika</th>
+      <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email</th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef> Aktywny</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox class="ps-3"
+                      color="primary"
+                      disableRipple
+                      (click)="$event.preventDefault()"
+                      [checked]="element.active">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="operations">
+      <th mat-header-cell *matHeaderCellDef> Operacje</th>
+      <td mat-cell *matCellDef="let element">
+        <button *ngIf="element.active" class="btn btn-danger" (click)="ban(element)">Dezaktywuj</button>
+        <button *ngIf="!element.active" class="btn btn-success" (click)="unban(element)">Aktywuj</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+</div>

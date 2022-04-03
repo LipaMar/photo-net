@@ -11,6 +11,8 @@ import {OrderComponent} from "./pages/order/order.component";
 import {MyMeetingsComponent} from "./pages/my-meetings/my-meetings.component";
 import {MessagesComponent} from "./pages/messages/messages.component";
 import {FollowedComponent} from "./pages/followed/followed.component";
+import {IsAdminGuard} from "./guards/is-admin.guard";
+import {AdminPanelComponent} from "./pages/admin-panel/admin-panel.component";
 
 const appRoutes: Routes = [
   {path: "home", component: HomeComponent},
@@ -23,6 +25,7 @@ const appRoutes: Routes = [
   {path: "confirm-meeting", canActivate: [IsLoggedGuard], component: OrderComponent},
   {path: "messages", canActivate: [IsLoggedGuard], component: MessagesComponent},
   {path: "followed", canActivate: [IsLoggedGuard], component: FollowedComponent},
+  {path: "admin-panel", canActivate: [IsLoggedGuard, IsAdminGuard], component: AdminPanelComponent},
   {path: "**", component: NotFoundComponent},
 ];
 

@@ -24,7 +24,7 @@
                                 [disabled]="!inEditMode">Widoczny w "Odkryj"</mat-checkbox></span>
             <h1>{{profile?.userName}}</h1>
             <div>
-              <ng-container *ngIf="!isMyProfile">
+              <ng-container *ngIf="!isMyProfile && profile?.active">
                 <button #followBtn class="mx-2 btn btn-brown" (click)="followOnClick()">Obserwuj</button>
                 <button class="btn btn-brown mx-2" (click)="messageToClicked()">Wiadomość</button>
               </ng-container>
@@ -39,7 +39,7 @@
 
           </div>
           <hr>
-          <div class="about-me">
+          <div class="about-me" *ngIf="profile?.active">
             <h5>O mnie</h5>
             <div class="about-me-inputs">
               <div *ngIf="isMyProfile">
@@ -76,10 +76,11 @@
               </chips-select>
             </div>
           </div>
+          <p class="text-center h3 alert-danger" *ngIf="!profile?.active">Konto zostało zawieszone</p>
         </form>
       </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="profile?.active">
       <div class="col-md-8 bg-light  p-2">
         <mat-tab-group>
           <mat-tab label="Zdjęcia({{profile?.postsCount}})">

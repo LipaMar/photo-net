@@ -35,4 +35,8 @@ export class LoginService {
   logout() {
     localStorage.removeItem("token");
   }
+
+  getRole() {
+    return this.http.get<string>(endpoints.users_info);
+  }
 }

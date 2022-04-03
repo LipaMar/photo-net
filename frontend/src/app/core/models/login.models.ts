@@ -7,4 +7,5 @@ export class Credentials {
 export interface LoggedDto {
   userName: string;
   active: boolean;
+  role: string;
 }

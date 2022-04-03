@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit, ModalConfig {
 
   modalTitle: string = 'page.login.header';
   logged: Promise<boolean>;
-  credentials = new Credentials('', '');
   form = this.fb.group({
     login: ["", [Validators.required]],
     password: ["", [Validators.required]]
@@ -40,11 +39,15 @@ export class LoginComponent implements OnInit, ModalConfig {
   }
 
   submitLogin() {
-    this.service.login(this.credentials)
+    const credentials = new Credentials(this.form.controls.login.value,this.form.controls.password.value);
+    this.service.login(credentials)
       .subscribe(data => {
-          if (data) {
+        if(data && !data.active){
+          this.showBannedAccountMess();
+        }
+        else if (data) {
             this.showSuccessMess();
-            localStorage.setItem("token", this.service.getToken(this.credentials));
+            localStorage.setItem("token", this.service.getToken(credentials));
             localStorage.setItem("isLogged", 'true');
             this.service.onLogin$.next(true);
             this.service.onLogin$.complete();
@@ -70,6 +73,10 @@ export class LoginComponent implements OnInit, ModalConfig {
 
   showLoginFailureMess() {
     this.toastr.error("message.login.failure");
+  }
+
+  showBannedAccountMess() {
+    this.toastr.error("message.login.bannedAccount");
   }
 
   async shouldClose() {

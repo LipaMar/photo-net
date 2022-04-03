@@ -17,11 +17,13 @@ import {DiscoverService} from "../../pages/discover/discover.service";
 export class NavbarComponent implements OnInit, OnDestroy {
 
   isLogged: boolean;
+  isAdmin: boolean;
   userName: string = '';
   subscriptions = new SubscriptionContainer();
   modalConfig: ModalConfig = this.login;
   isNavbarCollapsed = true;
 
+  panelRef = routes.admin_panel;
   followedRef = routes.followed;
   discoverRef = routes.discover;
   profileRef = routes.myProfile;
@@ -61,8 +63,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (data) {
       this.userName = data.userName;
       this.isLogged = data.active && data.userName.length > 0;
+      this.isAdmin = this.isLogged && data.role === 'ADMIN';
     } else {
       this.isLogged = false;
+      this.isAdmin = false;
       this.service.logout();
     }
   }

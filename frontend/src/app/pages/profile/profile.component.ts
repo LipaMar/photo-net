@@ -142,6 +142,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   styleFollowBtn(bool: boolean) {
+    if(!this.followBtn){
+      return;
+    }
     if (bool) {
       this.followBtn.nativeElement.innerHTML = "Nie obserwuj";
       this.followBtn.nativeElement.className = "mx-2 btn btn-dark-brown";

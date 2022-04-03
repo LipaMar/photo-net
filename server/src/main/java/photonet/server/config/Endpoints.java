@@ -21,4 +21,5 @@ public class Endpoints {
     public static final String MESSAGE = "/message";
     public static final String POST = "/post";
     public static final String LIKE = "/like";
+    public static final String USERS = "/users";
 }

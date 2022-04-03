@@ -1,22 +1,18 @@
 <div class="container">
-  <form #loginForm="ngForm" (ngSubmit)="submitLogin()">
+  <form [formGroup]="form" #loginForm="ngForm" (ngSubmit)="submitLogin()">
     <div class="form-group">
-      <label for="name">{{'page.login.login' | translate}}</label>
-      <input type="text" class="form-control" id="name"
-             required
-             [(ngModel)]="credentials.username" name="name"
-             #name="ngModel">
-      <div [hidden]="name.valid || name.pristine"
+      <label>{{'page.login.login' | translate}}</label>
+      <input class="form-control" formControlName="login" >
+      <div *ngIf="form.controls.login.errors && form.controls.login.touched"
            class="alert alert-danger">
         {{'page.login.provideLogin' | translate}}
       </div>
     </div>
 
     <div class="form-group">
-      <label for="password">{{'page.login.password' | translate}}</label>
-      <input required type="password" class="form-control" id="password"
-             [(ngModel)]="credentials.password" name="password" #password="ngModel">
-      <div class="form-control" [hidden]="password.valid || password.pristine"
+      <label>{{'page.login.password' | translate}}</label>
+      <input type="password" class="form-control" formControlName="password">
+      <div *ngIf="form.controls.password.errors && form.controls.password.touched"
            class="alert alert-danger">
         {{'page.login.providePass' | translate}}
       </div>

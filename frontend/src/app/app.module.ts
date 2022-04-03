@@ -40,6 +40,7 @@ import { FollowedComponent } from './pages/followed/followed.component';
 import {NgxMasonryModule} from "ngx-masonry";
 import {MasonryGalleryModule} from "ngx-masonry-gallery";
 import { FullScreenModalComponent } from './components/full-screen-modal/full-screen-modal.component';
+import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { FullScreenModalComponent } from './components/full-screen-modal/full-sc
     MessagesComponent,
     FollowedComponent,
     FullScreenModalComponent,
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,
