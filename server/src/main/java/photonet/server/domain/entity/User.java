@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 @AllArgsConstructor
+@Table(name = "app_user")
 public class User {
 
     @Id
@@ -23,7 +24,7 @@ public class User {
     private String userName;
     @Column(unique = true)
     private String email;
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(length = 4000)
     private String bio;
     @Column(nullable = false)
     private Boolean active;
@@ -48,7 +49,7 @@ public class User {
 
     @Formula("(select count(r.id) from rate r where r.target_id = id)")
     private Integer ratingCount;
-    @Formula("(select avg(CAST(r.rating as double)) from rate r where r.target_id = id)")
+    @Formula("(select avg(r.rating) from rate r where r.target_id = id)")
     private Double rating;
 
 }

@@ -8,7 +8,6 @@ import photonet.server.domain.entity.Opinion;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Table(name = "rate")
 @Entity
 @Setter
 @Getter
