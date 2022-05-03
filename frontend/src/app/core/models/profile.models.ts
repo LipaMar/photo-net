@@ -19,7 +19,8 @@ export interface PostDisplay extends PostDto {
 export interface ProfileDto extends DiscoverDto {
   bio: string,
   posts: PostDto[],
-  comments: CommentDto[] | any
+  comments: CommentDto[] | any,
+  email: string,
 }
 
 export interface ProfileUpdateDto extends DiscoverDto {

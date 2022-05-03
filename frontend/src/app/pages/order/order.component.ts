@@ -22,6 +22,7 @@ export class OrderComponent implements OnInit {
   hour: string;
   client: string;
   photographer: string;
+  email: string;
   price: number;
   place: string;
 
@@ -43,12 +44,13 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptions.add = this.scheduleService.getMeetingInfo(this.meetingId).subscribe(meeting => {
       this.date = new Date(meeting.date);
-      this.hour = meeting.timeStart;
+      this.hour = meeting.timeStart.slice(0,-3);
       this.dateToDisplay = this.datePipe.transform(this.date, 'EEEE, d MMMM y', undefined, 'pl-PL');
     });
     this.subscriptions.add = this.profileService.getProfileDetails(this.photographer).subscribe(photographer => {
       this.price = photographer.price;
       this.place = photographer.city;
+      this.email = photographer.email;
     });
   }
 

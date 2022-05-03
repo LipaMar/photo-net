@@ -13,6 +13,7 @@ import java.util.List;
 public class ProfileDto extends PhotographerBasicDto {
 
     private String bio;
+    private String email;
     private List<PostSimpleDto> posts;
     private List<CommentDto> comments;
 
