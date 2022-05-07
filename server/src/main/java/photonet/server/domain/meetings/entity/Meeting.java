@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import static photonet.server.core.enums.MeetingStatus.*;
+
 @Entity
 @Getter
 @Setter
@@ -30,5 +32,16 @@ public class Meeting {
     @ManyToOne
     private User userBooked;
 
+    public static void ifPastDateThenUpdateStatus(Meeting meeting) {
+        final var date = meeting.getDate();
+        final var time = meeting.getTimeStart();
+        if (date.isBefore(LocalDate.now()) || (date.isEqual(LocalDate.now()) && time.isBefore(LocalTime.now()))) {
+            if (meeting.getStatus() == FREE) {
+                meeting.setStatus(DELETED);
+            } else if (meeting.getStatus() != DELETED) {
+                meeting.setStatus(ARCHIVAL);
+            }
+        }
+    }
 
 }

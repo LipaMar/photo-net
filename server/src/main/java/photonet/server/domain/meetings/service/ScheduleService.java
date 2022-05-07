@@ -54,22 +54,12 @@ public class ScheduleService {
         final var meetings = schedule.getMeetings();
         Stream.concat(meetingsAsClient.stream(), meetings.stream())
               .collect(Collectors.toList())
-              .forEach(this::ifPastDateThenUpdateStatus);
+              .forEach(Meeting::ifPastDateThenUpdateStatus);
         meetingRepository.saveAll(meetings);
         meetingRepository.deleteAllByStatus(DELETED);
     }
 
-    private void ifPastDateThenUpdateStatus(Meeting meeting) {
-        final var date = meeting.getDate();
-        final var time = meeting.getTimeStart();
-        if (date.isBefore(LocalDate.now()) || (date.isEqual(LocalDate.now()) && time.isBefore(LocalTime.now()))) {
-            if (meeting.getStatus() == FREE) {
-                meeting.setStatus(DELETED);
-            } else if (meeting.getStatus() != DELETED) {
-                meeting.setStatus(ARCHIVAL);
-            }
-        }
-    }
+
 
     private Schedule mockSchedule() {
         var schedule = new Schedule();
@@ -159,7 +149,7 @@ public class ScheduleService {
     @Transactional
     public void updateMeetingStatus(Long meetingId, MeetingStatus status) {
         final var meeting = meetingRepository.findById(meetingId).orElseThrow();
-        ifPastDateThenUpdateStatus(meeting);
+        Meeting.ifPastDateThenUpdateStatus(meeting);
         if (meeting.getStatus() == ARCHIVAL || meeting.getStatus() == DELETED) {
             return;
         }
