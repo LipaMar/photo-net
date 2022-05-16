@@ -55,7 +55,7 @@
                 <br>
                 <mat-form-field>
                   <mat-label>Cena za sesję</mat-label>
-                  <input matInput formControlName="price" type="number">
+                  <input matInput formControlName="price" type="number" [min]="0">
                   <span matSuffix>zł</span>
                 </mat-form-field>
               </div>

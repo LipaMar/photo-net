@@ -142,7 +142,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   styleFollowBtn(bool: boolean) {
-    if(!this.followBtn){
+    if (!this.followBtn) {
       return;
     }
     if (bool) {
@@ -207,19 +207,32 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onSaveClicked() {
+    if (this.profileUpdateForm.controls.price.value < 0) {
+      this.toastr.error("Cena nie może być ujemna")
+      return;
+    } else if (this.profile.categories.length == 0) {
+      this.toastr.error("Brak wybranej kategorii zdjęć")
+      return;
+    }
     this.profileUpdateForm.disable();
     this.inEditMode = !this.inEditMode;
+    let city = this.profileUpdateForm.get("city")?.value;
+    this.profileUpdateForm.controls.city.setValue(this.capitalizeFirstLetter(city));
     let updated = {
       userName: this.profile.userName,
       isPublic: this.profileUpdateForm.controls.isPublic.value,
       bio: this.profileUpdateForm.get("bio")?.value,
-      city: this.profileUpdateForm.get("city")?.value,
+      city: city,
       price: this.profileUpdateForm.get("price")?.value,
       categories: this.profile.categories
     } as ProfileUpdateDto;
     this.subscriptions.add = this.profileService.updateProfile(updated).subscribe(response => {
       this.profile = response;
     })
+  }
+
+  private capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   private setFormFieldsFromProfile() {
