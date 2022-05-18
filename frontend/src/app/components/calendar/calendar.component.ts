@@ -119,6 +119,11 @@ export class CalendarComponent implements OnInit, OnChanges {
       this.timePicker.reset();
       this.hoursSelected = this.getDtoHoursForDate(pickedDate, [FREE]);
       this.timePicker.removeValues(this.getDtoHoursForDate(pickedDate, [ACCEPTED, NEW, ARCHIVAL, CANCELED]));
+      const today = new Date();
+      if(this.isDateEqual(today, pickedDate)){
+        const toRemove = [...Array(today.getHours()+1)].map((_,i)=>String(i).padStart(2, '0')).map((i)=>`${i}:00`);
+        this.timePicker.removeValues(toRemove);
+      }
       this.dateSelected = pickedDate;
       await this.modalComponent.open();
 
@@ -131,7 +136,10 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   onScheduleHourSave(): boolean {
     let meetings: MeetingDto[] = this.createMeetings();
-    this.savedSchedule.emit({meetings: meetings, saveDate: this.datePipe.transform(this.dateSelected, DatePattern.DATE_WITH_DASH)});
+    this.savedSchedule.emit({
+      meetings: meetings,
+      saveDate: this.datePipe.transform(this.dateSelected, DatePattern.DATE_WITH_DASH)
+    });
     return true;
   }
 
@@ -142,8 +150,9 @@ export class CalendarComponent implements OnInit, OnChanges {
   private getDtoHoursForDate(pickedDate: Date, statuses: MeetingStatus[]): string[] {
     const result: string[] = [];
     this.schedule.meetings?.forEach(meeting => {
+      const timeStart = meeting.timeStart;
       if (this.hasMeetingStatus(meeting, pickedDate, statuses)) {
-        result.push(meeting.timeStart.slice(0, -3));
+        result.push(timeStart.slice(0, -3));
       }
     });
     return result;
@@ -188,5 +197,9 @@ export class CalendarComponent implements OnInit, OnChanges {
     if (date) {
       this.clientBooking.emit({date: date, hour: hour});
     }
+  }
+
+  private isNotPast(timeStart: string): boolean {
+    return new Date().getHours() < Number.parseInt(timeStart);
   }
 }
