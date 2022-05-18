@@ -41,5 +41,6 @@ export class FilterComponent implements OnInit {
     this.filtersParam.categories = this.categoryFilter.resetTo([]);
     this.filtersParam.ratingMoreThan = -1;
     this.filterForm.reset();
+    this.filter();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OrderService} from "./order.service";
 import {Router} from "@angular/router";
 import {routes} from "../../core/const/consts";
@@ -14,7 +14,7 @@ import {DatePattern} from "../../core/enums/datePattern";
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss']
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent implements OnInit, OnDestroy {
 
   meetingId: number;
   date: Date;
@@ -33,7 +33,7 @@ export class OrderComponent implements OnInit {
               private scheduleService: ScheduleService,
               private datePipe: DatePipe,
               private router: Router) {
-    if(!this.orderService.isPopulated()){
+    if (!this.orderService.isPopulated()) {
       this.router.navigateByUrl(routes.home);
     }
     this.client = orderService.client;
@@ -44,7 +44,7 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptions.add = this.scheduleService.getMeetingInfo(this.meetingId).subscribe(meeting => {
       this.date = new Date(meeting.date);
-      this.hour = meeting.timeStart.slice(0,-3);
+      this.hour = meeting.timeStart.slice(0, -3);
       this.dateToDisplay = this.datePipe.transform(this.date, 'EEEE, d MMMM y', undefined, 'pl-PL');
     });
     this.subscriptions.add = this.profileService.getProfileDetails(this.photographer).subscribe(photographer => {
@@ -54,17 +54,28 @@ export class OrderComponent implements OnInit {
     });
   }
 
-  onClickAccept(){
+  onClickAccept() {
     const date = this.datePipe.transform(this.date, DatePattern.DATE_WITH_DASH);
-    if(date){
-      const meeting: BookMeetingDto = {id: this.meetingId,
+    if (date) {
+      const meeting: BookMeetingDto = {
+        id: this.meetingId,
         date: date,
         timeStart: this.hour,
         price: this.price,
-        photographer: this.photographer};
+        photographer: this.photographer
+      };
       this.subscriptions.add = this.orderService.bookAMeeting(meeting).subscribe();
       this.router.navigateByUrl(routes.myMeetings);
     }
+  }
+
+  onClickCancel() {
+
+      this.router.navigateByUrl(`${routes.profile}/${this.photographer}`);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.dispose();
   }
 
 }

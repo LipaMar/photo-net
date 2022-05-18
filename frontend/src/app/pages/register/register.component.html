@@ -41,7 +41,7 @@
 
         </div>
 
-        <button type="submit" class="btn btn-brown">{{'page.register.registerButton' | translate}}</button>
+        <button type="submit" class="btn btn-brown" [disabled]="!form.valid">{{'page.register.registerButton' | translate}}</button>
 
       </form>
     </div>

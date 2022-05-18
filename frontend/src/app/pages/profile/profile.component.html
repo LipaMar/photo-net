@@ -76,7 +76,7 @@
               </chips-select>
             </div>
           </div>
-          <p class="text-center h3 alert-danger" *ngIf="!profile?.active">Konto zostało zawieszone</p>
+          <p class="text-center h3 alert-danger" *ngIf="profile && !profile.active">Konto zostało zawieszone</p>
         </form>
       </div>
     </div>
