@@ -1,7 +1,6 @@
 package photonet.server.domain.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +23,6 @@ import photonet.server.webui.dto.UserInfoDto;
 import photonet.server.webui.profile.dto.ProfileDto;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,7 +32,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final PhotoRepository photoRepository;
     private final UserMapper userMapper;
-    @Qualifier("CloudService")
     private final FileService fileService;
 
     @Transactional

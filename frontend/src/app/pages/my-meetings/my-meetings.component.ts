@@ -119,8 +119,8 @@ export class MyMeetingsComponent implements OnInit, OnDestroy {
     if (element.status === MeetingStatus.ARCHIVAL ||
       element.status === MeetingStatus.CANCELED) {
       result += " bg-darken";
-    } else if (this.calculateDiff(element.date) <= 1) {
-      result += " bg-danger";
+    } else if (element.status === MeetingStatus.ACCEPTED) {
+      result += " bg-blue";
     }
     return result;
   }

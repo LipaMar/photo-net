@@ -2,8 +2,10 @@
   <div class="container-fluid">
     <div class="row justify-content-between">
       <div class="col-md-5 bg-light">
-        <img class="rounded-3 profile-pic" [src]="showPic(profile?.profilePicture)"
-             alt="Zdjęcie profilowe"/>
+        <div class="profile-pic">
+          <img class="rounded-3" [src]="showPic(profile?.profilePicture)"
+                alt="Zdjęcie profilowe"/>
+        </div>
         <button *ngIf="isMyProfile" class="my-1 float-end" mat-raised-button (click)="fileInput.click()">
           Ustaw zdjęcie profilowe
           <input hidden #fileInput (click)="fileInput.value =''" (change)="onFileSelected($event)" type="file">

@@ -1,7 +1,6 @@
 package photonet.server.domain.posts.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,7 +32,6 @@ public class PostService {
     private final PostMapper postMapper;
     private final UserService userService;
     private final FollowService followService;
-    @Qualifier("CloudService")
     private final FileService fileService;
 
     public List<PostSimpleDto> getPostsOfFollowedUsers() {

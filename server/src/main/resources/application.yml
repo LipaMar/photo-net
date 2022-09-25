@@ -14,3 +14,23 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+---
+spring:
+  config:
+    activate:
+      on-profile: cloud
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: zaq1@WSX
+    url: jdbc:postgresql://localhost/photonet
+  cloud:
+    gcp:
+      project-id: ringed-choir-337013
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  jpa:
+    hibernate:
+      ddl-auto: update
