@@ -1,0 +1,3 @@
+FROM postgres
+ENV POSTGRES_DB=photonet
+ENV POSTGRES_PASSWORD=zaq1@WSX

@@ -1,0 +1,5 @@
+build:
+  docker:
+    db: /db/Dockerfile
+    server: /server/Dockerfile
+    frontend: /frontend/Dockerfile
