@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  server:
+    build: server
+    container_name: server
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=jdbc:postgresql://db:5432/photonet
+      - POSTGRES_PASSWORD=zaq1@WSX
+    networks:
+      - network
+  db:
+    image: postgres
+    container_name: db
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - network
+    environment:
+      - POSTGRES_DB=photonet
+      - POSTGRES_PASSWORD=zaq1@WSX
+  frontend:
+    build: frontend
+    container_name: front
+    ports:
+      - "4200:80"
+    volumes:
+      - front:/app/dist/frontend
+    networks:
+      - network
+volumes:
+  db:
+  front:
+networks:
+  network:
