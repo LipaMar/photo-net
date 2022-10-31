@@ -1,12 +1,11 @@
-FROM openjdk:17-alpine
+FROM maven:3.8.6-eclipse-temurin-17-alpine
 
-COPY .mvn ./.mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:resolve
+COPY pom.xml ./
+RUN mvn dependency:resolve
 
 COPY src ./src
 
 EXPOSE 8080
 
-CMD ["./mvnw","spring-boot:run"]
+CMD ["mvn","spring-boot:run"]
 
