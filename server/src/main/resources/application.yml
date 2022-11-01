@@ -2,11 +2,14 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: zaq1@WSX
-    url: jdbc:postgresql://localhost/photonet
+    password: ${POSTGRES_PASSWORD}
+    url: ${DATABASE_URL}
   cloud:
     gcp:
-      project-id: ringed-choir-337013
+      core:
+        enabled: false
+      storage:
+        enabled: false
   servlet:
     multipart:
       max-file-size: 10MB
@@ -22,8 +25,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: zaq1@WSX
-    url: jdbc:postgresql://localhost/photonet
+    password: ${POSTGRES_PASSWORD}
+    url: ${DATABASE_URL}
   cloud:
     gcp:
       project-id: ringed-choir-337013
