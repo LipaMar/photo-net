@@ -7,8 +7,8 @@ import lombok.Data;
 @Builder
 public class LoginDto {
 
-    private String userName;
-    private Boolean active;
-    private String role;
+  private String userName;
+  private Boolean active;
+  private String role;
 
 }

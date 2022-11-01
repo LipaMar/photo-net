@@ -55,4 +55,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Other ###
 /server/.gitignore
+/server/photos/

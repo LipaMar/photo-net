@@ -10,17 +10,17 @@ import photonet.server.webui.dto.CommentDto;
 @Mapper(uses = {UserMapper.class})
 public interface CommentMapper extends OpinionMapper<Comment> {
 
-    CommentDto entityToDto(Comment comment);
+  CommentDto entityToDto(Comment comment);
 
-    @Mapping(target = "author", ignore = true)
-    @Mapping(target = "target", ignore = true)
-    Comment dtoToEntity(CommentDto commentDto);
+  @Mapping(target = "author", ignore = true)
+  @Mapping(target = "target", ignore = true)
+  Comment dtoToEntity(CommentDto commentDto);
 
-    @AfterMapping
-    default void changeAuthorIfAnonymous(@MappingTarget CommentDto dto, Comment comment) {
-        if (comment.isAnonymous()) {
-            dto.setAuthor("Anonim");
-        }
+  @AfterMapping
+  default void changeAuthorIfAnonymous(@MappingTarget CommentDto dto, Comment comment) {
+    if (comment.isAnonymous()) {
+      dto.setAuthor("Anonim");
     }
+  }
 
 }

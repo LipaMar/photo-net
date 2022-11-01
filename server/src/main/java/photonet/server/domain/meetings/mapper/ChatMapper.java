@@ -12,9 +12,9 @@ import photonet.server.domain.messages.entity.Message;
 public interface ChatMapper {
 
 
-    ChatRoomDto mapChatRoomToDto(ChatRoom chatRoom);
+  ChatRoomDto mapChatRoomToDto(ChatRoom chatRoom);
 
-    @Mapping(target = "chatRoomId", source = "chatRoom.id")
-    MessageDto mapMessageToDto(Message message);
+  @Mapping(target = "chatRoomId", source = "chatRoom.id")
+  MessageDto mapMessageToDto(Message message);
 
 }

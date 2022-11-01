@@ -1,15 +1,12 @@
 package photonet.server.domain.entity;
 
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import photonet.server.domain.entity.Opinion;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Date;
 
 @Entity
 @Setter
@@ -18,9 +15,9 @@ import java.util.Date;
 @SuperBuilder
 public class Comment extends Opinion {
 
-    @Column(columnDefinition="TEXT")
-    private String content;
-    private Date added;
-    private boolean anonymous;
+  @Column(columnDefinition = "TEXT")
+  private String content;
+  private Date added;
+  private boolean anonymous;
 
 }

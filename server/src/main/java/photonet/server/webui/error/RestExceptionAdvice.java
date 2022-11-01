@@ -10,15 +10,16 @@ import photonet.server.core.exception.ForbiddenRestException;
 @RestControllerAdvice
 public class RestExceptionAdvice {
 
-    @ExceptionHandler({AlreadyExistRestException.class})
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorMessage alreadyExists(AlreadyExistRestException e) {
-        return ErrorMessage.builder().status(e.getHttpStatus()).message(e.getMessage()).build();
-    }
-    @ExceptionHandler({ForbiddenRestException.class})
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ErrorMessage alreadyExists(ForbiddenRestException e) {
-        return ErrorMessage.builder().status(e.getHttpStatus()).message(e.getMessage()).build();
-    }
+  @ExceptionHandler({AlreadyExistRestException.class})
+  @ResponseStatus(HttpStatus.CONFLICT)
+  public ErrorMessage alreadyExists(AlreadyExistRestException e) {
+    return ErrorMessage.builder().status(e.getHttpStatus()).message(e.getMessage()).build();
+  }
+
+  @ExceptionHandler({ForbiddenRestException.class})
+  @ResponseStatus(HttpStatus.FORBIDDEN)
+  public ErrorMessage alreadyExists(ForbiddenRestException e) {
+    return ErrorMessage.builder().status(e.getHttpStatus()).message(e.getMessage()).build();
+  }
 
 }

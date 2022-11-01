@@ -17,25 +17,25 @@ import photonet.server.webui.dto.ScheduleDto;
 @Setter
 public abstract class ScheduleMapper {
 
-    @Autowired
-    private UserRepository userRepository;
+  @Autowired
+  private UserRepository userRepository;
 
-    public abstract ScheduleDto scheduleToDto(Schedule schedule);
+  public abstract ScheduleDto scheduleToDto(Schedule schedule);
 
-    @Mapping(target = "owner", source = "schedule.owner")
-    public abstract MeetingDto meetingToDto(Meeting meeting);
+  @Mapping(target = "owner", source = "schedule.owner")
+  public abstract MeetingDto meetingToDto(Meeting meeting);
 
-    public abstract Schedule ScheduleDtoToEntity(ScheduleDto dto);
+  public abstract Schedule ScheduleDtoToEntity(ScheduleDto dto);
 
-    public abstract Meeting MeetingDtoToEntity(MeetingDto dto);
+  public abstract Meeting MeetingDtoToEntity(MeetingDto dto);
 
 
-    public User findUserByUserName(String userName) {
-        if(userName == null ) {
-            return null;
-        }
-        return userRepository.findByUserName(userName)
-                             .orElseThrow(NotFoundRestException::new);
+  public User findUserByUserName(String userName) {
+    if (userName == null) {
+      return null;
     }
+    return userRepository.findByUserName(userName)
+        .orElseThrow(NotFoundRestException::new);
+  }
 
 }

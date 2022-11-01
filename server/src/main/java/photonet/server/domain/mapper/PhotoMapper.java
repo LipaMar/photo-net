@@ -9,15 +9,15 @@ import photonet.server.domain.service.upload.FileService;
 @Mapper
 public abstract class PhotoMapper {
 
-    @Autowired
-    private FileService fileService;
+  @Autowired
+  private FileService fileService;
 
-    public byte[] getPhotoBlob(Photo photo) {
-        return photo == null ? null : fileService.getBlob(photo.getPath());
-    }
+  public byte[] getPhotoBlob(Photo photo) {
+    return photo == null ? null : fileService.getBlob(photo.getPath());
+  }
 
-    public String getPhotoLink(Photo photo) {
-        return photo == null ? null : fileService.getUrl(photo.getPath());
-    }
+  public String getPhotoLink(Photo photo) {
+    return photo == null ? null : fileService.getUrl(photo.getPath());
+  }
 
 }

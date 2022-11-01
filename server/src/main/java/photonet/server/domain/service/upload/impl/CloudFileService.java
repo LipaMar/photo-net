@@ -19,33 +19,34 @@ import photonet.server.domain.service.upload.FileService;
 @RequiredArgsConstructor
 class CloudFileService implements FileService {
 
-    private final String BUCKET_NAME = "photo-net";
-    private final GcpProjectIdProvider projectIdProvider;
-    private final Storage storage;
-    private final String separator = "/";
+  private final String BUCKET_NAME = "photo-net";
+  private final GcpProjectIdProvider projectIdProvider;
+  private final Storage storage;
+  private final String separator = "/";
 
-    @Override
-    public byte[] getBlob(String url) {
-        return storage.get(BlobId.of(BUCKET_NAME, url)).getContent();
-    }
+  @Override
+  public byte[] getBlob(String url) {
+    return storage.get(BlobId.of(BUCKET_NAME, url)).getContent();
+  }
 
-    @Override
-    public String getUrl(String url) {
-        return String.format("https://storage.googleapis.com/%s/%s", BUCKET_NAME, url);
-    }
+  @Override
+  public String getUrl(String url) {
+    return String.format("https://storage.googleapis.com/%s/%s", BUCKET_NAME, url);
+  }
 
-    @Override
-    public String saveFile(byte[] file) {
-        return uploadObject(projectIdProvider.getProjectId(), BUCKET_NAME, FileUtils.generatePath(DIR), file);
-    }
+  @Override
+  public String saveFile(byte[] file) {
+    return uploadObject(projectIdProvider.getProjectId(), BUCKET_NAME, FileUtils.generatePath(DIR),
+        file);
+  }
 
-    private String uploadObject(String projectId, String bucketName, String objectName, byte[] file) {
-        var path = FileUtils.generatePath(DIR, separator);
-        BlobId blobId = BlobId.of(bucketName, path);
-        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
-        storage.create(blobInfo, file);
+  private String uploadObject(String projectId, String bucketName, String objectName, byte[] file) {
+    var path = FileUtils.generatePath(DIR, separator);
+    BlobId blobId = BlobId.of(bucketName, path);
+    BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+    storage.create(blobInfo, file);
 
-        log.info("File uploaded to bucket {} as {}", bucketName, path);
-        return path;
-    }
+    log.info("File uploaded to bucket {} as {}", bucketName, path);
+    return path;
+  }
 }

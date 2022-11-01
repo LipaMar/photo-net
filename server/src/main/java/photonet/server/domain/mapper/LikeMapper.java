@@ -5,4 +5,5 @@ import photonet.server.domain.entity.AppLike;
 
 @Mapper
 public interface LikeMapper extends OpinionMapper<AppLike> {
+
 }

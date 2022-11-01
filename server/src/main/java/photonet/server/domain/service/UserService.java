@@ -1,5 +1,7 @@
 package photonet.server.domain.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -22,92 +24,92 @@ import photonet.server.webui.dto.UserDto;
 import photonet.server.webui.dto.UserInfoDto;
 import photonet.server.webui.profile.dto.ProfileDto;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
-    private final PhotoRepository photoRepository;
-    private final UserMapper userMapper;
-    private final FileService fileService;
+  private final UserRepository userRepository;
+  private final PhotoRepository photoRepository;
+  private final UserMapper userMapper;
+  private final FileService fileService;
 
-    @Transactional
-    public void register(UserDto user) {
-        if (userRepository.existsByUserNameOrEmail(user.getUserName(), user.getEmail())) {
-            throw new AlreadyExistRestException("Użytkownik o podanym loginie już istnieje", HttpStatus.CONFLICT);
-        }
-        User toSave = userMapper.mapUserDtoToUser(user);
-        toSave.setRole(Roles.USER);
-        toSave.setIsPublic(false);
-        userRepository.save(toSave);
+  @Transactional
+  public void register(UserDto user) {
+    if (userRepository.existsByUserNameOrEmail(user.getUserName(), user.getEmail())) {
+      throw new AlreadyExistRestException("Użytkownik o podanym loginie już istnieje",
+          HttpStatus.CONFLICT);
     }
+    User toSave = userMapper.mapUserDtoToUser(user);
+    toSave.setRole(Roles.USER);
+    toSave.setIsPublic(false);
+    userRepository.save(toSave);
+  }
 
-    public ProfileDto getProfile(String userName) {
-        return userRepository.findByUserName(userName)
-                             .map(userMapper::mapUserToProfileDto)
-                             .orElseThrow(NotFoundRestException::new);
-    }
+  public ProfileDto getProfile(String userName) {
+    return userRepository.findByUserName(userName)
+        .map(userMapper::mapUserToProfileDto)
+        .orElseThrow(NotFoundRestException::new);
+  }
 
-    public ProfileDto getLoggedUserProfile() {
-        return userRepository.findByUserName(SecurityUtils.loggedUserName())
-                             .map(userMapper::mapUserToProfileDto)
-                             .orElseThrow(NotFoundRestException::new);
-    }
+  public ProfileDto getLoggedUserProfile() {
+    return userRepository.findByUserName(SecurityUtils.loggedUserName())
+        .map(userMapper::mapUserToProfileDto)
+        .orElseThrow(NotFoundRestException::new);
+  }
 
-    public UserDetails getSecurityDetails(String username) {
-        return userRepository.findByUserName(username)
-                             .map(userMapper::mapUserToUserDetails)
-                             .orElseThrow(NotFoundRestException::new);
-    }
+  public UserDetails getSecurityDetails(String username) {
+    return userRepository.findByUserName(username)
+        .map(userMapper::mapUserToUserDetails)
+        .orElseThrow(NotFoundRestException::new);
+  }
 
-    @Transactional
-    public void uploadPicture(MultipartFile file) {
-        var user = userRepository.findByUserName(SecurityUtils.loggedUserName())
-                                 .orElseThrow(NotFoundRestException::new);
-        var filePath = fileService.saveFile(file);
-        var photo = savePhoto(filePath);
-        user.setProfilePicture(photo);
-        userRepository.save(user);
-    }
+  @Transactional
+  public void uploadPicture(MultipartFile file) {
+    var user = userRepository.findByUserName(SecurityUtils.loggedUserName())
+        .orElseThrow(NotFoundRestException::new);
+    var filePath = fileService.saveFile(file);
+    var photo = savePhoto(filePath);
+    user.setProfilePicture(photo);
+    userRepository.save(user);
+  }
 
-    public LoginDto isLogged() {
-        var auth = SecurityUtils.getAuthentication();
-        return userRepository.findByUserName(SecurityUtils.loggedUserName())
-                             .filter((x) -> auth.isAuthenticated())
-                             .filter((x) -> !(auth instanceof AnonymousAuthenticationToken))
-                             .map(userMapper::mapToLoginDto)
-                             .orElse(null);
-    }
+  public LoginDto isLogged() {
+    var auth = SecurityUtils.getAuthentication();
+    return userRepository.findByUserName(SecurityUtils.loggedUserName())
+        .filter((x) -> auth.isAuthenticated())
+        .filter((x) -> !(auth instanceof AnonymousAuthenticationToken))
+        .map(userMapper::mapToLoginDto)
+        .orElse(null);
+  }
 
-    @Transactional
-    public Photo savePhoto(String filePath) {
-        var photo = new Photo();
-        photo.setPath(filePath);
-        return photoRepository.save(photo);
-    }
+  @Transactional
+  public Photo savePhoto(String filePath) {
+    var photo = new Photo();
+    photo.setPath(filePath);
+    return photoRepository.save(photo);
+  }
 
-    public User findByUserName(String userName) {
-        return userRepository.findByUserName(userName).orElseThrow(NotFoundRestException::new);
-    }
+  public User findByUserName(String userName) {
+    return userRepository.findByUserName(userName).orElseThrow(NotFoundRestException::new);
+  }
 
-    public User getLoggedUser() {
-        return userRepository.findByUserName(SecurityUtils.loggedUserName()).orElseThrow(NotFoundRestException::new);
-    }
+  public User getLoggedUser() {
+    return userRepository.findByUserName(SecurityUtils.loggedUserName())
+        .orElseThrow(NotFoundRestException::new);
+  }
 
-    public List<UserInfoDto> getUsersInfo() {
-        return userRepository.findAll().stream().map(userMapper::userToUserInfo).collect(Collectors.toList());
-    }
+  public List<UserInfoDto> getUsersInfo() {
+    return userRepository.findAll().stream().map(userMapper::userToUserInfo)
+        .collect(Collectors.toList());
+  }
 
-    @Transactional
-    public void unban(String userName) {
-        userRepository.updateActiveStatus(userName, true);
-    }
+  @Transactional
+  public void unban(String userName) {
+    userRepository.updateActiveStatus(userName, true);
+  }
 
-    @Transactional
-    public void ban(String userName) {
-        userRepository.updateActiveStatus(userName, false);
-    }
+  @Transactional
+  public void ban(String userName) {
+    userRepository.updateActiveStatus(userName, false);
+  }
 }

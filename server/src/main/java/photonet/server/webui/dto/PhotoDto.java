@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class PhotoDto {
 
-    private Long id;
-    private String path;
+  private Long id;
+  private String path;
 
 }

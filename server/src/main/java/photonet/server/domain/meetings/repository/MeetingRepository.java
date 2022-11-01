@@ -1,5 +1,7 @@
 package photonet.server.domain.meetings.repository;
 
+import java.time.LocalDate;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,22 +11,20 @@ import photonet.server.domain.entity.User;
 import photonet.server.domain.meetings.entity.Meeting;
 import photonet.server.domain.meetings.entity.Schedule;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Repository
 public interface MeetingRepository extends JpaRepository<Meeting, Long> {
 
-    List<Meeting> removeAllByScheduleAndDateAndStatus(Schedule schedule, LocalDate date, MeetingStatus status);
+  List<Meeting> removeAllByScheduleAndDateAndStatus(Schedule schedule, LocalDate date,
+      MeetingStatus status);
 
-    List<Meeting> findAllByUserBooked(User user);
+  List<Meeting> findAllByUserBooked(User user);
 
-    List<Meeting> findAllByUserBookedUserName(String user);
+  List<Meeting> findAllByUserBookedUserName(String user);
 
-    @Modifying
-    @Query("UPDATE Meeting m SET m.status = :newStatus WHERE m.id = :meetingId")
-    void updateMeetingStatus(Long meetingId, MeetingStatus newStatus);
+  @Modifying
+  @Query("UPDATE Meeting m SET m.status = :newStatus WHERE m.id = :meetingId")
+  void updateMeetingStatus(Long meetingId, MeetingStatus newStatus);
 
-    void deleteAllByStatus(MeetingStatus status);
+  void deleteAllByStatus(MeetingStatus status);
 
 }

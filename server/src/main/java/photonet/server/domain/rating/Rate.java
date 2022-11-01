@@ -1,12 +1,10 @@
 package photonet.server.domain.rating;
 
+import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import photonet.server.domain.entity.Opinion;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
 @Setter
@@ -14,6 +12,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class Rate extends Opinion {
 
-    private Integer rating;
+  private Integer rating;
 
 }
