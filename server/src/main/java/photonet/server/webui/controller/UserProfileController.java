@@ -11,8 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import photonet.server.config.Endpoints;
 import photonet.server.domain.service.ProfileService;
 import photonet.server.domain.service.UserService;
-import photonet.server.webui.profile.dto.ProfileDto;
-import photonet.server.webui.profile.dto.ProfileUpdateDto;
+import photonet.server.webui.dto.profile.ProfileDto;
+import photonet.server.webui.dto.profile.ProfileUpdateDto;
 
 @RestController
 @RequestMapping(Endpoints.USER_PROFILE)

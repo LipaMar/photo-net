@@ -1,9 +1,14 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: ${POSTGRES_PASSWORD}
-    url: ${DATABASE_URL}
+    username: ${ POSTGRES_USERNAME:postgres}
+    password: ${ POSTGRES_PASSWORD:zaq1@WSX}
+    url: ${ POSTGRES_URL:jdbc:postgresql://localhost:5432/photonet}
+  jpa:
+    hibernate:
+      ddl-auto: create
+---
+spring:
   cloud:
     gcp:
       core:
@@ -14,19 +19,11 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
-  jpa:
-    hibernate:
-      ddl-auto: update
 ---
 spring:
   config:
     activate:
       on-profile: cloud
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: ${POSTGRES_PASSWORD}
-    url: ${DATABASE_URL}
   cloud:
     gcp:
       project-id: ringed-choir-337013
@@ -34,6 +31,3 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
-  jpa:
-    hibernate:
-      ddl-auto: update

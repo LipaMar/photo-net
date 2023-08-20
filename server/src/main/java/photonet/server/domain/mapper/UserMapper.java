@@ -12,8 +12,8 @@ import photonet.server.webui.dto.LoginDto;
 import photonet.server.webui.dto.UserDto;
 import photonet.server.webui.dto.UserInfoDto;
 import photonet.server.webui.dto.discover.PhotographerBasicDto;
-import photonet.server.webui.profile.dto.ProfileBasicDto;
-import photonet.server.webui.profile.dto.ProfileDto;
+import photonet.server.webui.dto.profile.ProfileBasicDto;
+import photonet.server.webui.dto.profile.ProfileDto;
 
 @Mapper(uses = {RateMapper.class, PhotoMapper.class, PostMapper.class, CommentMapper.class})
 public interface UserMapper {

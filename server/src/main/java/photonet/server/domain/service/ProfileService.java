@@ -8,9 +8,9 @@ import photonet.server.core.utils.SecurityUtils;
 import photonet.server.domain.entity.User;
 import photonet.server.domain.mapper.UserMapper;
 import photonet.server.domain.repository.UserRepository;
-import photonet.server.webui.profile.dto.ProfileBasicDto;
-import photonet.server.webui.profile.dto.ProfileDto;
-import photonet.server.webui.profile.dto.ProfileUpdateDto;
+import photonet.server.webui.dto.profile.ProfileBasicDto;
+import photonet.server.webui.dto.profile.ProfileDto;
+import photonet.server.webui.dto.profile.ProfileUpdateDto;
 
 @Service
 @RequiredArgsConstructor

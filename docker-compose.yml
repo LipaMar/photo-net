@@ -1,0 +1,13 @@
+services:
+  photo-net-db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: zaq1@WSX
+      POSTGRES_URL: jdbc:postgresql://localhost/photonet
+      POSTGRES_DB: photonet
+    ports:
+      - 5432:5432
+
+

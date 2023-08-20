@@ -1,4 +1,4 @@
-package photonet.server.webui.profile.controller;
+package photonet.server.webui.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;

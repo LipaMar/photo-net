@@ -22,7 +22,7 @@ import photonet.server.domain.service.upload.FileService;
 import photonet.server.webui.dto.LoginDto;
 import photonet.server.webui.dto.UserDto;
 import photonet.server.webui.dto.UserInfoDto;
-import photonet.server.webui.profile.dto.ProfileDto;
+import photonet.server.webui.dto.profile.ProfileDto;
 
 @Service
 @RequiredArgsConstructor
@@ -43,12 +43,6 @@ public class UserService {
     toSave.setRole(Roles.USER);
     toSave.setIsPublic(false);
     userRepository.save(toSave);
-  }
-
-  public ProfileDto getProfile(String userName) {
-    return userRepository.findByUserName(userName)
-        .map(userMapper::mapUserToProfileDto)
-        .orElseThrow(NotFoundRestException::new);
   }
 
   public ProfileDto getLoggedUserProfile() {

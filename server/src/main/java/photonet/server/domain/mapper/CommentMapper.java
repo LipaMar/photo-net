@@ -5,12 +5,19 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import photonet.server.domain.entity.Comment;
+import photonet.server.domain.entity.User;
 import photonet.server.webui.dto.CommentDto;
 
-@Mapper(uses = {UserMapper.class})
+import java.util.Optional;
+
+@Mapper
 public interface CommentMapper extends OpinionMapper<Comment> {
 
   CommentDto entityToDto(Comment comment);
+
+  default String mapUserToString(User user) {
+    return Optional.ofNullable(user).map(User::getUserName).orElse(null);
+  }
 
   @Mapping(target = "author", ignore = true)
   @Mapping(target = "target", ignore = true)
